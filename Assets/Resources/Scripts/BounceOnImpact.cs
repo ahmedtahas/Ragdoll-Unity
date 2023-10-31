@@ -6,13 +6,8 @@ public class BounceOnImpact : MonoBehaviour
 {
     public float bounceForce = 5f; // The force applied when bouncing
 
-    private Rigidbody2D[] siblingRigidbodies;
+    public Rigidbody2D[] siblingRigidbodies;
 
-    void Start()
-    {
-        // Get all sibling rigidbodies
-        siblingRigidbodies = transform.parent.GetComponentsInChildren<Rigidbody2D>();
-    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D collidedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
