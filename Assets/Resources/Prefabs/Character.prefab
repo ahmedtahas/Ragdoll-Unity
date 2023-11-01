@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &1412427981643489106
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +397,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!231 &3417981828829267442
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -417,7 +418,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!70 &5493559576387238446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -466,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &1969802190003290385
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &2123724263784485151
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &2374853553298243329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &3457379721874462123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1291,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!231 &1161938957645167641
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1307,7 +1312,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!70 &9066355686376323539
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1356,6 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &4318588645356195805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,6 +1608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!114 &8227762453370207153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1802,6 +1809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &4970912315361670314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,6 +2043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &5047985509252579776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!114 &3623027397616233798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,7 +2466,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!231 &6705802122593790180
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2477,7 +2487,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!70 &6124933713842355884
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2526,6 +2536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &5553988562013646373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,7 +2700,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!231 &1750398324867245769
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2710,7 +2721,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 15
 --- !u!70 &9162664898853870000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2759,6 +2770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &5670616959502809966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2992,6 +3004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &6197078209422381841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,6 +3238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &6367434250359405692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,6 +3473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []
 --- !u!1 &6467869217686869605
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,3 +3707,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  siblingRigidbodies: []

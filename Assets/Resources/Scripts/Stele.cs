@@ -50,7 +50,6 @@ public class Stele : MonoBehaviour
     }
     public void Teleport(Vector3 position)
     {
-        Debug.Log("Teleporting to " + position);
         body.transform.position = position;
     }
 }
