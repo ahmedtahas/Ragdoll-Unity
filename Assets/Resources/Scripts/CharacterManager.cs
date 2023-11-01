@@ -11,6 +11,11 @@ public class CharacterManager : MonoBehaviour
     private Vector3 characterScale;
     private GameObject rf;
     private GameObject lf;
+
+    private void Start()
+    {
+        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().AddToView(transform.Find("Body").transform);
+    }
     
     public void Instantiate(string character)
     {

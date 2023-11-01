@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     {
         
         character = Instantiate(Resources.Load("Prefabs/Character") as GameObject, transform.position, Quaternion.identity);
-        character.GetComponent<CharacterManager>().Instantiate("Chronopen");
+        character.GetComponent<CharacterManager>().Instantiate("Holstar");
 
     }
 }

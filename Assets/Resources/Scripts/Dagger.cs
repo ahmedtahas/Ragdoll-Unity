@@ -12,6 +12,7 @@ public class Dagger : MonoBehaviour
     {
         startPosition = transform.position;
         player = FindObjectOfType<Stele>();
+        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().AddToView(transform);
     }
 
     void Update()
@@ -21,6 +22,7 @@ public class Dagger : MonoBehaviour
         {
             Debug.Log("Dagger reached max distance");
             player.Teleport(transform.position);
+            GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform);
             Destroy(gameObject);
         }
     }
@@ -44,6 +46,7 @@ public class Dagger : MonoBehaviour
                 // Teleport the player to the dagger's position
                 player.Teleport(transform.position);
             }
+            GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform);
             Destroy(gameObject);
         }
     }

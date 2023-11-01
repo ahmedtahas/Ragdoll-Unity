@@ -12,7 +12,7 @@ public class Holstar : MonoBehaviour
 
     void Start()
     {
-        bulletPrefab = Resources.Load("Prefabs/Skills/Bullet") as GameObject;
+        bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
         rf = transform.Find("Body/RUA/RLA/RF");
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
     }
@@ -31,7 +31,6 @@ public class Holstar : MonoBehaviour
         barrelPosition = rf.GetComponent<WeaponCollision>().GetUpperRightCorner();
         
         GameObject bullet = Instantiate(bulletPrefab, barrelPosition, rf.rotation) as GameObject;
-
         // Get the Collider2D component of the bullet
         Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
 

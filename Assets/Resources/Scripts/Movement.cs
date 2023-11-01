@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    void Update()
+    void FixedUpdate()
     {
-        float forceAmount = 30.0f; // You can adjust this value to change the amount of force
+        float forceAmount = 500.0f; // You can adjust this value to change the amount of force
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 

@@ -15,7 +15,7 @@ public class Stele : MonoBehaviour
     {
         body = transform.Find("Body");
         barrel = transform.Find("Body/RUA/RLA/RF");
-        daggerPrefab = Resources.Load("Prefabs/Skills/Dagger") as GameObject;
+        daggerPrefab = Resources.Load("Prefabs/Dagger") as GameObject;
     }
 
     void Update()
