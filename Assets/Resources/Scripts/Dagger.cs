@@ -7,6 +7,7 @@ public class Dagger : MonoBehaviour
     public float maxDistance = 100f;
     private Vector3 startPosition;
     private Stele player;
+    public int damageAmount = 10;
 
     void Start()
     {
@@ -34,7 +35,19 @@ public class Dagger : MonoBehaviour
         {
             if (rb.bodyType == RigidbodyType2D.Dynamic)
             {
-                Debug.Log("Dagger hit an enemy");
+                if (collision.gameObject.CompareTag("Skill"))
+                {
+                    Debug.Log("Dagger hit a skill");
+                }
+                else if (collision.gameObject.CompareTag("Head"))
+                {
+                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount * 2);
+                }
+                else
+                {
+                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount);
+                }
+                
                 // Teleport the player behind the enemy
                 Vector2 enemyPosition = collision.transform.position;
                 Vector2 behindEnemy = enemyPosition - (Vector2)transform.right;

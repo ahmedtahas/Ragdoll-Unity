@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
         
         character = Instantiate(Resources.Load("Prefabs/Character") as GameObject, transform.position, Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate("Holstar");
+        character.transform.position = new Vector3(100, 0, 0);
 
     }
 }

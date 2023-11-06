@@ -17,7 +17,6 @@ public class BounceOnImpact : MonoBehaviour
         {
             // Calculate bounce direction
             Vector2 contactNormal = collision.contacts[0].normal;
-            float power = 10f; 
 
             // Apply impulse to this object
             GetComponent<Rigidbody2D>().AddForce(contactNormal * bounceForce, ForceMode2D.Impulse);

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6651298547592435250}
   - component: {fileID: 674452766380386827}
   - component: {fileID: 1784714212880179506}
-  - component: {fileID: 323592956071555362}
+  - component: {fileID: 5367527838767098351}
   m_Layer: 0
   m_Name: MultiTargetCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &323592956071555362
+--- !u!114 &5367527838767098351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a048000f7df3084eaceebd34a015daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minZoom: 10
-  maxZoom: 50
-  zoomLimiter: 50
+  minZoom: 5
+  maxZoom: 75
+  zoomLimiter: 140
   zoomSpeed: 0.1

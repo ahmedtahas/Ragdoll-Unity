@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
+    MovementStick movementStick;
+    Rigidbody2D rb;
+    Vector2 direction;
+    float speed = 1f;
+    void Start()
+    {
+        if (!IsOwner)
+        {
+            Debug.Log("Not owner");
+            return;
+        }
+        movementStick = GameObject.Find("MovementStick").GetComponent<MovementStick>();
+        rb = GetComponent<Rigidbody2D>();
+    }
     void FixedUpdate()
     {
-        float forceAmount = 500.0f; // You can adjust this value to change the amount of force
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-        if (Input.GetKey(KeyCode.W))
+        if (!IsOwner)
         {
-            rb.AddForce(Vector2.up * forceAmount);
+            Debug.Log("Not owner");
+            return;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(Vector2.down * forceAmount);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(Vector2.left * forceAmount);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(Vector2.right * forceAmount);
-        }
+        direction = movementStick.GetInput();
+        if (direction.magnitude > 0.1f)
+            rb.velocity = movementStick.GetInput() * speed;
     }
 }

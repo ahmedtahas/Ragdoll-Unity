@@ -9,6 +9,7 @@ public class IgnoreSelf : MonoBehaviour
     {
         Rigidbody2D[] rigidbodies = GetComponentsInChildren<Rigidbody2D>();
         Transform[] transforms = rigidbodies.Select(rb => rb.transform).ToArray();
+        GetComponent<Health>().childTransforms = transforms;
         foreach (Transform trans in transforms)
         {
             trans.GetComponent<BounceOnImpact>().siblingRigidbodies = rigidbodies;

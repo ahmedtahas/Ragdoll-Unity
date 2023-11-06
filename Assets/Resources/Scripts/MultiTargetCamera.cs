@@ -5,8 +5,9 @@ using UnityEngine;
 public class MultiTargetCamera : MonoBehaviour
 {
     public float minZoom = 5f;
-    public float maxZoom = 50f;
-    public float zoomLimiter = 50f;
+    public float maxZoom = 75f;
+    public float zoomLimiter = 140f;
+    public float zoomSpeed = 0.1f;
 
     private Camera cam;
     private List<Transform> gameObjectsInView = new List<Transform>();
@@ -40,7 +41,6 @@ public class MultiTargetCamera : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public float zoomSpeed = 0.1f;  // Add this line at the top with your other public variables
 
     private void Zoom()
     {
@@ -64,7 +64,7 @@ public class MultiTargetCamera : MonoBehaviour
 
     private float GetGreatestDistance()
     {
-        if (gameObjectsInView.Count == 0)
+        if (gameObjectsInView.Count <= 1)
             return 0f;
 
         float minX = gameObjectsInView[0].position.x;
