@@ -16,6 +16,19 @@ public class Stele : MonoBehaviour
         body = transform.Find("Body");
         barrel = transform.Find("Body/RUA/RLA/RF");
         daggerPrefab = Resources.Load("Prefabs/Dagger") as GameObject;
+        SkillStick skillStick = GameObject.Find("SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.SetBehavior(SkillStick.BehaviorType.AimAndRelease);
+            // Subscribe to the OnSignalSent event
+            skillStick.OnAim += HandleSignal;
+        }
+    }
+    
+    void HandleSignal(Vector2 signal, bool isReleased)
+    {
+        // Handle the signal
+        Debug.Log("Received signal: " + signal + ", isReleased: " + isReleased);
     }
 
     void Update()

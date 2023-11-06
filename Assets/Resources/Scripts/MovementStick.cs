@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.Netcode;
 
-public class MovementStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class MovementStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public RectTransform joystickBase;
     public RectTransform knob;
@@ -10,6 +11,11 @@ public class MovementStick : MonoBehaviour, IPointerDownHandler, IDragHandler, I
 
     void Start()
     {
+        // if (!IsOwner)
+        // {
+        //     gameObject.SetActive(false);
+        //     return;
+        // }
         startPosition = transform.position;
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Holstar : MonoBehaviour
 {
+    private SkillStick skillStick;
     private Transform rf;
     private Vector2 barrelPosition;
     private GameObject bulletPrefab;
@@ -12,14 +13,21 @@ public class Holstar : MonoBehaviour
 
     void Start()
     {
+        skillStick = GameObject.Find("SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.SetBehavior(SkillStick.BehaviorType.Click);
+            skillStick.OnClick += HandleSignal;
+        }
         bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
         rf = transform.Find("Body/RUA/RLA/RF");
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void HandleSignal(bool isReleased)
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        Debug.Log("Received signal: " + isReleased);
+        if (isReleased)
         {
             Shoot();
         }
