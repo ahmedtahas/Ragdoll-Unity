@@ -22,7 +22,7 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
     // Define an event to send out the signal
     public event Action<Vector2, bool> OnAim;
     public event Action<bool, float> OnChargeUp;
-    public event Action<bool> OnClick;
+    public event Action OnClick;
 
     public void SetBehavior(BehaviorType behavior)
     {
@@ -37,7 +37,7 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
         switch (currentBehavior)
         {
             case BehaviorType.Click:
-                OnClick?.Invoke(true);
+                OnClick?.Invoke();
                 break;
             case BehaviorType.ChargeUp:
                 isCharging = true;

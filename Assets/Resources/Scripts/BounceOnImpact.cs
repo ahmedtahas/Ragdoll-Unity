@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BounceOnImpact : MonoBehaviour
 {
     public float bounceForce = 5f; // The force applied when bouncing
-
     public Rigidbody2D[] siblingRigidbodies;
+    public event Action OnBounce;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,6 +16,7 @@ public class BounceOnImpact : MonoBehaviour
         // Check if the collided object is a dynamic Rigidbody2D
         if (collidedRigidbody != null && collidedRigidbody.bodyType == RigidbodyType2D.Dynamic)
         {
+            OnBounce?.Invoke();
             // Calculate bounce direction
             Vector2 contactNormal = collision.contacts[0].normal;
 

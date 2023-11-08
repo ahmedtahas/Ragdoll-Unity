@@ -70,7 +70,7 @@ public class Chronopen : MonoBehaviour
         isOnCooldown = !canUseSkill;
     }
 
-    void HandleSkillSignal(bool isReleased)
+    void HandleSkillSignal()
     {
         if (!isOnCooldown)
         {

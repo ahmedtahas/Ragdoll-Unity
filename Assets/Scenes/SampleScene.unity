@@ -2573,6 +2573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Stele
+  enemyName: Chronopen
 --- !u!1001 &7918995763843151504
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -36,9 +36,9 @@ public class Holstar : MonoBehaviour
         isOnCooldown = !canUseSkill;
     }
 
-    void HandleSignal(bool isReleased)
+    void HandleSignal()
     {
-        if (isReleased && !isOnCooldown)
+        if (!isOnCooldown)
         {
             Shoot();
         }

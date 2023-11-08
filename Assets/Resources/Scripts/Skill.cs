@@ -46,12 +46,9 @@ public class Skill : NetworkBehaviour
         }
     }
 
-    void HandleClick(bool isReleased)
+    void HandleClick()
     {
-        if (isReleased)
-        {
-            StartCoroutine(DurationRoutine(true));
-        }
+        StartCoroutine(DurationRoutine(true));
     }
 
     public void SetStats(float cooldown, float duration)

@@ -33,40 +33,53 @@ public class CharacterManager : MonoBehaviour
         {
             case "Chronopen":
                 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
-                isTwoHanded = true;
                 usesWeapon = true;
-                characterRadius = 20.0f;
+                isTwoHanded = true;
+                characterRadius = 10.0f;
                 characterSpeed = 50.0f;
                 characterHealth = 200.0f;
                 characterCooldown = 10.0f;
                 characterDamage = 10.0f;
-                characterKnockback = 5.0f;
+                characterKnockback = 25.0f;
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Chronopen>();
                 break;
             case "Holstar":
                 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
-                isTwoHanded = false;
                 usesWeapon = true;
-                characterRadius = 25.0f;
+                isTwoHanded = false;
+                characterRadius = 10.0f;
                 characterSpeed = 50.0f;
                 characterHealth = 160.0f;
                 characterCooldown = 6.0f;
                 characterDamage = 12.5f;
-                characterKnockback = 5.0f;
+                characterKnockback = 25.0f;
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Holstar>();
                 break;
             case "Stele":
                 characterScale = new Vector3(0.8f, 0.8f, 0.8f);
-                isTwoHanded = true;
                 usesWeapon = true;
-                characterRadius = 20f;
+                isTwoHanded = true;
+                characterRadius = 8.0f;
                 characterSpeed = 60.0f;
                 characterHealth = 160.0f;
                 characterCooldown = 15.0f;
                 characterDamage = 12.5f;
-                characterKnockback = 4.0f;
+                characterKnockback = 20.0f;
+                characterSkillDuration = 0.0f;
+                gameObject.AddComponent<Stele>();
+                break;
+            case "Pugilse":
+                characterScale = new Vector3(0.8f, 0.8f, 0.8f);
+                usesWeapon = true;
+                isTwoHanded = true;
+                characterRadius = 8.0f;
+                characterSpeed = 60.0f;
+                characterHealth = 160.0f;
+                characterCooldown = 15.0f;
+                characterDamage = 12.5f;
+                characterKnockback = 20.0f;
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Stele>();
                 break;
@@ -125,13 +138,13 @@ public class CharacterManager : MonoBehaviour
             float range = player.Value.radius + callerRadius;
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
-                callerVectorLenght += callerRadius;
+                callerVectorLenght += range * 1.5f;
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
             }
         }
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
         {
-            float range = player.Value.radius + callerRadius;
+            float range = callerRadius;
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght += callerRadius;
@@ -140,32 +153,32 @@ public class CharacterManager : MonoBehaviour
         }
         if (callerEndPosition.x > roomPositiveDimensions.x)
         {
-            callerEndPosition.x = roomPositiveDimensions.x - callerRadius;
+            callerEndPosition.x = roomPositiveDimensions.x - callerRadius / 2;
         }
         else if (callerEndPosition.x < roomNegativeDimensions.x)
         {
-            callerEndPosition.x = roomNegativeDimensions.x + callerRadius;
+            callerEndPosition.x = roomNegativeDimensions.x + callerRadius / 2;
         }
         if (callerEndPosition.y > roomPositiveDimensions.y)
         {
-            callerEndPosition.y = roomPositiveDimensions.y - callerRadius;
+            callerEndPosition.y = roomPositiveDimensions.y - callerRadius / 2;
         }
         else if (callerEndPosition.y < roomNegativeDimensions.y)
         {
-            callerEndPosition.y = roomNegativeDimensions.y + callerRadius;
+            callerEndPosition.y = roomNegativeDimensions.y + callerRadius / 2;
         }
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
         {
             float range = player.Value.radius + callerRadius;
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
-                callerVectorLenght -= callerRadius;
+                callerVectorLenght -= range * 1.5f;
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
             }
         }
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
         {
-            float range = player.Value.radius + callerRadius;
+            float range = callerRadius;
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght -= callerRadius;

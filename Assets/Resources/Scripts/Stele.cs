@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.UI;
+using System;
 
 public class Stele : MonoBehaviour
 {
+    MultiTargetCamera multiTargetCamera;
+    GameObject afterImage;
     private Transform barrel;
     private Transform body;
     private Transform hip;
@@ -18,6 +21,8 @@ public class Stele : MonoBehaviour
 
     void Start()
     {
+        afterImage = Resources.Load<GameObject>("Prefabs/SteleAfterImage");
+        multiTargetCamera = GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>();
         hip = transform.Find("Body/Stomach/Hip");
         indicatorPrefab = Resources.Load("Prefabs/Indicator") as GameObject;
         body = transform.Find("Body");
@@ -98,13 +103,34 @@ public class Stele : MonoBehaviour
 
     public void Teleport(Vector3 position)
     {
-        body.position = position;
-        SpringJoint2D[] joints = GetComponentsInChildren<SpringJoint2D>();
+        GameObject afterImageInstance = Instantiate(afterImage, body.position, Quaternion.identity);
+        multiTargetCamera.AddToView(afterImageInstance.transform);
 
-        foreach (SpringJoint2D joint in joints)
+        float distance = Vector3.Distance(body.position, position);
+
+        float waitTime = 0.25f + 0.25f * (distance / 100f);
+        
+        body.GetComponent<Renderer>().enabled = false;
+        foreach (Renderer renderer in body.GetComponentsInChildren<Renderer>())
         {
-            joint.distance = 0.005f;
+            renderer.enabled = false;
         }
+        StartCoroutine(RemoveAfterImage(afterImageInstance, waitTime));
+        body.position = position;
+    }
+
+    private IEnumerator RemoveAfterImage(GameObject afterImageInstance, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        body.GetComponent<Renderer>().enabled = true;
+        foreach (Renderer renderer in body.GetComponentsInChildren<Renderer>())
+        {
+            renderer.enabled = true;
+        }
+        multiTargetCamera.RemoveFromView(afterImageInstance.transform);
+
+        Destroy(afterImageInstance);
     }
 
 }
