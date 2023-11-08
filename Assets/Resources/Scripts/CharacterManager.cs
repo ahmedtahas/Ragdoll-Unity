@@ -10,7 +10,7 @@ public class CharacterManager : MonoBehaviour
     private bool usesWeapon = false;
     private bool isTwoHanded = false;
     private Vector3 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
-    public float characterRadius = 8.5f;
+    public float characterRadius = 50.0f;
     private float characterSpeed = 1.0f;
     private float characterHealth = 100.0f;
     private float characterCooldown = 10.0f;
@@ -35,8 +35,8 @@ public class CharacterManager : MonoBehaviour
                 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
                 isTwoHanded = true;
                 usesWeapon = true;
-                characterRadius = 8.5f;
-                characterSpeed = 1.0f;
+                characterRadius = 20.0f;
+                characterSpeed = 50.0f;
                 characterHealth = 200.0f;
                 characterCooldown = 10.0f;
                 characterDamage = 10.0f;
@@ -48,8 +48,8 @@ public class CharacterManager : MonoBehaviour
                 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
                 isTwoHanded = false;
                 usesWeapon = true;
-                characterRadius = 8.5f;
-                characterSpeed = 1.0f;
+                characterRadius = 25.0f;
+                characterSpeed = 50.0f;
                 characterHealth = 160.0f;
                 characterCooldown = 6.0f;
                 characterDamage = 12.5f;
@@ -61,8 +61,8 @@ public class CharacterManager : MonoBehaviour
                 characterScale = new Vector3(0.8f, 0.8f, 0.8f);
                 isTwoHanded = true;
                 usesWeapon = true;
-                characterRadius = 40f;
-                characterSpeed = 1.2f;
+                characterRadius = 20f;
+                characterSpeed = 60.0f;
                 characterHealth = 160.0f;
                 characterCooldown = 15.0f;
                 characterDamage = 12.5f;

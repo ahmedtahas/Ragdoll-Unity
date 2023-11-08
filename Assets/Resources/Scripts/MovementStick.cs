@@ -5,38 +5,37 @@ using Unity.Netcode;
 public class MovementStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public RectTransform joystickBase;
+    public RectTransform area;
     public RectTransform knob;
     private Vector2 inputVector;
-    private Vector2 startPosition;
-
-    void Start()
-    {
-        startPosition = transform.position;
-    }
+    private Vector2 knobStartPosition;
+    private Vector2 areaStartPosition;
 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        joystickBase.position = eventData.position;
-        joystickBase.gameObject.SetActive(true);
+        areaStartPosition = area.position;
+        knobStartPosition = knob.position;
+        area.position = eventData.position;
         OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 direction = eventData.position - (Vector2)joystickBase.position;
-        inputVector = Vector2.ClampMagnitude(direction, joystickBase.sizeDelta.x / 2);
-        knob.position = joystickBase.position + new Vector3(inputVector.x, inputVector.y, 0);
+        Vector2 direction = eventData.position - (Vector2)area.position;
+        inputVector = Vector2.ClampMagnitude(direction, area.sizeDelta.x);
+        knob.position = (Vector2)area.position + inputVector;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        joystickBase.transform.position = startPosition;
+        area.position = areaStartPosition;
+        knob.position = knobStartPosition;
         inputVector = Vector2.zero;
     }
 
     public Vector2 GetInput()
     {
-        return inputVector;
+        return inputVector.normalized;
     }
 }

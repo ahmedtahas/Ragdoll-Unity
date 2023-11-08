@@ -8,9 +8,11 @@ using System;
 public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public RectTransform joystickBase;
+    public RectTransform area;
     public RectTransform knob;
     private Vector2 inputVector;
-    private Vector2 startPosition;
+    private Vector2 knobStartPosition;
+    private Vector2 areaStartPosition;
     private bool isCharging = false;
     private float chargeStartTime;
 
@@ -22,11 +24,6 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
     public event Action<bool, float> OnChargeUp;
     public event Action<bool> OnClick;
 
-    void Start()
-    {
-        startPosition = transform.position;
-    }
-
     public void SetBehavior(BehaviorType behavior)
     {
         currentBehavior = behavior;
@@ -34,6 +31,9 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        areaStartPosition = area.position;
+        knobStartPosition = knob.position;
+        area.position = eventData.position;
         switch (currentBehavior)
         {
             case BehaviorType.Click:
@@ -55,7 +55,9 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
         {
             return;
         }
-        inputVector = eventData.position - startPosition;
+        Vector2 direction = eventData.position - (Vector2)area.position;
+        inputVector = Vector2.ClampMagnitude(direction, area.sizeDelta.x);
+        knob.position = (Vector2)area.position + inputVector;
         OnAim?.Invoke(inputVector.normalized, false);
     }
 
@@ -73,5 +75,7 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
                 OnAim?.Invoke(inputVector.normalized, true);
                 break;
         }
+        area.position = areaStartPosition;
+        knob.position = knobStartPosition;
     }
 }

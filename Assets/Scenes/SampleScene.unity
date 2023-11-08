@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystickBase: {fileID: 0}
+  area: {fileID: 0}
   knob: {fileID: 0}
   currentBehavior: 0
 --- !u!114 &295524771
@@ -880,6 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystickBase: {fileID: 1060579198}
+  area: {fileID: 0}
   knob: {fileID: 117785526}
 --- !u!114 &1060579200
 MonoBehaviour:
@@ -1739,6 +1741,14 @@ PrefabInstance:
       value: 0.6011543
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
@@ -2562,7 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Chronopen
+  characterName: Stele
 --- !u!1001 &7918995763843151504
 PrefabInstance:
   m_ObjectHideFlags: 0
