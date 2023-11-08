@@ -1844,11 +1844,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6219672661355084467, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.000000052453853
+      value: 0.00000005245352
       objectReference: {fileID: 0}
     - target: {fileID: 6219672661355084467, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -1.2000043
+      value: -1.1999967
       objectReference: {fileID: 0}
     - target: {fileID: 6414441004767001775, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_BodyType
@@ -1884,11 +1884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7865233415279214234, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000119209275
+      value: 0.0000017881391
       objectReference: {fileID: 0}
     - target: {fileID: 7865233415279214234, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 1.8000036
+      value: 1.8000004
       objectReference: {fileID: 0}
     - target: {fileID: 8427281672906288293, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Stele
+  characterName: Chronopen
 --- !u!1001 &7918995763843151504
 PrefabInstance:
   m_ObjectHideFlags: 0

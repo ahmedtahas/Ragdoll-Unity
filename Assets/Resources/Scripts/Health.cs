@@ -20,11 +20,17 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
         healthText.text = currentHealth.ToString();
         healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
 
         if (currentHealth <= 0)
         {
+            healthText.text = "0";
+            healthBar.fillAmount = 0.5f;
             StartCoroutine(DeathRoutine());
         }
     }

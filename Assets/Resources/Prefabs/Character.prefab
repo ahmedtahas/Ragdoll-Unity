@@ -134,7 +134,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 1.2}
   m_ConnectedAnchor: {x: 0.00000023841858, y: -0.00000005245368}
   m_UseMotor: 0
@@ -165,7 +165,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &8381497643528804934
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!70 &9198332000407300476
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -577,7 +577,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -1.8}
   m_ConnectedAnchor: {x: 0.00000017176387, y: 0.6011543}
   m_UseMotor: 0
@@ -608,7 +608,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &3417981828829267442
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -629,7 +629,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &5493559576387238446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -947,7 +947,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -1.05}
   m_ConnectedAnchor: {x: 0, y: 1.2}
   m_UseMotor: 0
@@ -978,7 +978,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &2785182462485061824
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -999,7 +999,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!58 &508371567551467269
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1236,7 +1236,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0.00000053644175, y: 1.8000008}
   m_UseMotor: 0
@@ -1884,6 +1884,7 @@ MonoBehaviour:
   skillStick: {fileID: 229162995679679581}
   cooldownBar: {fileID: 2459565723035805643}
   cooldownText: {fileID: 2515709063199507636}
+  duration: 0
 --- !u!1 &3484725085926668777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2094,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -1.8}
   m_ConnectedAnchor: {x: 0.00000023841855, y: 1.8}
   m_UseMotor: 0
@@ -2124,7 +2125,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &1161938957645167641
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2145,7 +2146,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &9066355686376323539
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2377,7 +2378,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0.00000018596485, y: -1.2}
   m_UseMotor: 0
@@ -2408,7 +2409,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &3744882836831875612
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2429,7 +2430,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!58 &6897971632001297892
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2686,7 +2687,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -0.000000059604645, y: 1.8}
   m_UseMotor: 0
@@ -3039,7 +3040,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -0.6}
   m_ConnectedAnchor: {x: -0.000000052453668, y: -1.1999999}
   m_UseMotor: 0
@@ -3070,7 +3071,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &6882066365588755892
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -3091,7 +3092,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &7480781357892175497
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3398,7 +3399,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -0.00000018596485, y: -1.2}
   m_UseMotor: 0
@@ -3429,7 +3430,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &100214998293502473
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -3450,7 +3451,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!58 &9160207295858755832
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4009,7 +4010,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -1.8}
   m_ConnectedAnchor: {x: -0.00000017881393, y: 1.8}
   m_UseMotor: 0
@@ -4040,7 +4041,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &6705802122593790180
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4061,7 +4062,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &6124933713842355884
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4287,7 +4288,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -1.8}
   m_ConnectedAnchor: {x: 0.00000023136847, y: 0.60115385}
   m_UseMotor: 0
@@ -4318,7 +4319,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &1750398324867245769
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4339,7 +4340,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &9162664898853870000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4565,7 +4566,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 1.2}
   m_ConnectedAnchor: {x: -0.00000013351118, y: -1.2000003}
   m_UseMotor: 0
@@ -4596,7 +4597,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &5574754390123194305
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4617,7 +4618,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!70 &640781846066521891
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4843,7 +4844,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 1.2}
   m_ConnectedAnchor: {x: 0.00000013351118, y: -1.2000003}
   m_UseMotor: 0
@@ -4874,7 +4875,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &3528637149267479782
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4895,7 +4896,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!70 &8344565253309725878
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5122,7 +5123,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: -0.6}
   m_ConnectedAnchor: {x: 0.00000010490734, y: 0.60000014}
   m_UseMotor: 0
@@ -5153,7 +5154,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!231 &1103083217537308203
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -5174,7 +5175,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 15
+  m_Frequency: 18
 --- !u!70 &6352887737224096446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5400,7 +5401,7 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 0
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 1.2}
   m_ConnectedAnchor: {x: -0.00000023841858, y: -0.00000005245368}
   m_UseMotor: 0
@@ -5431,7 +5432,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!231 &8216625280741711049
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -5452,7 +5453,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 12
+  m_Frequency: 18
 --- !u!70 &3989178280153906493
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class Skill : NetworkBehaviour
     public TextMeshProUGUI cooldownText;
     float cooldown;
     float remainingCooldown;
-    float duration;
+    public float duration;
     float remainingDuration;
     bool duringCooldown;
 
@@ -59,6 +59,7 @@ public class Skill : NetworkBehaviour
         this.cooldown = cooldown;
         remainingCooldown = cooldown;
         this.duration = duration;
+        remainingDuration = duration;
         cooldownBar.fillAmount = 1.0f;
         cooldownText.text = "Ready";
     }
@@ -67,6 +68,7 @@ public class Skill : NetworkBehaviour
         if (duringCooldown)
             yield break;
         duringCooldown = true;
+        Debug.Log("DurationRoutine  " + duration + "  " + remainingDuration);
         while (remainingDuration > 0)
         {
             remainingDuration -= Time.deltaTime;
