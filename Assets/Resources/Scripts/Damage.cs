@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    public int damageAmount = 10;
+    public float damage = 10;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -16,13 +16,18 @@ public class Damage : MonoBehaviour
             GetComponentInParent<TimeController>().SlowDownTime(0.01f, 0.5f);
             if (collision.gameObject.CompareTag("Head"))
             {
-                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount * 2);
+                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);
             }
             else if (collision.gameObject.CompareTag("Damagable"))
             {
-                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount);
+                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             }
         
         }
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
     }
 }

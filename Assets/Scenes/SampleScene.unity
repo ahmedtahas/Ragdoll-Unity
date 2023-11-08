@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295524769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -383,6 +383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3ebcd3ef04f164eb07aab7d7dad45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystickBase: {fileID: 0}
+  knob: {fileID: 0}
+  currentBehavior: 0
 --- !u!114 &295524771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1060579198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1741,11 +1744,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -120.9
+      value: -124.18
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -39.5
+      value: -43.88
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1814,6 +1817,10 @@ PrefabInstance:
     - target: {fileID: 4716597096548250140, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 1.7999966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768695440727121462, guid: 90813600e6caca145999825834e71683, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994841807823109595, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2555,6 +2562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Stele
 --- !u!1001 &7918995763843151504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,6 +2614,10 @@ PrefabInstance:
     - target: {fileID: 4607404038639119996, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
       propertyPath: m_Name
       value: MultiTargetCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367527838767098351, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
+      propertyPath: minZoom
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6651298547592435250, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
       propertyPath: orthographic size

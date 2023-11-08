@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Holstar : MonoBehaviour
 {
-    private SkillStick skillStick;
     private Transform rf;
     private Vector2 barrelPosition;
     private GameObject bulletPrefab;
     private Rigidbody2D rfRigidbody;
     public float recoilForce = 100f;
+    bool isOnCooldown = false;
+    TimeController timeController;
 
     void Start()
     {
-        skillStick = GameObject.Find("SkillStick").GetComponent<SkillStick>();
+        timeController = GetComponent<TimeController>();
+        Skill skill = GetComponent<Skill>();
+        if (skill != null)
+        {
+            skill.CanUseSkill += HandleCooldown;
+        }
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         if (skillStick != null)
         {
             skillStick.SetBehavior(SkillStick.BehaviorType.Click);
@@ -24,10 +31,14 @@ public class Holstar : MonoBehaviour
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
     }
 
+    void HandleCooldown(bool canUseSkill)
+    {
+        isOnCooldown = !canUseSkill;
+    }
+
     void HandleSignal(bool isReleased)
     {
-        Debug.Log("Received signal: " + isReleased);
-        if (isReleased)
+        if (isReleased && !isOnCooldown)
         {
             Shoot();
         }
@@ -35,7 +46,8 @@ public class Holstar : MonoBehaviour
 
     void Shoot()
     {
-        
+        timeController.SlowDownTime();
+        isOnCooldown = true;
         barrelPosition = rf.GetComponent<WeaponCollision>().GetUpperRightCorner();
         
         GameObject bullet = Instantiate(bulletPrefab, barrelPosition, rf.rotation) as GameObject;

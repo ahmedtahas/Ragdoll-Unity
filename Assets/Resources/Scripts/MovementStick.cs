@@ -11,11 +11,6 @@ public class MovementStick : NetworkBehaviour, IPointerDownHandler, IDragHandler
 
     void Start()
     {
-        // if (!IsOwner)
-        // {
-        //     gameObject.SetActive(false);
-        //     return;
-        // }
         startPosition = transform.position;
     }
 

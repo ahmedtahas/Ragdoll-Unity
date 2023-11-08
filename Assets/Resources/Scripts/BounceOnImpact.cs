@@ -28,4 +28,9 @@ public class BounceOnImpact : MonoBehaviour
             }
         }
     }
+
+    public void SetKnockback(float knockback)
+    {
+        bounceForce = knockback;
+    }
 }

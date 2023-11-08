@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
-    public void SlowDownTime(float scale, float duration)
+    public void SlowDownTime(float scale = 0.01f, float duration = 0.5f)
     {
         StartCoroutine(SlowDown(scale, duration));
     }

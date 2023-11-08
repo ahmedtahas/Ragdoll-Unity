@@ -1,23 +1,27 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth;
-    public int currentHealth;
+    public Image healthBar;
+    public TextMeshProUGUI healthText;
+    public float maxHealth;
+    public float currentHealth;
     private LayerMask deathLayer;
     public Transform[] childTransforms;
 
     void Start()
     {
-        maxHealth = 100;
-        currentHealth = maxHealth;
         deathLayer = LayerMask.NameToLayer("Dead");
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float amount)
     {
-        currentHealth -= damage;
+        currentHealth -= amount;
+        healthText.text = currentHealth.ToString();
+        healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
 
         if (currentHealth <= 0)
         {
@@ -47,7 +51,15 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find("Body").transform);
+        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find("Body/Stomach/Hip").transform);
         // Destroy(gameObject);
+    }
+
+    public void SetHealth(float health)
+    {
+        maxHealth = health;
+        currentHealth = maxHealth;
+        healthBar.fillAmount = 1;
+        healthText.text = currentHealth.ToString();
     }
 }

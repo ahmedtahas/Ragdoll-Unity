@@ -24,11 +24,6 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
 
     void Start()
     {
-        // if (!IsOwner)
-        // {
-        //     gameObject.SetActive(false);
-        //     return;
-        // }
         startPosition = transform.position;
     }
 
@@ -39,69 +34,43 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // if (!IsOwner)
-        // {
-        //     return;
-        // }
-
         switch (currentBehavior)
         {
             case BehaviorType.Click:
-                // Handle click behavior
-                Debug.Log("Clicked");
                 OnClick?.Invoke(true);
                 break;
             case BehaviorType.ChargeUp:
-                // Start charging up
                 isCharging = true;
                 chargeStartTime = Time.time;
-                Debug.Log("Charging up");
                 OnChargeUp?.Invoke(false, 0.0f);
                 break;
             case BehaviorType.AimAndRelease:
-                // Start aiming
-                Debug.Log("Aiming");
                 break;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        // if (!IsOwner || currentBehavior != BehaviorType.AimAndRelease)
-        // {
-        //     return;
-        // }
-
-        // Update aim
+        if (currentBehavior != BehaviorType.AimAndRelease)
+        {
+            return;
+        }
         inputVector = eventData.position - startPosition;
-        Debug.Log("Aiming");
-
-        // Send out the signal
-        OnAim?.Invoke(inputVector, false);
+        OnAim?.Invoke(inputVector.normalized, false);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        // if (!IsOwner)
-        // {
-        //     return;
-        // }
-
         switch (currentBehavior)
         {
             case BehaviorType.ChargeUp:
-                // Release charge
                 isCharging = false;
-                Debug.Log("Released charge");
                 float chargeTime = Time.time - chargeStartTime;
                 OnChargeUp?.Invoke(true, chargeTime);
                 chargeStartTime = 0.0f;
                 break;
             case BehaviorType.AimAndRelease:
-                // Release aim
-                Debug.Log("Released aim");
-                // Send out the signal
-                OnAim?.Invoke(inputVector, true);
+                OnAim?.Invoke(inputVector.normalized, true);
                 break;
         }
     }
