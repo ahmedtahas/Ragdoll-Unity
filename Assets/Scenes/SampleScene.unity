@@ -1802,7 +1802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3457379721874462123, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4099405191508517349, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2554,7 +2554,7 @@ Transform:
   m_GameObject: {fileID: 2065184873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2572,8 +2572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Stele
-  enemyName: Chronopen
+  characterName: Pugilse
+  enemyName: Pugilse
 --- !u!1001 &7918995763843151504
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,13 +11,14 @@ public class Skill : NetworkBehaviour
     public SkillStick skillStick;
     public Image cooldownBar;
     public TextMeshProUGUI cooldownText;
-    float cooldown;
+    public float cooldown;
     float remainingCooldown;
     public float duration;
     float remainingDuration;
     bool duringCooldown;
 
-    public event Action<bool> CanUseSkill;
+    public event Action CanUseSkill;
+    public event Action OnDurationEnd;
 
     void Start()
     {
@@ -51,6 +52,15 @@ public class Skill : NetworkBehaviour
         StartCoroutine(DurationRoutine(true));
     }
 
+    public void SetCooldownBar(float fillAmount, string text)
+    {
+        cooldownBar.fillAmount = (fillAmount / 2) + 0.5f;
+        cooldownText.text = text;
+        remainingDuration = fillAmount * duration;
+    }
+
+
+
     public void SetStats(float cooldown, float duration)
     {
         this.cooldown = cooldown;
@@ -65,7 +75,6 @@ public class Skill : NetworkBehaviour
         if (duringCooldown)
             yield break;
         duringCooldown = true;
-        Debug.Log("DurationRoutine  " + duration + "  " + remainingDuration);
         while (remainingDuration > 0)
         {
             remainingDuration -= Time.deltaTime;
@@ -74,6 +83,7 @@ public class Skill : NetworkBehaviour
             yield return null;
         }
         remainingDuration = duration;
+        OnDurationEnd?.Invoke();
         if (cooldown)
             StartCoroutine(CooldownRoutine());
     }
@@ -90,7 +100,7 @@ public class Skill : NetworkBehaviour
         remainingCooldown = cooldown;
         cooldownBar.fillAmount = 1.0f;
         cooldownText.text = "Ready";
-        CanUseSkill?.Invoke(true);
+        CanUseSkill?.Invoke();
         duringCooldown = false;
     }
 }

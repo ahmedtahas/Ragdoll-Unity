@@ -31,9 +31,9 @@ public class Holstar : MonoBehaviour
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
     }
 
-    void HandleCooldown(bool canUseSkill)
+    void HandleCooldown()
     {
-        isOnCooldown = !canUseSkill;
+        isOnCooldown = false;
     }
 
     void HandleSignal()

@@ -47,9 +47,9 @@ public class Stele : MonoBehaviour
         if (aiming) indicator.transform.position = hip.position;
     }
 
-    void HandleCooldown(bool canUseSkill)
+    void HandleCooldown()
     {
-        isOnCooldown = !canUseSkill;
+        isOnCooldown = false;
     }
     
     void HandleSkillSignal(Vector2 direction, bool isReleased)

@@ -78,10 +78,10 @@ public class CharacterManager : MonoBehaviour
                 characterSpeed = 60.0f;
                 characterHealth = 160.0f;
                 characterCooldown = 15.0f;
-                characterDamage = 12.5f;
+                characterDamage = 8.0f;
                 characterKnockback = 20.0f;
-                characterSkillDuration = 0.0f;
-                gameObject.AddComponent<Stele>();
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Pugilse>();
                 break;
         }
         GetComponent<Skill>().SetStats(characterCooldown, characterSkillDuration);

@@ -13,7 +13,6 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
     private Vector2 inputVector;
     private Vector2 knobStartPosition;
     private Vector2 areaStartPosition;
-    private bool isCharging = false;
     private float chargeStartTime;
 
     public enum BehaviorType { Click, ChargeUp, AimAndRelease }
@@ -40,7 +39,6 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
                 OnClick?.Invoke();
                 break;
             case BehaviorType.ChargeUp:
-                isCharging = true;
                 chargeStartTime = Time.time;
                 OnChargeUp?.Invoke(false, 0.0f);
                 break;
@@ -66,7 +64,6 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
         switch (currentBehavior)
         {
             case BehaviorType.ChargeUp:
-                isCharging = false;
                 float chargeTime = Time.time - chargeStartTime;
                 OnChargeUp?.Invoke(true, chargeTime);
                 chargeStartTime = 0.0f;
