@@ -83,6 +83,19 @@ public class CharacterManager : MonoBehaviour
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Pugilse>();
                 break;
+            case "Root":
+                characterScale = new Vector3(1.0f, 1.0f, 1.0f);
+                usesWeapon = true;
+                isTwoHanded = false;
+                characterRadius = 10.0f;
+                characterSpeed = 50.0f;
+                characterHealth = 160.0f;
+                characterCooldown = 15.0f;
+                characterDamage = 12.5f;
+                characterKnockback = 25.0f;
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Root>();
+                break;
         }
         GetComponent<Skill>().SetStats(characterCooldown, characterSkillDuration);
         GetComponent<Health>().SetHealth(characterHealth);
@@ -186,5 +199,18 @@ public class CharacterManager : MonoBehaviour
             }
         }
         return callerEndPosition;
+    }
+
+    public Transform GetEnemy(GameObject caller)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (player != caller)
+            {
+                return player.transform;
+            }
+        }
+        return null;
     }
 }

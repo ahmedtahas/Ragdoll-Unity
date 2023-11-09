@@ -9,7 +9,7 @@ public class Dagger : MonoBehaviour
     public float maxDistance = 100f;
     private Vector3 startPosition;
     private Stele player;
-    public int damageAmount = 10;
+    public int damage = 10;
     public float spinSpeed = 5f;
 
     public event Action<Vector3> OnHit;
@@ -38,26 +38,20 @@ public class Dagger : MonoBehaviour
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            if (rb.bodyType == RigidbodyType2D.Dynamic)
+            if (!rb.isKinematic && collision.gameObject.tag != "Skill")
             {
-                if (collision.gameObject.CompareTag("Skill"))
+                Health health = collision.gameObject.GetComponentInParent<Health>();
+                if (health != null)
                 {
-                    Debug.Log("Dagger hit a skill");
+                    if (collision.gameObject.CompareTag("Head"))
+                    {
+                        health.TakeDamage(damage);
+                    }
+                    Debug.Log("Meteor hit " + collision.gameObject.name);
+                    health.TakeDamage(damage);
                 }
-                else if (collision.gameObject.CompareTag("Head"))
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount * 2);
-                }
-                else
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount);
-                }
-                
-                // Teleport the player behind the enemy
-                Vector2 enemyPosition = collision.transform.position;
-                Vector2 behindEnemy = enemyPosition - (Vector2)transform.right;
             }
-            else if (rb.bodyType == RigidbodyType2D.Static)
+            else if (rb.isKinematic)
             {
                 Debug.Log("Dagger hit a wall" + transform.position);
             }

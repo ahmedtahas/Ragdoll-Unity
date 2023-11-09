@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 50f;
-    public int damageAmount = 10;
+    public int damage = 10;
 
     void Start()
     {
@@ -18,19 +18,17 @@ public class Bullet : MonoBehaviour
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            if (rb.bodyType == RigidbodyType2D.Dynamic)
+            if (!rb.isKinematic && collision.gameObject.tag != "Skill")
             {
-                if (collision.gameObject.CompareTag("Skill"))
+                Health health = collision.gameObject.GetComponentInParent<Health>();
+                if (health != null)
                 {
-                    Debug.Log("Bullet hit a skill");
-                }
-                else if (collision.gameObject.CompareTag("Head"))
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount * 2);
-                }
-                else
-                {
-                    collision.gameObject.GetComponentInParent<Health>().TakeDamage(damageAmount);
+                    if (collision.gameObject.CompareTag("Head"))
+                    {
+                        health.TakeDamage(damage);
+                    }
+                    Debug.Log("Meteor hit " + collision.gameObject.name);
+                    health.TakeDamage(damage);
                 }
             }
         }

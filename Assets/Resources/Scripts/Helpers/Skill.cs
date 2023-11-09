@@ -59,6 +59,10 @@ public class Skill : NetworkBehaviour
         remainingDuration = fillAmount * duration;
     }
 
+    public void EndDuration()
+    {
+        remainingDuration = 0;
+    }
 
 
     public void SetStats(float cooldown, float duration)

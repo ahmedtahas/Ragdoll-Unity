@@ -1754,11 +1754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -124.18
+      value: -18.2
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.88
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2497894144070722967, guid: 90813600e6caca145999825834e71683, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2572,7 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Pugilse
+  characterName: Root
   enemyName: Pugilse
 --- !u!1001 &7918995763843151504
 PrefabInstance:
