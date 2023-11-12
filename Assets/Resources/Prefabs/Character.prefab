@@ -1885,6 +1885,7 @@ MonoBehaviour:
   skillStick: {fileID: 229162995679679581}
   cooldownBar: {fileID: 2459565723035805643}
   cooldownText: {fileID: 2515709063199507636}
+  cooldown: 0
   duration: 0
 --- !u!1 &3484725085926668777
 GameObject:
@@ -2181,8 +2182,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.2, y: 4.8}
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 1.2, y: 4.5}
   m_Direction: 0
 --- !u!114 &1887897112264424436
 MonoBehaviour:
@@ -4099,8 +4100,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0000009536743}
-  m_Size: {x: 1.2, y: 4.8}
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 1.2, y: 4.5}
   m_Direction: 0
 --- !u!114 &497680996481582111
 MonoBehaviour:
@@ -4655,8 +4656,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.00000047683716}
-  m_Size: {x: 1.2000003, y: 3.6000009}
+  m_Offset: {x: 0, y: 0.1}
+  m_Size: {x: 1.2000003, y: 3.3}
   m_Direction: 0
 --- !u!114 &5694979496238003926
 MonoBehaviour:
@@ -4933,8 +4934,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.00000047683716}
-  m_Size: {x: 1.2000003, y: 3.6000009}
+  m_Offset: {x: 0, y: 0.1}
+  m_Size: {x: 1.2000003, y: 3.3}
   m_Direction: 0
 --- !u!114 &8205135265271569960
 MonoBehaviour:

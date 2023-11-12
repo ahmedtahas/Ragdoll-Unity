@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    private Vector2 roomPositiveDimensions = new Vector2(130.0f, 55.0f);
-    private Vector2 roomNegativeDimensions = new Vector2(-130.0f, -55.0f);
+    private Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
+    private Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
     private bool usesWeapon = false;
     private bool isTwoHanded = false;
     private Vector3 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
