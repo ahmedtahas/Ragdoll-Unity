@@ -12,6 +12,7 @@ public class Movement : NetworkBehaviour
     bool hitCooldown = false;
     void Start()
     {
+        movementStick.OnMove += HandleMove;
         BounceOnImpact[] bounceOnImpacts = GetComponentsInChildren<BounceOnImpact>();
 
         // Subscribe to their signals
@@ -20,6 +21,10 @@ public class Movement : NetworkBehaviour
             bounceOnImpact.OnBounce += HandleBounce;
         }
         rb = GetComponent<Rigidbody2D>();
+    }
+    public void HandleMove(Vector2 direction)
+    {
+        this.direction = direction;
     }
 
     private void HandleBounce()
@@ -31,9 +36,8 @@ public class Movement : NetworkBehaviour
     {
         if (hitCooldown)
             return;
-        direction = movementStick.GetInput();
         if (direction.magnitude > 0.1f)
-            rb.velocity = movementStick.GetInput() * speed;
+            rb.velocity = direction * speed;
     }
 
     public void SetSpeed(float speed)

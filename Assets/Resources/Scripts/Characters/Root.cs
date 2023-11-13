@@ -38,7 +38,7 @@ public class Root : MonoBehaviour
     {
         if (!isOnCooldown)
         {
-            CreateMeteor();
+            StartCoroutine(CreateMeteorAfterDelay());
         }
     }
 
@@ -47,11 +47,17 @@ public class Root : MonoBehaviour
         skill.EndDuration();
     }
 
+    IEnumerator CreateMeteorAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CreateMeteor();
+    }
+
     public void CreateMeteor()
     {
         isOnCooldown = true;
         meteorInstance = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
         meteorInstance.GetComponent<Meteor>().OnHit += HandleMeteorHit;
-        meteorInstance.GetComponent<Meteor>().FollowEnemy(characterManager.GetEnemy(gameObject).Find(Constants.HIP).gameObject, skill.duration, damage.damage);
+        meteorInstance.GetComponent<Meteor>().FollowEnemy(GameManager.Instance.enemy, skill.duration, damage.damage);
     }
 }

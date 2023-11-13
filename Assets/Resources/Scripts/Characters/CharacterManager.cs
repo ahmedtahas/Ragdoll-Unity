@@ -118,6 +118,23 @@ public class CharacterManager : MonoBehaviour
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Root>();
                 break;
+            case Constants.BOT:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = mediumHealth;
+                characterDamage = mediumDamage;
+                characterKnockback = mediumKnockback;
+                usesWeapon = false;
+                isTwoHanded = false;
+                characterCooldown = 0.0f;
+                characterSkillDuration = 0.0f;
+                gameObject.AddComponent<Bot>();
+                break;
+        }
+        if (character != Constants.BOT)
+        {
+            GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
         }
         GetComponent<Skill>().SetStats(characterCooldown, characterSkillDuration);
         GetComponent<Health>().SetHealth(characterHealth);

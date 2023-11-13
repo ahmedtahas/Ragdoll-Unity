@@ -49,7 +49,23 @@ public class Dropdown : MonoBehaviour
     public void CharacterSelected()
     {
         PlayerPrefs.SetString(Constants.SELECTED_CHARACTER, selectedOptionText.text);
-        
+        int layer = LayerMask.NameToLayer(Constants.CHARACTER_DISPLAY_LAYER);
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> objectsToDestroy = new List<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == layer)
+            {
+                objectsToDestroy.Add(obj);
+
+            }
+        }
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            if (obj.transform.Find(Constants.HIP) != null)
+                GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(obj.transform.Find(Constants.HIP).transform);
+            Destroy(obj);
+        }
 
     }
 }

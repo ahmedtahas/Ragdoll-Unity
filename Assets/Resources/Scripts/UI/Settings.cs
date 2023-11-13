@@ -16,6 +16,16 @@ public class Settings : MonoBehaviour
     void Start()
     {
         joystickAlignment = PlayerPrefs.GetInt("JoystickSwapped", 0);
+        if (joystickAlignment == 0)
+        {
+            joystickToggle.transform.Find("MovementStick").transform.localPosition = rightStick;
+            joystickToggle.transform.Find("SkillStick").transform.localPosition = leftStick;
+        }
+        else
+        {
+            joystickToggle.transform.Find("MovementStick").transform.localPosition = leftStick;
+            joystickToggle.transform.Find("SkillStick").transform.localPosition = rightStick;
+        }
     }
 
     public void SwapJoystickAlignment()

@@ -9,6 +9,12 @@ public class Constants
     public const string CHARACTER_DISPLAY_LAYER = "CharacterDisplay";
     public const string DAGGER_PREFAB_PATH = "Prefabs/Dagger";
     public const string BULLET_PREFAB_PATH = "Prefabs/Bullet";
+    public const string GAME_MODE = "GameMode";
+    public static Vector3 LEFT_STICK = new Vector3(480.0f, 0.0f, 0.0f);
+    public static Vector3 RIGHT_STICK = new Vector3(-480.0f, 0.0f, 0.0f);
+    public static Vector3 LEFT_KNOB = new Vector3(224.0f, -284.0f, 0.0f);
+    public static Vector3 RIGHT_KNOB = new Vector3(-224.0f, -284.0f, 0.0f);
+    public const string BOT = "Bot";
     public const string CHRONOPEN = "Chronopen";
     public const string HOLSTAR = "Holstar";
     public const string ROOT = "Root";

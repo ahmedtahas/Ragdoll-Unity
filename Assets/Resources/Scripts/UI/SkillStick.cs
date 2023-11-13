@@ -22,6 +22,22 @@ public class SkillStick : NetworkBehaviour, IPointerDownHandler, IDragHandler, I
     public event Action<Vector2, bool> OnAim;
     public event Action<bool, float> OnChargeUp;
     public event Action OnClick;
+    int joystickSwapped = 0;
+
+    void Start()
+    {
+        joystickSwapped = PlayerPrefs.GetInt("JoystickSwapped", 0);
+        if (joystickSwapped == 1)
+        {
+            joystickBase.transform.localPosition = Constants.LEFT_STICK;
+            area.transform.localPosition = Constants.LEFT_KNOB;
+        }
+        else
+        {
+            joystickBase.transform.localPosition = Constants.RIGHT_STICK;
+            area.transform.localPosition = Constants.RIGHT_KNOB;
+        }
+    }
 
     public void SetBehavior(BehaviorType behavior)
     {
