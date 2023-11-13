@@ -16,7 +16,7 @@ public class Dagger : MonoBehaviour
 
     void Start()
     {
-        cam = GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>();
+        cam = GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>();
         startPosition = transform.position;
         player = FindObjectOfType<Stele>();
         cam.AddToView(transform);

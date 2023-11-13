@@ -11,11 +11,11 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         
-        character = Instantiate(Resources.Load("Prefabs/Character") as GameObject, transform.position, Quaternion.identity);
+        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position, Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate(characterName);
         character.transform.position = new Vector3(100, 0, 0);
         character.name = characterName;
-        character = Instantiate(Resources.Load("Prefabs/Character") as GameObject, transform.position, Quaternion.identity);
+        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position, Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate(enemyName);
         character.transform.position = new Vector3(-100, 0, 0);
         character.name = enemyName;

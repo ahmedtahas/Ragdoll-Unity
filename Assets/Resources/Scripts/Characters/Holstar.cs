@@ -27,7 +27,7 @@ public class Holstar : MonoBehaviour
             skillStick.OnClick += HandleSignal;
         }
         bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
-        rf = transform.Find("Body/RUA/RLA/RF");
+        rf = transform.Find(Constants.RF);
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
     }
 

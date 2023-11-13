@@ -14,7 +14,7 @@ public class Root : MonoBehaviour
     void Start()
     {
         damage = GetComponent<Damage>();
-        meteorPrefab = Resources.Load<GameObject>("Prefabs/Meteor");
+        meteorPrefab = Resources.Load<GameObject>(Constants.METEOR_PREFAB_PATH);
         characterManager = GetComponent<CharacterManager>();
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         skill = GetComponent<Skill>();
@@ -52,6 +52,6 @@ public class Root : MonoBehaviour
         isOnCooldown = true;
         meteorInstance = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
         meteorInstance.GetComponent<Meteor>().OnHit += HandleMeteorHit;
-        meteorInstance.GetComponent<Meteor>().FollowEnemy(characterManager.GetEnemy(gameObject).Find("Body/Stomach/Hip").gameObject, skill.duration, damage.damage);
+        meteorInstance.GetComponent<Meteor>().FollowEnemy(characterManager.GetEnemy(gameObject).Find(Constants.HIP).gameObject, skill.duration, damage.damage);
     }
 }

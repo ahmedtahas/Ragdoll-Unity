@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().AddToView(transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform);
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
     }
 
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform);
         Destroy(gameObject);
     }
 }

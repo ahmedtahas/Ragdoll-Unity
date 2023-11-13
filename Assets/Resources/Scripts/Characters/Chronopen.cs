@@ -34,8 +34,8 @@ public class Chronopen : MonoBehaviour
         // List of paths to the child objects
         string[] paths = new string[]
         {
-            "Body/RUA/RLA/RF",
-            "Body/LUA/LLA/LF"
+            Constants.RF,
+            Constants.LF,
         };
 
         foreach (string path in paths)

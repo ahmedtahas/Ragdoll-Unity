@@ -57,7 +57,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find("Body/Stomach/Hip").transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find(Constants.HIP).transform);
         // Destroy(gameObject);
     }
 

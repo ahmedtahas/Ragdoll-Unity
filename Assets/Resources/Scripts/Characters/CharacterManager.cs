@@ -20,79 +20,101 @@ public class CharacterManager : MonoBehaviour
     private GameObject rf;
     private GameObject lf;
 
+    Vector3 bigSize = new Vector3(1.2f, 1.2f, 1.2f);
+    Vector3 mediumSize = new Vector3(1.0f, 1.0f, 1.0f);
+    Vector3 smallSize = new Vector3(0.8f, 0.8f, 0.8f);
+    float bigRadius = 12.5f;
+    float mediumRadius = 10.0f;
+    float smallRadius = 8.0f;
+    float highSpeed = 60.0f;
+    float mediumSpeed = 50.0f;
+    float lowSpeed = 40.0f;
+    float highHealth = 240.0f;
+    float mediumHealth = 200.0f;
+    float lowHealth = 160.0f;
+    float highDamage = 12.5f;
+    float mediumDamage = 10.0f;
+    float lowDamage = 8.0f;
+    float highKnockback = 30.0f;
+    float mediumKnockback = 25.0f;
+    float lowKnockback = 20.0f;
+
+
+
+
     private void Start()
     {
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().AddToView(transform.Find("Body/Stomach/Hip").transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform.Find(Constants.HIP).transform);
     }
     
     public void Instantiate(string character)
     {
-        rf = transform.Find("Body/RUA/RLA/RF").gameObject;
-        lf = transform.Find("Body/LUA/LLA/LF").gameObject;
+        rf = transform.Find(Constants.RF).gameObject;
+        lf = transform.Find(Constants.LF).gameObject;
         switch (character)
         {
-            case "Chronopen":
-                characterScale = new Vector3(1.0f, 1.0f, 1.0f);
+            case Constants.CHRONOPEN:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = mediumHealth;
+                characterDamage = mediumDamage;
+                characterKnockback = mediumKnockback;
                 usesWeapon = true;
                 isTwoHanded = true;
-                characterRadius = 10.0f;
-                characterSpeed = 50.0f;
-                characterHealth = 200.0f;
                 characterCooldown = 10.0f;
-                characterDamage = 10.0f;
-                characterKnockback = 25.0f;
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Chronopen>();
                 break;
-            case "Holstar":
-                characterScale = new Vector3(1.0f, 1.0f, 1.0f);
+            case Constants.HOLSTAR:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = lowHealth;
+                characterDamage = highDamage;
+                characterKnockback = mediumKnockback;
                 usesWeapon = true;
                 isTwoHanded = false;
-                characterRadius = 10.0f;
-                characterSpeed = 50.0f;
-                characterHealth = 160.0f;
                 characterCooldown = 6.0f;
-                characterDamage = 12.5f;
-                characterKnockback = 25.0f;
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Holstar>();
                 break;
-            case "Stele":
-                characterScale = new Vector3(0.8f, 0.8f, 0.8f);
+            case Constants.STELE:
+                characterScale = smallSize;
+                characterRadius = smallRadius;
+                characterSpeed = highSpeed;
+                characterHealth = lowHealth;
+                characterDamage = highDamage;
+                characterKnockback = lowKnockback;
                 usesWeapon = true;
                 isTwoHanded = true;
-                characterRadius = 8.0f;
-                characterSpeed = 60.0f;
-                characterHealth = 160.0f;
                 characterCooldown = 15.0f;
-                characterDamage = 12.5f;
-                characterKnockback = 20.0f;
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Stele>();
                 break;
-            case "Pugilse":
-                characterScale = new Vector3(0.8f, 0.8f, 0.8f);
+            case Constants.PUGILSE:
+                characterScale = smallSize;
+                characterRadius = smallRadius;
+                characterSpeed = highSpeed;
+                characterHealth = lowHealth;
+                characterDamage = lowDamage;
+                characterKnockback = lowKnockback;
                 usesWeapon = true;
                 isTwoHanded = true;
-                characterRadius = 8.0f;
-                characterSpeed = 60.0f;
-                characterHealth = 160.0f;
                 characterCooldown = 15.0f;
-                characterDamage = 8.0f;
-                characterKnockback = 20.0f;
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Pugilse>();
                 break;
-            case "Root":
-                characterScale = new Vector3(1.0f, 1.0f, 1.0f);
+            case Constants.ROOT:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = lowHealth;
+                characterDamage = highDamage;
+                characterKnockback = mediumKnockback;
                 usesWeapon = true;
                 isTwoHanded = false;
-                characterRadius = 10.0f;
-                characterSpeed = 50.0f;
-                characterHealth = 160.0f;
                 characterCooldown = 15.0f;
-                characterDamage = 12.5f;
-                characterKnockback = 25.0f;
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Root>();
                 break;
@@ -104,7 +126,7 @@ public class CharacterManager : MonoBehaviour
         {
             bounceOnImpact.SetKnockback(characterKnockback);
         }
-        transform.Find("Body").GetComponent<Movement>().SetSpeed(characterSpeed);
+        transform.Find(Constants.BODY).GetComponent<Movement>().SetSpeed(characterSpeed);
         Damage[] damages = GetComponentsInChildren<Damage>();
         foreach (Damage damage in damages)
         {
@@ -126,7 +148,7 @@ public class CharacterManager : MonoBehaviour
     public Vector3 GetAvailablePosition(GameObject caller, Vector3 position)
     {
         float callerRadius = caller.GetComponent<CharacterManager>().characterRadius;
-        Vector3 callerHipPosition = caller.transform.Find("Body/Stomach/Hip").position;
+        Vector3 callerHipPosition = caller.transform.Find(Constants.HIP).position;
         Vector3 callerEndPosition = position;
         float callerVectorLenght = (callerEndPosition - callerHipPosition).magnitude;
         Vector3 callerVector = (callerEndPosition - callerHipPosition).normalized;
@@ -139,7 +161,7 @@ public class CharacterManager : MonoBehaviour
                 continue;
             }
             CharacterManager characterManager = players[i].GetComponent<CharacterManager>();
-            Transform hip = players[i].transform.Find("Body/Stomach/Hip");
+            Transform hip = players[i].transform.Find(Constants.HIP);
 
             if (characterManager != null && hip != null)
             {
@@ -213,4 +235,5 @@ public class CharacterManager : MonoBehaviour
         }
         return null;
     }
+
 }

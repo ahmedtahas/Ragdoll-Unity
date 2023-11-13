@@ -14,7 +14,7 @@ public class Meteor : MonoBehaviour
 
     void Start()
     {
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().AddToView(transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform);
     }
 
     public void FollowEnemy(GameObject enemy, float duration = 10f, float damage = 12.5f)
@@ -65,7 +65,7 @@ public class Meteor : MonoBehaviour
             }
         }
         OnHit?.Invoke();
-        GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>().RemoveFromView(transform);
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform);
         Destroy(gameObject);
     }
 }

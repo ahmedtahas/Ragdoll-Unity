@@ -16,18 +16,21 @@ public class Stele : MonoBehaviour
     public float spinSpeed = 5f;
     GameObject indicatorPrefab;
     GameObject indicator;
+    int hitCount = 0;
+    int maxHitCount = 2;
     bool aiming = false;
     bool isOnCooldown = false;
+    Damage[] damages;
 
     void Start()
     {
         afterImage = Resources.Load<GameObject>("Prefabs/SteleAfterImage");
-        multiTargetCamera = GameObject.Find("MultiTargetCamera").GetComponent<MultiTargetCamera>();
-        hip = transform.Find("Body/Stomach/Hip");
+        multiTargetCamera = GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>();
+        hip = transform.Find(Constants.HIP);
         indicatorPrefab = Resources.Load("Prefabs/Indicator") as GameObject;
-        body = transform.Find("Body");
+        body = transform.Find(Constants.BODY);
         barrel = transform.Find("Body/RUA/RLA");
-        daggerPrefab = Resources.Load("Prefabs/Dagger") as GameObject;
+        daggerPrefab = Resources.Load(Constants.DAGGER_PREFAB_PATH) as GameObject;
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         Skill skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -39,6 +42,20 @@ public class Stele : MonoBehaviour
         if (skill != null)
         {
             skill.CanUseSkill += HandleCooldown;
+        }
+        damages = GetComponentsInChildren<Damage>();
+
+        // Subscribe to their signals
+        foreach (Damage damage in damages)
+        {
+            damage.OnHit += HandleHit;
+        }
+    }
+    void HandleHit()
+    {
+        if (hitCount < maxHitCount && !isOnCooldown)
+        {
+            hitCount++;
         }
     }
 
@@ -54,8 +71,9 @@ public class Stele : MonoBehaviour
     
     void HandleSkillSignal(Vector2 direction, bool isReleased)
     {
-        if (isReleased && !isOnCooldown)
+        if (isReleased && !isOnCooldown && hitCount == maxHitCount)
         {
+            hitCount = 0;
             aiming = false;
             Destroy(indicator);
             ThrowDagger(direction);
