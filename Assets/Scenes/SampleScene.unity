@@ -10080,6 +10080,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemy: {fileID: 0}
+  playerDamage: 0
+  enemyDamage: 0
+  playerHealth: 0
+  enemyHealth: 0
+  playerKnockback: 0
+  enemyKnockback: 0
 --- !u!4 &1401926544
 Transform:
   m_ObjectHideFlags: 0
@@ -15308,7 +15314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f757bce9a3ae37e44ba7f4ea60785e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Root
+  characterName: Holstar
   enemyName: Bot
 --- !u!1 &2084631139
 GameObject:

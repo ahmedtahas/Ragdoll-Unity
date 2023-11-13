@@ -8,6 +8,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public float playerDamage;
+    public float enemyDamage;
+    public float playerHealth;
+    public float enemyHealth;
+    public float playerKnockback;
+    public float enemyKnockback;
+    
 
     private void Awake()
     {

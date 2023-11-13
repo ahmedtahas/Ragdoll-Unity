@@ -14,17 +14,14 @@ public class Bot : MonoBehaviour
         movement = transform.Find(Constants.BODY).GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
-        StartCoroutine(Chase());
+        // StartCoroutine(Chase());
     }
 
 
     IEnumerator Chase()
     {
-        while (player == null)
-        {
-            player = GameManager.Instance.player;
-            yield return new WaitForSeconds(0.1f);
-        }
+        yield return new WaitUntil(() => GameManager.Instance.player != null);
+        player = GameManager.Instance.player;
         while (true)
         {
             if ((player.transform.position - hip.transform.position).magnitude > 30.0f)

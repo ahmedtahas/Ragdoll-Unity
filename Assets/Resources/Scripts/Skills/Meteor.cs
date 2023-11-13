@@ -42,11 +42,14 @@ public class Meteor : MonoBehaviour
         }
 
         speed = finalSpeed;
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         Vector3 direction = (enemy.transform.position - transform.position).normalized;
-        rb.velocity = direction * speed;
 
-        yield break;
+        // Continue moving in the same direction until the meteor hits something
+        while (true)
+        {
+            transform.Translate(direction * speed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -61,6 +64,7 @@ public class Meteor : MonoBehaviour
                 {
                     health.TakeDamage(damage);
                 }
+                // collision.gameObject.GetComponent<BounceOnImpact>().Bounce(collision.contacts[0].normal);
                 health.TakeDamage(damage);
             }
         }

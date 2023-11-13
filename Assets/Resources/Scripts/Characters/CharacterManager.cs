@@ -135,6 +135,9 @@ public class CharacterManager : MonoBehaviour
         if (character != Constants.BOT)
         {
             GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
+            GameManager.Instance.playerDamage = characterDamage;
+            GameManager.Instance.playerHealth = characterHealth;
+            GameManager.Instance.playerKnockback = characterKnockback;
         }
         GetComponent<Skill>().SetStats(characterCooldown, characterSkillDuration);
         GetComponent<Health>().SetHealth(characterHealth);
