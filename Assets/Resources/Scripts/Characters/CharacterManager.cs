@@ -131,6 +131,19 @@ public class CharacterManager : MonoBehaviour
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Bot>();
                 break;
+            case Constants.TIN:
+                characterScale = bigSize;
+                characterRadius = bigRadius;
+                characterSpeed = lowSpeed;
+                characterHealth = highHealth;
+                characterDamage = lowDamage;
+                characterKnockback = highKnockback;
+                usesWeapon = false;
+                isTwoHanded = false;
+                characterCooldown = 15.0f;
+                characterSkillDuration = 4.0f;
+                gameObject.AddComponent<Tin>();
+                break;
         }
         if (character != Constants.BOT)
         {

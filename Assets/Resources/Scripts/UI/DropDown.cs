@@ -17,6 +17,7 @@ public class Dropdown : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI skillNameText;
     public TextMeshProUGUI skillDescriptionText;
+    public GameObject spawner;
 
     private bool isDropdownOpen = false;
 
@@ -49,23 +50,27 @@ public class Dropdown : MonoBehaviour
     public void CharacterSelected()
     {
         PlayerPrefs.SetString(Constants.SELECTED_CHARACTER, selectedOptionText.text);
-        int layer = LayerMask.NameToLayer(Constants.CHARACTER_DISPLAY_LAYER);
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-        List<GameObject> objectsToDestroy = new List<GameObject>();
-        foreach (GameObject obj in allObjects)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            if (obj.layer == layer)
-            {
-                objectsToDestroy.Add(obj);
-
-            }
+            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
+            Destroy(player);
         }
-        foreach (GameObject obj in objectsToDestroy)
+        GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(100, 0, 0), Quaternion.identity);
+        character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);
+        character.name = selectedOptionText.text;
+        if (PlayerPrefs.GetString(Constants.GAME_MODE) == Constants.SINGLE_PLAYER)
         {
-            if (obj.transform.Find(Constants.HIP) != null)
-                GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(obj.transform.Find(Constants.HIP).transform);
-            Destroy(obj);
+            character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position + new Vector3(100, 0, 0), Quaternion.identity);
+            character.GetComponent<CharacterManager>().Instantiate(Constants.BOT);
+            character.name = Constants.BOT;
         }
+        // else
+        // {
+        //     character.transform.Find(Constants.BODY).GetComponent<Rigidbody2D>().isKinematic = false;
+        //     character.transform.Find(Constants.BODY).GetComponent<Movement>().enabled = true;
+        //     character.transform.Find("UI").gameObject.SetActive(true);
+        // }
 
     }
 }

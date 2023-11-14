@@ -5,20 +5,16 @@ using UnityEngine;
 public class CharacterDisplay : MonoBehaviour
 {
     GameObject character;
+    
     public void ShowCharacter(string characterName)
     {
-        int layer = LayerMask.NameToLayer(Constants.CHARACTER_DISPLAY_LAYER);
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allObjects)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            if (obj.layer == layer)
-            {
-                if (obj.transform.Find(Constants.HIP) != null)
-                    GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(obj.transform.Find(Constants.HIP).transform);
-                Destroy(obj);
-            }
+            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
+            Destroy(player);
         }
-        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate(characterName);
 
         character.transform.Find(Constants.BODY).GetComponent<Rigidbody2D>().isKinematic = true;

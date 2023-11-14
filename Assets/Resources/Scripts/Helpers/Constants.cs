@@ -10,12 +10,15 @@ public class Constants
     public const string DAGGER_PREFAB_PATH = "Prefabs/Dagger";
     public const string BULLET_PREFAB_PATH = "Prefabs/Bullet";
     public const string GAME_MODE = "GameMode";
+    public const string SINGLE_PLAYER = "SinglePlayer";
+    public const string MULTI_PLAYER = "MultiPlayer";
     public static Vector3 LEFT_STICK = new Vector3(480.0f, 0.0f, 0.0f);
     public static Vector3 RIGHT_STICK = new Vector3(-480.0f, 0.0f, 0.0f);
     public static Vector3 LEFT_KNOB = new Vector3(224.0f, -284.0f, 0.0f);
     public static Vector3 RIGHT_KNOB = new Vector3(-224.0f, -284.0f, 0.0f);
     public const string BOT = "Bot";
     public const string CHRONOPEN = "Chronopen";
+    public const string TIN = "Tin";
     public const string HOLSTAR = "Holstar";
     public const string ROOT = "Root";
     public const string STELE = "Stele";
@@ -33,7 +36,8 @@ public class Constants
         { HOLSTAR, "Bullseye" },
         { STELE, "Nothing Personal" },
         { PUGILSE, "Rhythm of Stars" },
-        { ROOT, "Comet of Hate" }
+        { ROOT, "Comet of Hate" },
+        { TIN, "Singularity"}
     };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_DESCRIPTIONS = new Dictionary<string, string>
     {
@@ -41,7 +45,8 @@ public class Constants
         { HOLSTAR, "Holstar shoots a bullet in the direction of the gun.\nCooldown: 6s" },
         { STELE, "Stele throws a dagger in a desired position and then teleports to it. The dagger can hit enemies and deal damage. Stele needs to damage the enemy 2 times to be able to throw a dagger.\nCooldown: 15s" },
         { PUGILSE, "Pugilse combos on every hit that deals damage and then gains damage according to the combo count for a duration. The duration extends with combo count.\nCooldown: 15s\nMax Combo: 10\n" },
-        { ROOT, "Root summons a Comet and guides it to the enemy for a duration. The Comet can also damage Root if hit.\nCooldown: 15s\nDuration: 10s" }
+        { ROOT, "Root summons a Comet and guides it to the enemy for a duration. The Comet can also damage Root if hit.\nCooldown: 15s\nDuration: 10s" },
+        { TIN, "Tin creates a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s" }
     };
     public static readonly Dictionary<string, int> CHARACTER_HEALTH_POINTS = new Dictionary<string, int>
     {
@@ -49,7 +54,8 @@ public class Constants
         { HOLSTAR, 160 },
         { STELE, 160 },
         { PUGILSE, 160 },
-        { ROOT, 160 }
+        { ROOT, 160 },
+        { TIN, 240 }
     };
     public static readonly Dictionary<string, int> CHARACTER_SPEEDS = new Dictionary<string, int>
     {
@@ -57,7 +63,8 @@ public class Constants
         { HOLSTAR, 50 },
         { STELE, 60 },
         { PUGILSE, 60 },
-        { ROOT, 50 }
+        { ROOT, 50 },
+        { TIN, 40 }
     };
     public static readonly Dictionary<string, float> CHARACTER_DAMAGES = new Dictionary<string, float>
     {
@@ -65,7 +72,8 @@ public class Constants
         { HOLSTAR, 12.5f },
         { STELE, 12.5f },
         { PUGILSE, 8.0f },
-        { ROOT, 12.5f }
+        { ROOT, 12.5f },
+        { TIN, 8.0f }
     };
 
 }
