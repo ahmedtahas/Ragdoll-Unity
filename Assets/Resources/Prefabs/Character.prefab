@@ -105,10 +105,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -118,7 +118,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6518096296875452655
 HingeJoint2D:
@@ -547,10 +547,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -560,7 +560,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6100000742774680417
 HingeJoint2D:
@@ -607,7 +607,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 24
 --- !u!231 &3417981828829267442
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 24
 --- !u!70 &5493559576387238446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -917,10 +917,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -930,7 +930,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &3387377661273486923
 HingeJoint2D:
@@ -1135,7 +1135,7 @@ Transform:
   m_GameObject: {fileID: 2123724263784485151}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.9659259, w: 0.258819}
-  m_LocalPosition: {x: 0, y: 1.8000009, z: 0}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1.1999998, y: 1.1999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1205,10 +1205,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1218,7 +1218,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &7865233415279214234
 HingeJoint2D:
@@ -1454,10 +1454,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1467,7 +1467,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &4238940841408883538
 CapsuleCollider2D:
@@ -2139,10 +2139,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2152,7 +2152,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &4716597096548250140
 HingeJoint2D:
@@ -2199,7 +2199,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!231 &1161938957645167641
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2220,7 +2220,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!70 &9066355686376323539
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2422,10 +2422,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2435,7 +2435,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &4099405191508517349
 HingeJoint2D:
@@ -2730,10 +2730,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2743,7 +2743,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &4446461153697278682
 HingeJoint2D:
@@ -3083,10 +3083,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3096,7 +3096,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &8427281672906288293
 HingeJoint2D:
@@ -3143,7 +3143,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!231 &6882066365588755892
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -3164,7 +3164,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!70 &7480781357892175497
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3441,10 +3441,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3454,7 +3454,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6219672661355084467
 HingeJoint2D:
@@ -4053,10 +4053,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4066,7 +4066,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6578489224434706967
 HingeJoint2D:
@@ -4113,7 +4113,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!231 &6705802122593790180
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4134,7 +4134,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!70 &6124933713842355884
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4330,10 +4330,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4343,7 +4343,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &722931161151900186
 HingeJoint2D:
@@ -4390,7 +4390,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 24
 --- !u!231 &1750398324867245769
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4411,7 +4411,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 24
 --- !u!70 &9162664898853870000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4536,7 +4536,7 @@ Transform:
   m_GameObject: {fileID: 5670616959502809966}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.4000006, z: 0}
+  m_LocalPosition: {x: 0, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4607,10 +4607,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4620,7 +4620,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &5994841807823109595
 HingeJoint2D:
@@ -4813,7 +4813,7 @@ Transform:
   m_GameObject: {fileID: 6197078209422381841}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.4000006, z: 0}
+  m_LocalPosition: {x: 0, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4884,10 +4884,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4897,7 +4897,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6004175650025733367
 HingeJoint2D:
@@ -5162,10 +5162,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5175,7 +5175,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &6539954036750836793
 HingeJoint2D:
@@ -5222,7 +5222,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!231 &1103083217537308203
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -5243,7 +5243,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
-  m_Frequency: 18
+  m_Frequency: 21
 --- !u!70 &6352887737224096446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5439,10 +5439,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5452,7 +5452,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &481652504509164378
 HingeJoint2D:

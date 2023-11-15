@@ -41,13 +41,13 @@ public class Holstar : MonoBehaviour
     {
         if (!isOnCooldown)
         {
+            skill.StartCooldown();
             Shoot();
         }
     }
 
     void Shoot()
     {
-        skill.StartCooldown();
         timeController.SlowDownTime();
         isOnCooldown = true;
         barrelPosition = rf.GetComponent<WeaponCollision>().GetUpperRightCorner();

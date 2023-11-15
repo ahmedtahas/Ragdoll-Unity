@@ -26,18 +26,18 @@ public class CharacterManager : MonoBehaviour
     float bigRadius = 12.5f;
     float mediumRadius = 10.0f;
     float smallRadius = 8.0f;
-    float highSpeed = 60.0f;
-    float mediumSpeed = 50.0f;
-    float lowSpeed = 40.0f;
+    float highSpeed = 250.0f;
+    float mediumSpeed = 200.0f;
+    float lowSpeed = 200.0f;
     float highHealth = 240.0f;
     float mediumHealth = 200.0f;
     float lowHealth = 160.0f;
     float highDamage = 12.5f;
     float mediumDamage = 10.0f;
     float lowDamage = 8.0f;
-    float highKnockback = 30.0f;
-    float mediumKnockback = 25.0f;
-    float lowKnockback = 20.0f;
+    float highKnockback = 60.0f;
+    float mediumKnockback = 60.0f;
+    float lowKnockback = 60.0f;
 
 
 

@@ -64,7 +64,6 @@ public class Meteor : MonoBehaviour
                 {
                     health.TakeDamage(damage);
                 }
-                // collision.gameObject.GetComponent<BounceOnImpact>().Bounce(collision.contacts[0].normal);
                 health.TakeDamage(damage);
             }
         }

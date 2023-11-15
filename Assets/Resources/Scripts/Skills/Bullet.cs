@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour
                     {
                         health.TakeDamage(damage);
                     }
-                    Debug.Log("Meteor hit " + collision.gameObject.name);
                     health.TakeDamage(damage);
                 }
             }

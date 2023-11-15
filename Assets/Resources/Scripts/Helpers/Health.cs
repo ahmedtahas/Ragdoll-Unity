@@ -36,13 +36,18 @@ public class Health : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        healthText.text = currentHealth.ToString();
-        healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
-
+        if (healthText != null)
+        {
+            healthText.text = currentHealth.ToString();
+            healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
+        }
         if (currentHealth <= 0)
         {
-            healthText.text = "0";
-            healthBar.fillAmount = 0.5f;
+            if (healthText != null)
+            {
+                healthText.text = "0";
+                healthBar.fillAmount = 0.5f;
+            }
             StartCoroutine(DeathRoutine());
         }
         OnHealthChanged?.Invoke(healthBar.fillAmount);
@@ -71,7 +76,6 @@ public class Health : MonoBehaviour
     private void Die()
     {
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find(Constants.HIP).transform);
-        // Destroy(gameObject);
     }
 
     public void SetHealth(float health)
@@ -84,6 +88,10 @@ public class Health : MonoBehaviour
 
     public void SetEnemyHealth(float health)
     {
+        if (enemyHealthBar == null)
+        {
+            return;
+        }
         enemyHealthBar.fillAmount = health;
     }
 }

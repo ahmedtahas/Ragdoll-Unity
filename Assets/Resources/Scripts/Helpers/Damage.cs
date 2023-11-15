@@ -16,7 +16,6 @@ public class Damage : MonoBehaviour
                 return;
             }
             OnHit?.Invoke();
-            GetComponentInParent<TimeController>().SlowDownTime(0.01f, 0.5f);
             if (collision.gameObject.CompareTag("Head"))
             {
                 collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);

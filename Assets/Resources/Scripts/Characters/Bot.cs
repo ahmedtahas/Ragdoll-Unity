@@ -16,7 +16,7 @@ public class Bot : MonoBehaviour
         movement = transform.Find(Constants.BODY).GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
-        StartCoroutine(Chase());
+        // StartCoroutine(Chase());
     }
 
 

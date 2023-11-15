@@ -47,7 +47,6 @@ public class Dagger : MonoBehaviour
                     {
                         health.TakeDamage(damage);
                     }
-                    Debug.Log("Meteor hit " + collision.gameObject.name);
                     health.TakeDamage(damage);
                 }
             }

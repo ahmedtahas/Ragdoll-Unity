@@ -35,9 +35,12 @@ public class Movement : NetworkBehaviour
     void FixedUpdate()
     {
         if (hitCooldown)
+        {
+            rb.velocity = Vector2.zero;
             return;
+        }
         if (direction.magnitude > 0.1f)
-            rb.velocity = direction * speed;
+            rb.AddForce(direction * speed);
     }
 
     public void SetSpeed(float speed)
