@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : NetworkBehaviour
 {
     private Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
     private Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
@@ -40,7 +41,38 @@ public class CharacterManager : MonoBehaviour
     float lowKnockback = 60.0f;
 
 
+    private NetworkVariable<int> selection = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+    public override void OnNetworkSpawn()
+    {
+        selection.OnValueChanged += (previousValue, newValue) =>
+        {
+            Debug.Log("Character selection changed to " + newValue + " for " + OwnerClientId);
+            if (Constants.CHARACTER_NAMES.TryGetValue(newValue, out string value))
+            {
+                Instantiate(value);
+                GameObject.Find("nwui").SetActive(false);
+                transform.Find("UI").gameObject.SetActive(true);
+            }
+        };
+        
+        if (IsOwner)
+        {
+            string character = PlayerPrefs.GetString(Constants.SELECTED_CHARACTER);
+
+            selection.Value = character switch
+            {
+                Constants.CHRONOPEN => 1,
+                Constants.HOLSTAR => 2,
+                Constants.STELE => 3,
+                Constants.PUGILSE => 4,
+                Constants.ROOT => 5,
+                Constants.TIN => 6,
+                _ => 0
+            };
+  
+        }; 
+    }
 
     private void Start()
     {
@@ -49,10 +81,37 @@ public class CharacterManager : MonoBehaviour
     
     public void Instantiate(string character)
     {
+        if (IsHost)
+        {
+            transform.Find(Constants.BODY).transform.position = new Vector3(-100, 0, 0);
+        }
+        else if (NetworkManager.Singleton.IsConnectedClient)
+        {
+            transform.Find(Constants.BODY).transform.position = new Vector3(+100, 0, 0);
+        }
+        gameObject.name = character;
         rf = transform.Find(Constants.RF).gameObject;
         lf = transform.Find(Constants.LF).gameObject;
         switch (character)
         {
+            case Constants.BOT:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = mediumHealth;
+                characterDamage = mediumDamage;
+                characterKnockback = mediumKnockback;
+                usesWeapon = false;
+                isTwoHanded = false;
+                characterCooldown = 0.0f;
+                characterSkillDuration = 0.0f;
+                gameObject.AddComponent<Bot>();
+                GameManager.Instance.enemy = transform.Find(Constants.HIP).gameObject;
+                GameManager.Instance.enemyTransform = transform;
+                GameManager.Instance.enemyDamage = characterDamage;
+                GameManager.Instance.enemyHealth = characterHealth;
+                GameManager.Instance.enemyKnockback = characterKnockback;
+                break;
             case Constants.CHRONOPEN:
                 characterScale = mediumSize;
                 characterRadius = mediumRadius;
@@ -117,24 +176,6 @@ public class CharacterManager : MonoBehaviour
                 characterCooldown = 15.0f;
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Root>();
-                break;
-            case Constants.BOT:
-                characterScale = mediumSize;
-                characterRadius = mediumRadius;
-                characterSpeed = mediumSpeed;
-                characterHealth = mediumHealth;
-                characterDamage = mediumDamage;
-                characterKnockback = mediumKnockback;
-                usesWeapon = false;
-                isTwoHanded = false;
-                characterCooldown = 0.0f;
-                characterSkillDuration = 0.0f;
-                gameObject.AddComponent<Bot>();
-                GameManager.Instance.enemy = transform.Find(Constants.HIP).gameObject;
-                GameManager.Instance.enemyTransform = transform;
-                GameManager.Instance.enemyDamage = characterDamage;
-                GameManager.Instance.enemyHealth = characterHealth;
-                GameManager.Instance.enemyKnockback = characterKnockback;
                 break;
             case Constants.TIN:
                 characterScale = bigSize;

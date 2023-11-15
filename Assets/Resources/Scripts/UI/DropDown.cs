@@ -50,17 +50,21 @@ public class Dropdown : MonoBehaviour
     public void CharacterSelected()
     {
         PlayerPrefs.SetString(Constants.SELECTED_CHARACTER, selectedOptionText.text);
+        GameManager.Instance.playerCharacter = selectedOptionText.text;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
             Destroy(player);
         }
-        GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(100, 0, 0), Quaternion.identity);
-        character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);
-        character.name = selectedOptionText.text;
         if (PlayerPrefs.GetString(Constants.GAME_MODE) == Constants.SINGLE_PLAYER)
         {
+            GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(100, 0, 0), Quaternion.identity);
+            character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);
+            character.name = selectedOptionText.text;
+            character.transform.Find(Constants.BODY).transform.position = new Vector3(-100, 0, 0);
+            GameObject.Find("nwui").SetActive(false);
+            character.transform.Find("UI").gameObject.SetActive(true);
             character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position + new Vector3(100, 0, 0), Quaternion.identity);
             character.GetComponent<CharacterManager>().Instantiate(Constants.BOT);
             character.name = Constants.BOT;

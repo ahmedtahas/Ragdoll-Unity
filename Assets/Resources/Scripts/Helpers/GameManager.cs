@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public string playerCharacter;
+    public string enemyCharacter;
     public Transform playerTransform;
     public Transform enemyTransform;
     public float playerDamage;

@@ -76,4 +76,14 @@ public class Constants
         { TIN, 8.0f }
     };
 
+    public static readonly Dictionary<int, string> CHARACTER_NAMES = new Dictionary<int, string>
+    {
+        { 1, Constants.CHRONOPEN },
+        { 2, Constants.HOLSTAR },
+        { 3, Constants.STELE },
+        { 4, Constants.PUGILSE },
+        { 5, Constants.ROOT },
+        { 6, Constants.TIN }
+    };
+
 }
