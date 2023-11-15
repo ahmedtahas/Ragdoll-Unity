@@ -51,6 +51,7 @@ public class Pugilse : MonoBehaviour
     {
         if (!isOnCooldown && combo > 0)
         {
+            skill.StartDuration(true);
             Rage();
         }
     }

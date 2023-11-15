@@ -130,6 +130,11 @@ public class CharacterManager : MonoBehaviour
                 characterCooldown = 0.0f;
                 characterSkillDuration = 0.0f;
                 gameObject.AddComponent<Bot>();
+                GameManager.Instance.enemy = transform.Find(Constants.HIP).gameObject;
+                GameManager.Instance.enemyTransform = transform;
+                GameManager.Instance.enemyDamage = characterDamage;
+                GameManager.Instance.enemyHealth = characterHealth;
+                GameManager.Instance.enemyKnockback = characterKnockback;
                 break;
             case Constants.TIN:
                 characterScale = bigSize;
@@ -148,6 +153,7 @@ public class CharacterManager : MonoBehaviour
         if (character != Constants.BOT)
         {
             GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
+            GameManager.Instance.playerTransform = transform;
             GameManager.Instance.playerDamage = characterDamage;
             GameManager.Instance.playerHealth = characterHealth;
             GameManager.Instance.playerKnockback = characterKnockback;

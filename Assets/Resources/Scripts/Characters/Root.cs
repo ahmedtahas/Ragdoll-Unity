@@ -49,13 +49,14 @@ public class Root : MonoBehaviour
 
     IEnumerator CreateMeteorAfterDelay()
     {
+        isOnCooldown = true;
+        skill.StartDuration(true);
         yield return new WaitForSeconds(0.5f);
         CreateMeteor();
     }
 
     public void CreateMeteor()
     {
-        isOnCooldown = true;
         meteorInstance = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
         meteorInstance.GetComponent<Meteor>().OnHit += HandleMeteorHit;
         meteorInstance.GetComponent<Meteor>().FollowEnemy(GameManager.Instance.enemy, skill.duration, damage.damage);

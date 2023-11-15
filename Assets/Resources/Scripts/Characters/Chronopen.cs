@@ -74,6 +74,7 @@ public class Chronopen : MonoBehaviour
     {
         if (!isOnCooldown)
         {
+            skill.StartDuration(true);
             SaveState();
             StartCoroutine(ChronopenRoutine());
         }

@@ -14,6 +14,7 @@ public class Stele : MonoBehaviour
     private GameObject daggerPrefab;
     public float throwForce = 0.5f;
     public float spinSpeed = 5f;
+    Skill skill;
     GameObject indicatorPrefab;
     GameObject indicator;
     int hitCount = 0;
@@ -32,7 +33,7 @@ public class Stele : MonoBehaviour
         barrel = transform.Find("Body/RUA/RLA");
         daggerPrefab = Resources.Load(Constants.DAGGER_PREFAB_PATH) as GameObject;
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
-        Skill skill = GetComponent<Skill>();
+        skill = GetComponent<Skill>();
         if (skillStick != null)
         {
             skillStick.SetBehavior(SkillStick.BehaviorType.AimAndRelease);
@@ -73,12 +74,13 @@ public class Stele : MonoBehaviour
     {
         if (isReleased && !isOnCooldown && hitCount == maxHitCount)
         {
+            skill.StartCooldown();
             hitCount = 0;
             aiming = false;
             Destroy(indicator);
             ThrowDagger(direction);
         }
-        else if (!isReleased && !isOnCooldown)
+        else if (!isReleased && !isOnCooldown && hitCount == maxHitCount)
         {
             aiming = true;
             if (indicator == null)

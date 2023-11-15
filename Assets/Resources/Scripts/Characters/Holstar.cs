@@ -10,12 +10,13 @@ public class Holstar : MonoBehaviour
     private Rigidbody2D rfRigidbody;
     public float recoilForce = 100f;
     bool isOnCooldown = false;
+    Skill skill;
     TimeController timeController;
 
     void Start()
     {
         timeController = GetComponent<TimeController>();
-        Skill skill = GetComponent<Skill>();
+        skill = GetComponent<Skill>();
         if (skill != null)
         {
             skill.CanUseSkill += HandleCooldown;
@@ -46,6 +47,7 @@ public class Holstar : MonoBehaviour
 
     void Shoot()
     {
+        skill.StartCooldown();
         timeController.SlowDownTime();
         isOnCooldown = true;
         barrelPosition = rf.GetComponent<WeaponCollision>().GetUpperRightCorner();

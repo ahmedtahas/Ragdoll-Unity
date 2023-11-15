@@ -20,36 +20,14 @@ public class Skill : NetworkBehaviour
     public event Action CanUseSkill;
     public event Action OnDurationEnd;
 
-    void Start()
+    public void StartDuration(bool cooldown = true)
     {
-        skillStick.OnAim += HandleAim;
-        skillStick.OnChargeUp += HandleChargeUp;
-        skillStick.OnClick += HandleClick;
+        StartCoroutine(DurationRoutine(cooldown));
     }
 
-    void HandleAim(Vector2 direction, bool isReleased)
+    public void StartCooldown()
     {
-        if (isReleased)
-        {
-            StartCoroutine(DurationRoutine(true));
-        }
-    }
-
-    void HandleChargeUp(bool isReleased, float chargeTime)
-    {
-        if (isReleased)
-        {
-            StartCoroutine(CooldownRoutine());
-        }
-        else
-        {
-            StartCoroutine(DurationRoutine(false));
-        }
-    }
-
-    void HandleClick()
-    {
-        StartCoroutine(DurationRoutine(true));
+        StartCoroutine(CooldownRoutine());
     }
 
     public void SetCooldownBar(float fillAmount, string text)
@@ -74,7 +52,7 @@ public class Skill : NetworkBehaviour
         cooldownBar.fillAmount = 1.0f;
         cooldownText.text = "Ready";
     }
-    IEnumerator DurationRoutine(bool cooldown = true)
+    IEnumerator DurationRoutine(bool cooldown)
     {
         if (duringCooldown)
             yield break;
