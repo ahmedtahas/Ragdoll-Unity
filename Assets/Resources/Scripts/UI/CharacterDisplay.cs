@@ -6,6 +6,11 @@ public class CharacterDisplay : MonoBehaviour
 {
     GameObject character;
     
+    void OnEnable()
+    {
+        ShowCharacter("Chronopen");
+    }
+
     public void ShowCharacter(string characterName)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -14,7 +19,7 @@ public class CharacterDisplay : MonoBehaviour
             GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
             Destroy(player);
         }
-        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+        character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate(characterName);
 
         character.transform.Find(Constants.BODY).GetComponent<Rigidbody2D>().isKinematic = true;

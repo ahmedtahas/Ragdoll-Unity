@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     public float playerKnockback;
     public float enemyKnockback;
     public event Action<float> OnEnemyHealthChanged;
-    
+    public event Action<float> OnFreezeEnemy;
+    public event Action<Vector2> OnPushEnemy;
+    public event Action<float> OnBlindEnemy;
 
     private void Awake()
     {
@@ -35,6 +37,23 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(EnemySet());
     }
+
+    public void BlindEnemy(float duration)
+    {
+        OnBlindEnemy?.Invoke(duration);
+    }
+
+    public void PushEnemy(Vector2 direction)
+    {
+        OnPushEnemy?.Invoke(direction);
+    }
+
+    public void FreezeEnemy(float duration)
+    {
+        OnFreezeEnemy?.Invoke(duration);
+    }
+
+    
 
     IEnumerator EnemySet()
     {

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c5441051ce7bb9d47a1c939e8d208328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -258,12 +258,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &5959984872958258607
 MonoBehaviour:
@@ -523,7 +523,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3cce5ea3b7ffa714bb92baf8960786b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -550,7 +550,7 @@ Rigidbody2D:
   m_Mass: 0.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -700,12 +700,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &7755487052648455429
 MonoBehaviour:
@@ -893,7 +893,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 664a70a77afbc1d4881fe49dc5b00f10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -920,7 +920,7 @@ Rigidbody2D:
   m_Mass: 0.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1083,12 +1083,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &2372775498859294449
 MonoBehaviour:
@@ -1208,7 +1208,7 @@ Rigidbody2D:
   m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1329,12 +1329,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &1999181276784316996
 MonoBehaviour:
@@ -1430,7 +1430,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: c5441051ce7bb9d47a1c939e8d208328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1457,7 +1457,7 @@ Rigidbody2D:
   m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1553,12 +1553,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &4973794925743166350
 MonoBehaviour:
@@ -1878,6 +1878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRadius: 0
+  selection:
+    m_InternalValue: 1
 --- !u!114 &3083987755383986516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,7 +2144,7 @@ Rigidbody2D:
   m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2292,12 +2294,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &4762556076217867205
 MonoBehaviour:
@@ -2398,7 +2400,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2425,7 +2427,7 @@ Rigidbody2D:
   m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2608,12 +2610,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &2935265340854076415
 MonoBehaviour:
@@ -2733,7 +2735,7 @@ Rigidbody2D:
   m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2854,12 +2856,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &3053326408595181771
 MonoBehaviour:
@@ -3059,7 +3061,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 140bee056f2426a468ad4c85127334a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3086,7 +3088,7 @@ Rigidbody2D:
   m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3236,12 +3238,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &1855946851794398670
 MonoBehaviour:
@@ -3417,7 +3419,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3444,7 +3446,7 @@ Rigidbody2D:
   m_Mass: 0.15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3627,12 +3629,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &8039335526978347225
 MonoBehaviour:
@@ -4056,7 +4058,7 @@ Rigidbody2D:
   m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4206,12 +4208,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &7009407115293758817
 MonoBehaviour:
@@ -4306,7 +4308,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3cce5ea3b7ffa714bb92baf8960786b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4333,7 +4335,7 @@ Rigidbody2D:
   m_Mass: 0.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4483,12 +4485,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &3270711634563136311
 MonoBehaviour:
@@ -4583,7 +4585,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c5441051ce7bb9d47a1c939e8d208328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4610,7 +4612,7 @@ Rigidbody2D:
   m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4760,12 +4762,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &7698639255227103555
 MonoBehaviour:
@@ -4860,7 +4862,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c5441051ce7bb9d47a1c939e8d208328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4887,7 +4889,7 @@ Rigidbody2D:
   m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5037,12 +5039,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &6670585692815566493
 MonoBehaviour:
@@ -5138,7 +5140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 140bee056f2426a468ad4c85127334a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5165,7 +5167,7 @@ Rigidbody2D:
   m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5315,12 +5317,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &8352044000661398344
 MonoBehaviour:
@@ -5415,7 +5417,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101836419
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c5441051ce7bb9d47a1c939e8d208328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5442,7 +5444,7 @@ Rigidbody2D:
   m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5592,12 +5594,12 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
+  ScaleThreshold: 0.1
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &1606312499096071808
 MonoBehaviour:

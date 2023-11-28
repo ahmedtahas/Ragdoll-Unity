@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
         }
         if (healthText != null)
         {
-            healthText.text = currentHealth.ToString();
+            healthText.text = currentHealth % 1 == 0 ? currentHealth.ToString() : currentHealth.ToString("F1");
             healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
         }
         if (currentHealth <= 0)

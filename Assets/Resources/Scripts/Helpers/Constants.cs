@@ -41,12 +41,12 @@ public class Constants
     };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_DESCRIPTIONS = new Dictionary<string, string>
     {
-        { CHRONOPEN, "Chronopen saves its position in time and then returns to that moment after the duration. Damage taken before returning will be healed back with an extra portion of it.\nCooldown: 10s\nDuration: 10s" },
-        { HOLSTAR, "Holstar shoots a bullet in the direction of the gun.\nCooldown: 6s" },
-        { STELE, "Stele throws a dagger in a desired position and then teleports to it. The dagger can hit enemies and deal damage. Stele needs to damage the enemy 2 times to be able to throw a dagger.\nCooldown: 15s" },
-        { PUGILSE, "Pugilse combos on every hit that deals damage and then gains damage according to the combo count for a duration. The duration extends with combo count.\nCooldown: 15s\nMax Combo: 10\n" },
-        { ROOT, "Root summons a Comet and guides it to the enemy for a duration. The Comet can also damage Root if hit.\nCooldown: 15s\nDuration: 10s" },
-        { TIN, "Tin creates a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s" }
+        { CHRONOPEN, "Save your position in time and return to that moment after a duration. Any damage taken before returning will be healed back, with an extra portion on top.\nCooldown: 10s\nDuration: 10s\nUsage: Tap" },
+        { HOLSTAR, "Fire your gun.\nCooldown: 6s\nUsage: Tap" },
+        { STELE, "Throw a dagger towards your target and instantly teleport to its location. The dagger will damage opponents, but you need to land two hits on an enemy before you can throw another one.\nCooldown: 15s\nUsage: Aim" },
+        { PUGILSE, "Combo on every hit that deals damage and then gain damage according to the combo count for a duration. The duration extends with combo count.\nCooldown: 15s\nMax Combo: 10\nUsage: Tap" },
+        { ROOT, "Summon a Comet that is locked on to the enemy for the duration. The Comet can also damage you if hit.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" },
+        { TIN, "Create a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s\nUsage: Hold" }
     };
     public static readonly Dictionary<string, int> CHARACTER_HEALTH_POINTS = new Dictionary<string, int>
     {

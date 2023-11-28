@@ -27,21 +27,21 @@ public class CharacterManager : NetworkBehaviour
     float bigRadius = 12.5f;
     float mediumRadius = 10.0f;
     float smallRadius = 8.0f;
-    float highSpeed = 250.0f;
-    float mediumSpeed = 200.0f;
-    float lowSpeed = 200.0f;
+    float highSpeed = 120.0f;
+    float mediumSpeed = 100.0f;
+    float lowSpeed = 80.0f;
     float highHealth = 240.0f;
     float mediumHealth = 200.0f;
     float lowHealth = 160.0f;
     float highDamage = 12.5f;
     float mediumDamage = 10.0f;
     float lowDamage = 8.0f;
-    float highKnockback = 60.0f;
-    float mediumKnockback = 60.0f;
-    float lowKnockback = 60.0f;
+    float highKnockback = 50.0f;
+    float mediumKnockback = 40.0f;
+    float lowKnockback = 30.0f;
 
 
-    private NetworkVariable<int> selection = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> selection = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public override void OnNetworkSpawn()
     {
@@ -58,9 +58,7 @@ public class CharacterManager : NetworkBehaviour
         
         if (IsOwner)
         {
-            string character = PlayerPrefs.GetString(Constants.SELECTED_CHARACTER);
-
-            selection.Value = character switch
+            selection.Value = PlayerPrefs.GetString(Constants.SELECTED_CHARACTER) switch
             {
                 Constants.CHRONOPEN => 1,
                 Constants.HOLSTAR => 2,
@@ -70,9 +68,10 @@ public class CharacterManager : NetworkBehaviour
                 Constants.TIN => 6,
                 _ => 0
             };
-  
         }; 
     }
+
+    
 
     private void Start()
     {
@@ -184,7 +183,7 @@ public class CharacterManager : NetworkBehaviour
                 characterHealth = highHealth;
                 characterDamage = lowDamage;
                 characterKnockback = highKnockback;
-                usesWeapon = false;
+                usesWeapon = true;
                 isTwoHanded = false;
                 characterCooldown = 15.0f;
                 characterSkillDuration = 4.0f;

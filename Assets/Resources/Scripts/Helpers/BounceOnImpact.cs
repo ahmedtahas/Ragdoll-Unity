@@ -20,21 +20,22 @@ public class BounceOnImpact : MonoBehaviour
 
     public void Bounce(Vector2 direction)
     {
-        GetComponentInParent<TimeController>().SlowDownTime(0.05f, 0.5f);
+        GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
+        Vector2 newDirection = new Vector3(direction.x, direction.y, 0).normalized;
         OnBounce?.Invoke();
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        rb.AddForce(direction.normalized * bounceForce, ForceMode2D.Impulse);
+        rb.AddForce(newDirection.normalized * bounceForce, ForceMode2D.Impulse);
 
+        // foreach (Rigidbody2D siblingRb in siblingRigidbodies)
+        // {
+        //     siblingRb.velocity = Vector2.zero;
+        //     siblingRb.angularVelocity = 0f;
+        // }
         foreach (Rigidbody2D siblingRb in siblingRigidbodies)
         {
-            siblingRb.velocity = Vector2.zero;
-            siblingRb.angularVelocity = 0f;
-        }
-        foreach (Rigidbody2D siblingRb in siblingRigidbodies)
-        {
-            siblingRb.AddForce(direction.normalized * (bounceForce / 2), ForceMode2D.Impulse);
+            siblingRb.AddForce(newDirection.normalized * bounceForce, ForceMode2D.Impulse);
         }
     }
 

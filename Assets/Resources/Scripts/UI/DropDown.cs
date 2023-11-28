@@ -18,12 +18,15 @@ public class Dropdown : MonoBehaviour
     public TextMeshProUGUI skillNameText;
     public TextMeshProUGUI skillDescriptionText;
     public GameObject spawner;
+    public Button initialOptionButton;
 
     private bool isDropdownOpen = false;
 
     void Start()
     {
         dropdownButton.onClick.AddListener(ToggleDropdown);
+        SelectOption(initialOptionButton);
+        ToggleDropdown();
     }
 
     public void ToggleDropdown()
