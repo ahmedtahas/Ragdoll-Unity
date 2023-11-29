@@ -23,6 +23,7 @@ public class Constants
     public const string ROOT = "Root";
     public const string STELE = "Stele";
     public const string PUGILSE = "Pugilse";
+    public const string DYNABULL = "Dynabull";
     public const string SELECTED_CHARACTER = "SelectedCharacter";
     public const string HIP = "Body/Stomach/Hip";
     public const string RF = "Body/RUA/RLA/RF";
@@ -37,7 +38,8 @@ public class Constants
         { STELE, "Nothing Personal" },
         { PUGILSE, "Rhythm of Stars" },
         { ROOT, "Comet of Hate" },
-        { TIN, "Singularity"}
+        { TIN, "Singularity" },
+        { DYNABULL, "Bulwark Bloom" }
     };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_DESCRIPTIONS = new Dictionary<string, string>
     {
@@ -46,7 +48,8 @@ public class Constants
         { STELE, "Throw a dagger towards your target and instantly teleport to its location. The dagger will damage opponents, but you need to land two hits on an enemy before you can throw another one.\nCooldown: 15s\nUsage: Aim" },
         { PUGILSE, "Combo on every hit that deals damage and then gain damage according to the combo count for a duration. The duration extends with combo count.\nCooldown: 15s\nMax Combo: 10\nUsage: Tap" },
         { ROOT, "Summon a Comet that is locked on to the enemy for the duration. The Comet can also damage you if hit.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" },
-        { TIN, "Create a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s\nUsage: Hold" }
+        { TIN, "Create a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s\nUsage: Hold" },
+        { DYNABULL, "Grow your shields and lower the damage you take for the duration.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" }
     };
     public static readonly Dictionary<string, int> CHARACTER_HEALTH_POINTS = new Dictionary<string, int>
     {
@@ -55,7 +58,8 @@ public class Constants
         { STELE, 160 },
         { PUGILSE, 160 },
         { ROOT, 160 },
-        { TIN, 240 }
+        { TIN, 240 },
+        { DYNABULL, 240 }
     };
     public static readonly Dictionary<string, int> CHARACTER_SPEEDS = new Dictionary<string, int>
     {
@@ -64,7 +68,8 @@ public class Constants
         { STELE, 60 },
         { PUGILSE, 60 },
         { ROOT, 50 },
-        { TIN, 40 }
+        { TIN, 40 },
+        { DYNABULL, 40 }
     };
     public static readonly Dictionary<string, float> CHARACTER_DAMAGES = new Dictionary<string, float>
     {
@@ -73,17 +78,19 @@ public class Constants
         { STELE, 12.5f },
         { PUGILSE, 8.0f },
         { ROOT, 12.5f },
-        { TIN, 8.0f }
+        { TIN, 8.0f },
+        { DYNABULL, 8.0f }
     };
 
     public static readonly Dictionary<int, string> CHARACTER_NAMES = new Dictionary<int, string>
     {
-        { 1, Constants.CHRONOPEN },
-        { 2, Constants.HOLSTAR },
-        { 3, Constants.STELE },
-        { 4, Constants.PUGILSE },
-        { 5, Constants.ROOT },
-        { 6, Constants.TIN }
+        { 1, CHRONOPEN },
+        { 2, HOLSTAR },
+        { 3, STELE },
+        { 4, PUGILSE },
+        { 5, ROOT },
+        { 6, TIN },
+        { 7, DYNABULL }
     };
 
 }

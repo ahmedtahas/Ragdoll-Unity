@@ -8,7 +8,7 @@ public class Pugilse : MonoBehaviour
     bool isOnCooldown = false;
     TimeController timeController;
     int combo = 0;
-    Damage[] damages;
+    Damage[] damagers;
     int maxCombo;
     float cooldown;
     float damage;
@@ -29,10 +29,10 @@ public class Pugilse : MonoBehaviour
             skillStick.SetBehavior(SkillStick.BehaviorType.Click);
             skillStick.OnClick += HandleSignal;
         }
-        damages = GetComponentsInChildren<Damage>();
+        damagers = GetComponentsInChildren<Damage>();
 
         // Subscribe to their signals
-        foreach (Damage damage in damages)
+        foreach (Damage damage in damagers)
         {
             damage.OnHit += HandleHit;
             this.damage = damage.damage;
@@ -69,7 +69,7 @@ public class Pugilse : MonoBehaviour
     {
         combo = 0;
         GetComponent<Skill>().SetStats(cooldown, (float)maxCombo);
-        foreach (Damage damage in damages)
+        foreach (Damage damage in damagers)
         {
             damage.SetDamage(this.damage);
         }
@@ -79,7 +79,7 @@ public class Pugilse : MonoBehaviour
     {
         isOnCooldown = true;
         timeController.SlowDownTime();
-        foreach (Damage damage in damages)
+        foreach (Damage damage in damagers)
         {
             damage.SetDamage(damage.damage * (combo + 1) / 2);
         }

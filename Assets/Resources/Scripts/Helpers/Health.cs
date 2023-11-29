@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public Transform[] childTransforms;
 
     public event Action<float> OnHealthChanged;
+    public event Action<float> OnDamageTaken;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-
+        if (amount > 0) OnDamageTaken?.Invoke(amount);
         if (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;

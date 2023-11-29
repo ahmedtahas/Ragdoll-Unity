@@ -190,6 +190,20 @@ public class CharacterManager : NetworkBehaviour
                 characterSkillDuration = 4.0f;
                 gameObject.AddComponent<Tin>();
                 break;
+            case Constants.DYNABULL:
+                characterScale = bigSize;
+                characterRadius = bigRadius;
+                characterSpeed = lowSpeed;
+                characterHealth = highHealth;
+                characterDamage = lowDamage;
+                characterKnockback = highKnockback;
+                usesWeapon = true;
+                isTwoHanded = true;
+                characterCooldown = 15.0f;
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Dynabull>();
+                break;
+            
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();
         foreach (Rigidbody2D rb in rigidbodies)
@@ -197,7 +211,6 @@ public class CharacterManager : NetworkBehaviour
             Sprite sprite = Resources.Load<Sprite>("Sprites/" + character + "/" + rb.name);
             if (sprite != null)
             {
-                Debug.Log(sprite.name);
                 rb.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public event Action<float> OnFreezeEnemy;
     public event Action<Vector2> OnPushEnemy;
     public event Action<float> OnBlindEnemy;
+    public event Action<bool> OnTrapped;
 
     private void Awake()
     {
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         StartCoroutine(EnemySet());
+    }
+
+    public void TrapEnemy(bool trapped)
+    {
+        OnTrapped?.Invoke(trapped);
     }
 
     public void BlindEnemy(float duration)

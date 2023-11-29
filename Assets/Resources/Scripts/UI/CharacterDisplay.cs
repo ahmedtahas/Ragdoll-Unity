@@ -8,17 +8,27 @@ public class CharacterDisplay : MonoBehaviour
     
     void OnEnable()
     {
+        if (character != null)
+        {
+            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(character.transform.Find(Constants.HIP).transform);
+            Destroy(character);
+        }
         ShowCharacter("Chronopen");
     }
 
     public void ShowCharacter(string characterName)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (character != null)
         {
-            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
-            Destroy(player);
+            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(character.transform.Find(Constants.HIP).transform);
+            Destroy(character);
         }
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // if (player != null)
+        // {
+        //     GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
+        //     Destroy(player);
+        // }
         character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         character.GetComponent<CharacterManager>().Instantiate(characterName);
 
@@ -40,5 +50,13 @@ public class CharacterDisplay : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        if (character != null)
+        {
+            GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(character.transform.Find(Constants.HIP).transform);
+            Destroy(character);
+        }
+    }
 
 }

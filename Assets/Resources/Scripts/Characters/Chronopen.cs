@@ -23,6 +23,7 @@ public class Chronopen : MonoBehaviour
         }
         if (skill != null)
         {
+            skill.OnDurationEnd += HandleDurationEnd;
             skill.CanUseSkill += HandleCooldown;
         }
         
@@ -57,14 +58,6 @@ public class Chronopen : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            health.TakeDamage(10);
-        }
-    }
-
     void HandleCooldown()
     {
         isOnCooldown = false;
@@ -76,13 +69,12 @@ public class Chronopen : MonoBehaviour
         {
             skill.StartDuration(true);
             SaveState();
-            StartCoroutine(ChronopenRoutine());
         }
     }
 
-    private IEnumerator ChronopenRoutine()
+
+    void HandleDurationEnd()
     {
-        yield return new WaitForSeconds(skill.duration);
         RestoreState();
     }
 
@@ -91,7 +83,6 @@ public class Chronopen : MonoBehaviour
         isOnCooldown = true;
         savedPosition = body.transform.position;
         savedHealth = health.currentHealth;
-
     }
 
     private void RestoreState()
