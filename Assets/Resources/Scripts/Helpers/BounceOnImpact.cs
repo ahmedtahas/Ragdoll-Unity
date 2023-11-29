@@ -21,6 +21,8 @@ public class BounceOnImpact : MonoBehaviour
     public void Bounce(Vector2 direction)
     {
         GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
+        if (name == "Head")
+            StartCoroutine(CameraShake(0.03f, 0.1f));
         Vector2 newDirection = new Vector3(direction.x, direction.y, 0).normalized;
         OnBounce?.Invoke();
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,24 @@ public class BounceOnImpact : MonoBehaviour
         {
             siblingRb.AddForce(newDirection.normalized * bounceForce, ForceMode2D.Impulse);
         }
+    }
+
+    IEnumerator CameraShake(float duration, float magnitude)
+    {
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+
+            GameObject.Find(Constants.MTC).transform.localPosition += new Vector3(x, y, -1);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
     }
 
     public void SetKnockback(float knockback)

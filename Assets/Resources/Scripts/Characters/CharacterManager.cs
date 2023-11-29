@@ -20,6 +20,7 @@ public class CharacterManager : NetworkBehaviour
     private float characterSkillDuration = 10.0f;
     private GameObject rf;
     private GameObject lf;
+    public Rigidbody2D[] rigidbodies;
 
     Vector3 bigSize = new Vector3(1.2f, 1.2f, 1.2f);
     Vector3 mediumSize = new Vector3(1.0f, 1.0f, 1.0f);
@@ -36,9 +37,9 @@ public class CharacterManager : NetworkBehaviour
     float highDamage = 12.5f;
     float mediumDamage = 10.0f;
     float lowDamage = 8.0f;
-    float highKnockback = 50.0f;
-    float mediumKnockback = 40.0f;
-    float lowKnockback = 30.0f;
+    float highKnockback = 25.0f;
+    float mediumKnockback = 20.0f;
+    float lowKnockback = 15.0f;
 
 
     public NetworkVariable<int> selection = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -190,6 +191,16 @@ public class CharacterManager : NetworkBehaviour
                 gameObject.AddComponent<Tin>();
                 break;
         }
+        rigidbodies = GetComponentsInChildren<Rigidbody2D>();
+        foreach (Rigidbody2D rb in rigidbodies)
+        {
+            Sprite sprite = Resources.Load<Sprite>("Sprites/" + character + "/" + rb.name);
+            if (sprite != null)
+            {
+                Debug.Log(sprite.name);
+                rb.GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+        }
         if (character != Constants.BOT)
         {
             GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
@@ -214,13 +225,11 @@ public class CharacterManager : NetworkBehaviour
         transform.localScale = characterScale;
         if (usesWeapon)
         {
-            rf.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/" + character + "/RF");
             rf.GetComponent<WeaponCollision>().UpdateCollisionShape();
-            if (isTwoHanded)
-            {
-                lf.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/" + character + "/LF");
-                lf.GetComponent<WeaponCollision>().UpdateCollisionShape();
-            }
+        }
+        if (isTwoHanded)
+        {
+            lf.GetComponent<WeaponCollision>().UpdateCollisionShape();
         }
     }
 
@@ -300,19 +309,6 @@ public class CharacterManager : NetworkBehaviour
             }
         }
         return callerEndPosition;
-    }
-
-    public Transform GetEnemy(GameObject caller)
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            if (player != caller)
-            {
-                return player.transform;
-            }
-        }
-        return null;
     }
 
 }
