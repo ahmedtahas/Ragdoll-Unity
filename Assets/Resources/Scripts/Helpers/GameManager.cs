@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    
+    public Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
+    public Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
+
     public GameObject player;
     public GameObject enemy;
     public string playerCharacter;
@@ -94,4 +98,93 @@ public class GameManager : MonoBehaviour
         );
     }
     
+
+    public Vector3 GetAvailablePosition(GameObject caller, Vector3 position)
+    {
+        float callerRadius = caller.GetComponent<CharacterManager>().characterRadius;
+        Vector3 callerHipPosition = caller.transform.Find(Constants.HIP).position;
+        Vector3 callerEndPosition = position;
+        float callerVectorLenght = (callerEndPosition - callerHipPosition).magnitude;
+        Vector3 callerVector = (callerEndPosition - callerHipPosition).normalized;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(caller.name + " " + position + "  HEBELEEEE " + callerHipPosition + "  " + callerEndPosition + "  " + callerVector);
+        Dictionary<GameObject, (float radius, Vector3 hipPosition)> playerData = new Dictionary<GameObject, (float, Vector3)>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] == caller)
+            {
+                continue;
+            }
+            CharacterManager characterManager = players[i].GetComponent<CharacterManager>();
+            Transform hip = players[i].transform.Find(Constants.HIP);
+
+            if (characterManager != null && hip != null)
+            {
+                playerData[players[i]] = (characterManager.characterRadius, hip.position);
+            }
+        }
+        foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
+        {
+            float range = player.Value.radius + callerRadius;
+            if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
+            {
+                callerVectorLenght += range * 1.5f;
+                Debug.Log("1  " + callerVectorLenght);
+                callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
+                Debug.Log(callerEndPosition);
+            }
+        }
+        foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
+        {
+            float range = callerRadius;
+            if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
+            {
+                callerVectorLenght += range;
+                Debug.Log("2  " + callerVectorLenght);
+                callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
+                Debug.Log(callerEndPosition);
+            }
+        }
+        Debug.Log(callerEndPosition);
+        if (callerEndPosition.x > roomPositiveDimensions.x)
+        {
+            callerEndPosition.x = roomPositiveDimensions.x - callerRadius / 2;
+        }
+        else if (callerEndPosition.x < roomNegativeDimensions.x)
+        {
+            callerEndPosition.x = roomNegativeDimensions.x + callerRadius / 2;
+        }
+        if (callerEndPosition.y > roomPositiveDimensions.y)
+        {
+            callerEndPosition.y = roomPositiveDimensions.y - callerRadius / 2;
+        }
+        else if (callerEndPosition.y < roomNegativeDimensions.y)
+        {
+            callerEndPosition.y = roomNegativeDimensions.y + callerRadius / 2;
+        }
+        Debug.Log(callerEndPosition);
+        foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
+        {
+            float range = callerRadius;
+            if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
+            {
+                callerVectorLenght -= range * 1.5f;
+                Debug.Log("3  " + callerVectorLenght);
+                callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
+                Debug.Log(callerEndPosition);
+            }
+        }
+        foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
+        {
+            float range = callerRadius;
+            if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
+            {
+                callerVectorLenght -= range;
+                Debug.Log("4  " + callerVectorLenght);
+                callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
+                Debug.Log(callerEndPosition);
+            }
+        }
+        return callerEndPosition;
+    }
 }

@@ -17,7 +17,7 @@ public class Stele : MonoBehaviour
     Skill skill;
     GameObject indicatorPrefab;
     GameObject indicator;
-    int hitCount = 0;
+    int hitCount = 2;
     int maxHitCount = 2;
     bool aiming = false;
     bool isOnCooldown = false;
@@ -131,7 +131,7 @@ public class Stele : MonoBehaviour
                 GameManager.Instance.DamageEnemy(damage);
             }
         }
-        Teleport(GetComponent<CharacterManager>().GetAvailablePosition(gameObject, position));
+        Teleport(GameManager.Instance.GetAvailablePosition(gameObject, position));
     }
 
     public void Teleport(Vector3 position)

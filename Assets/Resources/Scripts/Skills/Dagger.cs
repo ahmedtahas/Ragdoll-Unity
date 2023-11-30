@@ -47,12 +47,15 @@ public class Dagger : MonoBehaviour
                 OnHit?.Invoke(transform.position, true, false);
             }
         }
+        else
+        {
+            OnHit?.Invoke(transform.position, false, false);
+        }
         RemoveDagger();
     }
 
     void RemoveDagger()
     {
-        OnHit?.Invoke(transform.position, false, false);
         cam.RemoveFromView(transform);
         Destroy(gameObject);
     }

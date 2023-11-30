@@ -87,7 +87,7 @@ public class Chronopen : MonoBehaviour
 
     private void RestoreState()
     {
-        body.transform.position = GetComponent<CharacterManager>().GetAvailablePosition(gameObject, savedPosition);
+        body.transform.position = GameManager.Instance.GetAvailablePosition(gameObject, savedPosition);
         health.TakeDamage((-(savedHealth - health.currentHealth) * 2) * 0.69f);
     }
 }
