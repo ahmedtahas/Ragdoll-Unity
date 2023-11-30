@@ -12,7 +12,7 @@ public class Dagger : MonoBehaviour
     public int damage = 10;
     public float spinSpeed = 5f;
 
-    public event Action<Vector3> OnHit;
+    public event Action<Vector3, bool, bool> OnHit;
 
     void Start()
     {
@@ -36,31 +36,23 @@ public class Dagger : MonoBehaviour
     {
         
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill")
         {
-            if (!rb.isKinematic && collision.gameObject.tag != "Skill")
+            if (collision.gameObject.CompareTag("Head"))
             {
-                Health health = collision.gameObject.GetComponentInParent<Health>();
-                if (health != null)
-                {
-                    if (collision.gameObject.CompareTag("Head"))
-                    {
-                        health.TakeDamage(damage);
-                    }
-                    health.TakeDamage(damage);
-                }
+                OnHit?.Invoke(transform.position, true, true);
             }
-            else if (rb.isKinematic)
+            else
             {
-                Debug.Log("Dagger hit a wall" + transform.position);
+                OnHit?.Invoke(transform.position, true, false);
             }
-            RemoveDagger();
         }
+        RemoveDagger();
     }
 
     void RemoveDagger()
     {
-        OnHit?.Invoke(transform.position);
+        OnHit?.Invoke(transform.position, false, false);
         cam.RemoveFromView(transform);
         Destroy(gameObject);
     }

@@ -21,9 +21,10 @@ public class GameManager : MonoBehaviour
     public float enemyKnockback;
     public event Action<float> OnEnemyHealthChanged;
     public event Action<float> OnFreezeEnemy;
-    public event Action<Vector2> OnPushEnemy;
+    public event Action<Vector2, float> OnPushEnemy;
     public event Action<float> OnBlindEnemy;
-    public event Action<bool> OnTrapped;
+    public event Action<bool> OnTrapEnemy;
+    public event Action<float> OnDamageEnemy;
 
     private void Awake()
     {
@@ -39,9 +40,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EnemySet());
     }
 
+    public void DamageEnemy(float damage)
+    {
+        OnDamageEnemy?.Invoke(damage);
+    }
+
     public void TrapEnemy(bool trapped)
     {
-        OnTrapped?.Invoke(trapped);
+        OnTrapEnemy?.Invoke(trapped);
     }
 
     public void BlindEnemy(float duration)
@@ -49,9 +55,9 @@ public class GameManager : MonoBehaviour
         OnBlindEnemy?.Invoke(duration);
     }
 
-    public void PushEnemy(Vector2 direction)
+    public void PushEnemy(Vector2 direction, float force)
     {
-        OnPushEnemy?.Invoke(direction);
+        OnPushEnemy?.Invoke(direction, force);
     }
 
     public void FreezeEnemy(float duration)
@@ -76,4 +82,16 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetString(Constants.GAME_MODE, mode);
     }
+
+    public Vector2 RotateVector(Vector2 vector, float angle)
+    {
+        float angleInRadians = angle * Mathf.Deg2Rad;
+        float cosTheta = Mathf.Cos(angleInRadians);
+        float sinTheta = Mathf.Sin(angleInRadians);
+        return new Vector2(
+            vector.x * cosTheta - vector.y * sinTheta,
+            vector.x * sinTheta + vector.y * cosTheta
+        );
+    }
+    
 }

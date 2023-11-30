@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour
 {
     private float speed = 300f;
     public int damage = 10;
+    public event Action<Vector3, bool> OnHit;
 
     void Start()
     {
@@ -16,19 +18,15 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     { 
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill" && collision.gameObject.tag != "Shield")
         {
-            if (!rb.isKinematic && collision.gameObject.tag != "Skill")
+            if (collision.gameObject.CompareTag("Head"))
             {
-                Health health = collision.gameObject.GetComponentInParent<Health>();
-                if (health != null)
-                {
-                    if (collision.gameObject.CompareTag("Head"))
-                    {
-                        health.TakeDamage(damage);
-                    }
-                    health.TakeDamage(damage);
-                }
+                OnHit?.Invoke(transform.position, true);
+            }
+            else
+            {
+                OnHit?.Invoke(transform.position, false);
             }
         }
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform);

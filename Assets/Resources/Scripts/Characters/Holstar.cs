@@ -6,15 +6,20 @@ public class Holstar : MonoBehaviour
 {
     private Transform rf;
     private Vector2 barrelPosition;
+    Vector2 barrelVector;
     private GameObject bulletPrefab;
     private Rigidbody2D rfRigidbody;
-    public float recoilForce = 100f;
+    public float recoilForce = 42.0f;
     bool isOnCooldown = false;
     Skill skill;
     TimeController timeController;
+    float damage;
+    float force;
 
     void Start()
     {
+        damage = GetComponent<CharacterManager>().characterDamage;
+        force = GetComponent<CharacterManager>().characterKnockback;
         timeController = GetComponent<TimeController>();
         skill = GetComponent<Skill>();
         if (skill != null)
@@ -30,6 +35,7 @@ public class Holstar : MonoBehaviour
         bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
         rf = transform.Find(Constants.RF);
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
+        barrelVector = (rf.GetComponent<WeaponCollision>().GetUpperRightCorner() - Vector2.zero);
     }
 
     void HandleCooldown()
@@ -46,13 +52,27 @@ public class Holstar : MonoBehaviour
         }
     }
 
+    void HandleHit(Vector3 hitPosition, bool isHeadshot)
+    {
+        if (isHeadshot)
+        {
+            GameManager.Instance.DamageEnemy(damage * 3);
+        }
+        else
+        {
+            GameManager.Instance.DamageEnemy(damage);
+        }
+        GameManager.Instance.PushEnemy((new Vector2(hitPosition.x, hitPosition.y) - new Vector2(transform.position.x, transform.position.y)).normalized, force);
+    }
+
     void Shoot()
     {
         timeController.SlowDownTime();
         isOnCooldown = true;
-        barrelPosition = rf.GetComponent<WeaponCollision>().GetUpperRightCorner();
-        
+        barrelPosition = (Vector2)rf.position + GameManager.Instance.RotateVector(barrelVector, rf.eulerAngles.z);
+
         GameObject bullet = Instantiate(bulletPrefab, barrelPosition, rf.rotation) as GameObject;
+        bullet.GetComponent<Bullet>().OnHit += HandleHit;
         // Get the Collider2D component of the bullet
         Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
 
@@ -67,4 +87,6 @@ public class Holstar : MonoBehaviour
         
         rfRigidbody.AddForce(-rf.right * recoilForce, ForceMode2D.Impulse);
     }
+
+    
 }

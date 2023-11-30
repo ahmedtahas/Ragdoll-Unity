@@ -6,20 +6,20 @@ using Unity.Netcode;
 
 public class CharacterManager : NetworkBehaviour
 {
-    private Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
-    private Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
-    private bool usesWeapon = false;
-    private bool isTwoHanded = false;
-    private Vector3 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
+    public Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
+    public Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
+    public bool usesWeapon = false;
+    public bool isTwoHanded = false;
+    public Vector3 characterScale = new Vector3(1.0f, 1.0f, 1.0f);
     public float characterRadius = 50.0f;
-    private float characterSpeed = 1.0f;
-    private float characterHealth = 100.0f;
-    private float characterCooldown = 10.0f;
-    private float characterDamage = 10.0f;
-    private float characterKnockback = 5.0f;
-    private float characterSkillDuration = 10.0f;
-    private GameObject rf;
-    private GameObject lf;
+    public float characterSpeed = 1.0f;
+    public float characterHealth = 100.0f;
+    public float characterCooldown = 10.0f;
+    public float characterDamage = 10.0f;
+    public float characterKnockback = 5.0f;
+    public float characterSkillDuration = 10.0f;
+    public GameObject rf;
+    public GameObject lf;
     public Rigidbody2D[] rigidbodies;
 
     Vector3 bigSize = new Vector3(1.2f, 1.2f, 1.2f);

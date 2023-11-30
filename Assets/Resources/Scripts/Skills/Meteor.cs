@@ -8,18 +8,19 @@ public class Meteor : MonoBehaviour
     float speed = 30.0f;
     Vector3 finalScale = new Vector3(2, 2, 1);
     float finalSpeed = 50f;
-    float damage;
-
-    public event Action OnHit;
+    public float damage;
+    Health health;
+    public event Action<bool, bool> OnHit;
 
     void Start()
     {
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform);
     }
 
-    public void FollowEnemy(GameObject enemy, float duration = 10f, float damage = 12.5f)
+    public void FollowEnemy(GameObject owner, GameObject enemy, float duration, float damage)
     {
         this.damage = damage;
+        health = owner.GetComponent<Health>();
         StartCoroutine(FollowAndScale(enemy, duration));
     }
 
@@ -55,19 +56,30 @@ public class Meteor : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-        if (rb != null && !rb.isKinematic && collision.gameObject.tag != "Skill")
+        if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill" && collision.gameObject.tag != "Shield")
         {
             Health health = collision.gameObject.GetComponentInParent<Health>();
-            if (health != null)
+            if (health == this.health)
             {
                 if (collision.gameObject.CompareTag("Head"))
                 {
                     health.TakeDamage(damage);
                 }
                 health.TakeDamage(damage);
+                OnHit?.Invoke(false, false);
+            }
+            else
+            {
+                if (collision.gameObject.CompareTag("Head"))
+                {
+                    OnHit?.Invoke(true, true);
+                }
+                else
+                {
+                    OnHit?.Invoke(true, false);
+                }
             }
         }
-        OnHit?.Invoke();
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform);
         Destroy(gameObject);
     }

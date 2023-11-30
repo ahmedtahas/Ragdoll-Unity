@@ -18,7 +18,19 @@ public class WeaponCollision : MonoBehaviour
         PolygonCollider2D collider = GetComponent<PolygonCollider2D>();
         if (collider != null)
         {
-            return collider.bounds.max;
+            Vector2 maxPoint = collider.points[0];
+            foreach (Vector2 point in collider.points)
+            {
+                if (point.x > maxPoint.x)
+                {
+                    maxPoint.x = point.x;
+                }
+                if (point.y > maxPoint.y)
+                {
+                    maxPoint.y = point.y;
+                }
+            }
+            return maxPoint;
         }
         return Vector2.zero;
     }

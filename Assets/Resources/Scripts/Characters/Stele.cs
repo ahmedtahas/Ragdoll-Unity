@@ -21,7 +21,8 @@ public class Stele : MonoBehaviour
     int maxHitCount = 2;
     bool aiming = false;
     bool isOnCooldown = false;
-    Damage[] damages;
+    Damage[] damagers;
+    float damage;
 
     void Start()
     {
@@ -44,10 +45,11 @@ public class Stele : MonoBehaviour
         {
             skill.CanUseSkill += HandleCooldown;
         }
-        damages = GetComponentsInChildren<Damage>();
+        damagers = GetComponentsInChildren<Damage>();
+        damage = damagers[0].damage;
 
         // Subscribe to their signals
-        foreach (Damage damage in damages)
+        foreach (Damage damage in damagers)
         {
             damage.OnHit += HandleHit;
         }
@@ -116,8 +118,19 @@ public class Stele : MonoBehaviour
         }
     }
 
-    void HandleDaggerHit(Vector3 position)
+    void HandleDaggerHit(Vector3 position, bool isHit, bool isHeadshot)
     {
+        if (isHit)
+        {
+            if (isHeadshot)
+            {
+                GameManager.Instance.DamageEnemy(damage * 3);
+            }
+            else
+            {
+                GameManager.Instance.DamageEnemy(damage);
+            }
+        }
         Teleport(GetComponent<CharacterManager>().GetAvailablePosition(gameObject, position));
     }
 

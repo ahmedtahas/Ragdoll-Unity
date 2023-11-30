@@ -23,12 +23,19 @@ public class BounceOnImpact : MonoBehaviour
         GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
         if (name == "Head")
             StartCoroutine(CameraShake(0.03f, 0.1f));
-        Vector2 newDirection = new Vector3(direction.x, direction.y, 0).normalized;
         OnBounce?.Invoke();
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
-        rb.AddForce(newDirection.normalized * bounceForce, ForceMode2D.Impulse);
+        rb.AddForce(direction.normalized * bounceForce, ForceMode2D.Impulse);
+        foreach (Rigidbody2D siblingRb in siblingRigidbodies)
+        {
+            siblingRb.AddForce(direction.normalized * bounceForce, ForceMode2D.Impulse);
+        }
+    }
+
+    public void Pushed(Vector2 direction, float force)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
 
         // foreach (Rigidbody2D siblingRb in siblingRigidbodies)
         // {
@@ -37,7 +44,7 @@ public class BounceOnImpact : MonoBehaviour
         // }
         foreach (Rigidbody2D siblingRb in siblingRigidbodies)
         {
-            siblingRb.AddForce(newDirection.normalized * bounceForce, ForceMode2D.Impulse);
+            siblingRb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         }
     }
 
