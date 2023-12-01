@@ -1877,7 +1877,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4661af84c6226e94faca2acf4c2fbf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usesWeapon: 0
+  isTwoHanded: 0
+  characterScale: {x: 1, y: 1, z: 1}
   characterRadius: 0
+  characterSpeed: 1
+  characterHealth: 100
+  characterCooldown: 10
+  characterDamage: 10
+  characterKnockback: 5
+  characterSkillDuration: 10
+  rf: {fileID: 0}
+  lf: {fileID: 0}
   rigidbodies: []
   selection:
     m_InternalValue: 1

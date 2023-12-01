@@ -20,13 +20,32 @@ public class Skill : NetworkBehaviour
     public event Action CanUseSkill;
     public event Action OnDurationEnd;
 
-    public void StartDuration(bool cooldown = true)
+    Coroutine durationCoroutine;
+
+    public Coroutine StartDuration(bool cooldown = true)
     {
-        StartCoroutine(DurationRoutine(cooldown));
+        // Stop the previous duration coroutine if it's still running
+        if (durationCoroutine != null)
+        {
+            StopCoroutine(durationCoroutine);
+        }
+
+        // Start a new duration coroutine and store it in durationCoroutine
+        durationCoroutine = StartCoroutine(DurationRoutine(cooldown));
+
+        return durationCoroutine;
     }
 
     public void StartCooldown()
     {
+        // Stop the duration coroutine if it's still running
+        if (durationCoroutine != null)
+        {
+            StopCoroutine(durationCoroutine);
+            remainingDuration = duration;
+            durationCoroutine = null;
+        }
+
         StartCoroutine(CooldownRoutine());
     }
 
