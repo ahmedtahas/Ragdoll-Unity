@@ -30,7 +30,13 @@ public class Constants
     public const string LF = "Body/LUA/LLA/LF";
     public const string BODY = "Body";
     public const string MTC = "MultiTargetCamera";
-    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT };
+    public const string HEAD_SKIN = "Head";
+    public const string BODY_SKIN = "Body";
+    public static readonly string[] ARM_SKINS = { "RUA", "RLA", "LUA", "LLA" };
+    public static readonly string[] LEG_SKINS = { "RUL", "RLL", "LUL", "LLL" };
+    public static readonly string[] HIP_SKINS = { "Hip", "Stomach" };
+
+    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT, TIN, DYNABULL };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_NAMES = new Dictionary<string, string>
     {
         { CHRONOPEN, "Time in a Bottle" },

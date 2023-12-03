@@ -9,7 +9,7 @@ public class Dropdown : MonoBehaviour
     public GameObject dropdownMenu;
     public Button dropdownButton;
     public GameObject characterDisplay;
-    public CharacterDisplay characterDisplayScript;
+    public CharacterSelectionDisplay characterDisplayScript;
     public TextMeshProUGUI selectedOptionText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI damageText;
@@ -18,14 +18,12 @@ public class Dropdown : MonoBehaviour
     public TextMeshProUGUI skillNameText;
     public TextMeshProUGUI skillDescriptionText;
     public GameObject spawner;
-    public Button initialOptionButton;
 
     private bool isDropdownOpen = false;
 
     void Start()
     {
         dropdownButton.onClick.AddListener(ToggleDropdown);
-        SelectOption(initialOptionButton);
         ToggleDropdown();
     }
 
@@ -39,7 +37,7 @@ public class Dropdown : MonoBehaviour
     {
         selectedOptionText.text = optionButton.GetComponentInChildren<TextMeshProUGUI>().text;
         characterDisplay.SetActive(true);
-        characterDisplayScript.ShowCharacter(selectedOptionText.text);
+        characterDisplayScript.ShowCharacter(characterDisplayScript.GetButton(selectedOptionText.text));
         healthText.text = Constants.CHARACTER_HEALTH_POINTS[selectedOptionText.text].ToString();
         damageText.text = Constants.CHARACTER_DAMAGES[selectedOptionText.text].ToString();
         speedText.text = Constants.CHARACTER_SPEEDS[selectedOptionText.text].ToString();

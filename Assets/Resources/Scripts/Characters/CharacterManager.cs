@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
+using System;
 
 
 public class CharacterManager : NetworkBehaviour
@@ -67,7 +69,7 @@ public class CharacterManager : NetworkBehaviour
                 Constants.TIN => 6,
                 _ => 0
             };
-        }; 
+        };
     }
 
     
@@ -204,9 +206,34 @@ public class CharacterManager : NetworkBehaviour
             
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Skins");
         foreach (Rigidbody2D rb in rigidbodies)
         {
-            Sprite sprite = Resources.Load<Sprite>("Sprites/" + character + "/" + rb.name);
+            Sprite sprite = null;
+            if (Constants.ARM_SKINS.Contains(rb.name))
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "ArmSkin", 1) + "_Arm", StringComparison.OrdinalIgnoreCase));
+            }
+            else if (Constants.LEG_SKINS.Contains(rb.name))
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "LegSkin", 1) + "_Leg", StringComparison.OrdinalIgnoreCase));
+            }
+            else if (Constants.HIP_SKINS.Contains(rb.name))
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "HipSkin", 1) + "_Hip", StringComparison.OrdinalIgnoreCase));
+            }
+            else if (rb.name == Constants.BODY_SKIN)
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "BodySkin", 1) + "_Body", StringComparison.OrdinalIgnoreCase));
+            }
+            else if (rb.name == Constants.HEAD_SKIN)
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "HeadSkin", 1) + "_Head", StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                sprite = sprites.FirstOrDefault(s => s.name.Equals(character + "_" + PlayerPrefs.GetInt(character + "WeaponSkin", 1) + "_" + rb.name, StringComparison.OrdinalIgnoreCase));
+            }
             if (sprite != null)
             {
                 rb.GetComponent<SpriteRenderer>().sprite = sprite;
