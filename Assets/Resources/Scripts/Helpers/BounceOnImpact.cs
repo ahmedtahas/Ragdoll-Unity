@@ -7,41 +7,43 @@ public class BounceOnImpact : MonoBehaviour
 {
     private float bounceForce = 15f; // The force applied when bouncing
     public Rigidbody2D[] siblingRigidbodies;
-    public event Action OnBounce;
+    GameObject self;
+    private float lastPushedTime = 0f;
+    private float pushCooldown = 0.1f;
+
+    void Start()
+    {
+        self = transform.GetComponentInParent<CharacterManager>().gameObject;
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D collidedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
         if (collidedRigidbody != null && collidedRigidbody.bodyType == RigidbodyType2D.Dynamic)
         {
+            GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
+            if (name == "Head")
+                StartCoroutine(CameraShake(0.03f, 0.1f));
+            GameManager.Instance.PushEnemy(GameManager.Instance.RotateVector(collision.contacts[0].normal, 180), bounceForce, self);
             Bounce(collision.contacts[0].normal);
         }
     }
 
     public void Bounce(Vector2 direction)
     {
-        GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
-        if (name == "Head")
-            StartCoroutine(CameraShake(0.03f, 0.1f));
-        OnBounce?.Invoke();
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(direction.normalized * bounceForce, ForceMode2D.Impulse);
-        foreach (Rigidbody2D siblingRb in siblingRigidbodies)
-        {
-            siblingRb.AddForce(direction.normalized * bounceForce, ForceMode2D.Impulse);
-        }
     }
 
     public void Pushed(Vector2 direction, float force)
     {
+        if (Time.time - lastPushedTime < pushCooldown)
+        {
+            return;
+        }
+        lastPushedTime = Time.time;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
-
-        // foreach (Rigidbody2D siblingRb in siblingRigidbodies)
-        // {
-        //     siblingRb.velocity = Vector2.zero;
-        //     siblingRb.angularVelocity = 0f;
-        // }
         foreach (Rigidbody2D siblingRb in siblingRigidbodies)
         {
             siblingRb.AddForce(direction.normalized * force, ForceMode2D.Impulse);

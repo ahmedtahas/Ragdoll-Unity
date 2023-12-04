@@ -6,9 +6,9 @@ using System;
 
 public class Health : MonoBehaviour
 {
-    public Image healthBar;
-    public TextMeshProUGUI healthText;
-    public Image enemyHealthBar;
+    Image healthBar;
+    TextMeshProUGUI healthText;
+    Image enemyHealthBar;
     public float maxHealth;
     public float currentHealth;
     private LayerMask deathLayer;
@@ -17,8 +17,11 @@ public class Health : MonoBehaviour
     public event Action<float> OnHealthChanged;
     public event Action<float> OnDamageTaken;
 
-    void Start()
+    void OnEnable()
     {
+        healthBar = transform.Find("UI/Bars/Health/HBG/HFG").GetComponent<Image>();
+        healthText = transform.Find("UI/Bars/HT").GetComponent<TextMeshProUGUI>();
+        enemyHealthBar = transform.Find("UI/EnemyHealthBG/EnemyHealth").GetComponent<Image>();
         deathLayer = LayerMask.NameToLayer("Dead");
         StartCoroutine(SetEnemyHealth());
     }

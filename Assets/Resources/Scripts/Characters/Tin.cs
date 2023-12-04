@@ -15,15 +15,22 @@ public class Tin : MonoBehaviour
     GameObject shockwavePrefab;
     GameObject shockwave;
     Coroutine growShockwaveCoroutine;
+    Transform body;
 
     
 
     void Start()
     {
+        body = transform.Find(Constants.BODY);
         shockwavePrefab = Resources.Load<GameObject>("Prefabs/Shockwave");
         maximumCharge = GetComponent<CharacterManager>().characterSkillDuration;
         knockback = GetComponent<CharacterManager>().characterKnockback;
         damage = GetComponent<CharacterManager>().characterDamage;
+        
+    }
+
+    void OnEnable()
+    {
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -35,7 +42,26 @@ public class Tin : MonoBehaviour
         {
             skill.CanUseSkill += HandleCooldown;
         }
-        
+        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
+    }
+
+    void OnDisable()
+    {
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.OnChargeUp -= HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.CanUseSkill -= HandleCooldown;
+        }
+        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
+    }
+
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
+    {
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
     void HandleCooldown()
@@ -47,13 +73,13 @@ public class Tin : MonoBehaviour
     {
         if (!released)
         {
-            GameManager.Instance.playerTransform.GetComponentInChildren<Movement>().enabled = false;
+            transform.GetComponent<Movement>().enabled = false;
             skill.StartDuration(false);
             CreateShockwave();
         }
         if (!isOnCooldown && released)
         {
-            GameManager.Instance.playerTransform.GetComponentInChildren<Movement>().enabled = true;
+            transform.GetComponent<Movement>().enabled = true;
             isOnCooldown = true;
             DestroyShockwave();
             skill.StartCooldown();
@@ -67,7 +93,7 @@ public class Tin : MonoBehaviour
             }
             if ((GameManager.Instance.enemy.transform.position - GameManager.Instance.player.transform.position).magnitude <= range * multiplier)
             {
-                GameManager.Instance.PushEnemy((Vector2)(GameManager.Instance.player.transform.position - GameManager.Instance.enemy.transform.position), knockback);
+                GameManager.Instance.PushEnemy((Vector2)(GameManager.Instance.player.transform.position - GameManager.Instance.enemy.transform.position), knockback, gameObject);
                 GameManager.Instance.DamageEnemy(damage * multiplier);
             }
             multiplier = 1.0f;

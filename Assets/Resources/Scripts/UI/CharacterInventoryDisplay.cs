@@ -54,7 +54,7 @@ public class CharacterInventoryDisplay : MonoBehaviour
         character.GetComponent<CharacterManager>().Instantiate(characterName);
 
         character.transform.Find(Constants.BODY).GetComponent<Rigidbody2D>().isKinematic = true;
-        character.transform.Find(Constants.BODY).GetComponent<Movement>().enabled = false;
+        character.GetComponent<Movement>().enabled = false;
         character.transform.Find("UI").gameObject.SetActive(false);
     }
 

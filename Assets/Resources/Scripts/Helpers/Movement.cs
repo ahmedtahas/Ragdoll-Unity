@@ -5,42 +5,26 @@ using Unity.Netcode;
 
 public class Movement : NetworkBehaviour
 {
-    public MovementStick movementStick;
-    Rigidbody2D rb;
+    MovementStick movementStick;
+    Rigidbody2D body;
     Vector2 direction;
     float speed = 1f;
-    bool hitCooldown = false;
     void Start()
     {
+        movementStick = transform.Find("UI/MovementStick").GetComponent<MovementStick>();
         movementStick.OnMove += HandleMove;
-        BounceOnImpact[] bounceOnImpacts = GetComponentsInChildren<BounceOnImpact>();
 
-        // Subscribe to their signals
-        foreach (BounceOnImpact bounceOnImpact in bounceOnImpacts)
-        {
-            bounceOnImpact.OnBounce += HandleBounce;
-        }
-        rb = GetComponent<Rigidbody2D>();
+        body = transform.Find(Constants.BODY).GetComponent<Rigidbody2D>();
     }
     public void HandleMove(Vector2 direction)
     {
         this.direction = direction;
     }
 
-    private void HandleBounce()
-    {
-        hitCooldown = true;
-        StartCoroutine(OnBounceCooldown());
-    }
     void FixedUpdate()
     {
-        if (hitCooldown)
-        {
-            rb.velocity = Vector2.zero;
-            return;
-        }
         if (direction.magnitude > 0.1f)
-            rb.AddForce(direction * speed);
+            body.AddForce(direction * speed);
     }
 
     public void SetSpeed(float speed)
@@ -48,9 +32,4 @@ public class Movement : NetworkBehaviour
         this.speed = speed;
     }
 
-    private IEnumerator OnBounceCooldown()
-    {
-        yield return new WaitForSeconds(0.5f);
-        hitCooldown = false;
-    }
 }

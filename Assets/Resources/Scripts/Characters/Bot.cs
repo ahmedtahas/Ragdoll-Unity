@@ -43,9 +43,9 @@ public class Bot : MonoBehaviour
         // }
     }
 
-    void HandlePushEnemy(Vector2 direction, float force)
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
     {
-        body.GetComponent<BounceOnImpact>().Pushed(direction, force);
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
     void HandleBlindEnemy(float duration)

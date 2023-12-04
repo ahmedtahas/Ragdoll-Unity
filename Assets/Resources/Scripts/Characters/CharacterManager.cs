@@ -254,7 +254,7 @@ public class CharacterManager : NetworkBehaviour
         {
             bounceOnImpact.SetKnockback(characterKnockback);
         }
-        transform.Find(Constants.BODY).GetComponent<Movement>().SetSpeed(characterSpeed);
+        GetComponent<Movement>().SetSpeed(characterSpeed);
         Damage[] damages = GetComponentsInChildren<Damage>();
         foreach (Damage damage in damages)
         {

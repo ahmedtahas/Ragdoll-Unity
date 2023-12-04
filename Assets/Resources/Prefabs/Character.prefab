@@ -1360,7 +1360,6 @@ GameObject:
   - component: {fileID: 2453644834345941453}
   - component: {fileID: 6414441004767001775}
   - component: {fileID: 4238940841408883538}
-  - component: {fileID: 7203643752117329044}
   - component: {fileID: 7727611197037579792}
   - component: {fileID: 8512285802470712405}
   - component: {fileID: 4973794925743166350}
@@ -1504,19 +1503,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.2, y: 3.6}
   m_Direction: 0
---- !u!114 &7203643752117329044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2374853553298243329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4640d82acc7d1784c8bf1d70dcb01664, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementStick: {fileID: 7929703371670037602}
 --- !u!114 &7727611197037579792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,9 +1809,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2497894144070722967}
   - component: {fileID: 1883059551767638198}
+  - component: {fileID: 2528219198896769854}
   - component: {fileID: 3590923951322768431}
   - component: {fileID: 3083987755383986516}
-  - component: {fileID: 7954391067811094768}
   - component: {fileID: 7655671071416975642}
   - component: {fileID: -5585994560774438375}
   - component: {fileID: 13321160786348064}
@@ -1863,6 +1849,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1da9d36b9eb853c4180b0d76b43f4249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2528219198896769854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457379721874462123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4640d82acc7d1784c8bf1d70dcb01664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3590923951322768431
@@ -1904,25 +1902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306307f0ccbe0194ca0e792e44cb84d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 3093321669449166483}
-  healthText: {fileID: 3978435208670530529}
-  enemyHealthBar: {fileID: 8609183012110229497}
   maxHealth: 100
   currentHealth: 0
   childTransforms: []
---- !u!114 &7954391067811094768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457379721874462123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5168efb052fcc34b8054b937055f6bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!114 &7655671071416975642
 MonoBehaviour:
   m_ObjectHideFlags: 0

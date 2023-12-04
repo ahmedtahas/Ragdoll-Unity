@@ -70,12 +70,6 @@ public class Dropdown : MonoBehaviour
             character.GetComponent<CharacterManager>().Instantiate(Constants.BOT);
             character.name = Constants.BOT;
         }
-        // else
-        // {
-        //     character.transform.Find(Constants.BODY).GetComponent<Rigidbody2D>().isKinematic = false;
-        //     character.transform.Find(Constants.BODY).GetComponent<Movement>().enabled = true;
-        //     character.transform.Find("UI").gameObject.SetActive(true);
-        // }
 
     }
 }
