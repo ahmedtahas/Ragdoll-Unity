@@ -14,6 +14,12 @@ public class Chronopen : MonoBehaviour
     void Start()
     {
         health = GetComponent<Health>();
+        body = transform.Find(Constants.BODY);
+        DisableJoints();
+    }
+
+    void OnEnable()
+    {
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -26,9 +32,27 @@ public class Chronopen : MonoBehaviour
             skill.OnDurationEnd += HandleDurationEnd;
             skill.CanUseSkill += HandleCooldown;
         }
-        
-        body = transform.Find("Body");
-        DisableJoints();
+        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
+    }
+
+    void OnDisable()
+    {
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.OnClick -= HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.OnDurationEnd -= HandleDurationEnd;
+            skill.CanUseSkill -= HandleCooldown;
+        }
+        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
+    }
+
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
+    {
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
     public void DisableJoints()
     {
@@ -88,6 +112,6 @@ public class Chronopen : MonoBehaviour
     private void RestoreState()
     {
         body.transform.position = GameManager.Instance.GetAvailablePosition(gameObject, savedPosition);
-        health.TakeDamage((-(savedHealth - health.currentHealth) * 2) * 0.69f);
+        health.Heal(((savedHealth - health.currentHealth) * 2) * 0.69f);
     }
 }

@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
     private LayerMask deathLayer;
     public Transform[] childTransforms;
 
-    public event Action<float> OnHealthChanged;
+    public event Action<float, GameObject> OnHealthChanged;
     public event Action<float> OnDamageTaken;
 
     void OnEnable()
@@ -23,7 +23,13 @@ public class Health : MonoBehaviour
         healthText = transform.Find("UI/Bars/HT").GetComponent<TextMeshProUGUI>();
         enemyHealthBar = transform.Find("UI/EnemyHealthBG/EnemyHealth").GetComponent<Image>();
         deathLayer = LayerMask.NameToLayer("Dead");
+        GameManager.Instance.OnDamageEnemy += TakeDamage;
         StartCoroutine(SetEnemyHealth());
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnDamageEnemy -= TakeDamage;
     }
 
     IEnumerator SetEnemyHealth()
@@ -32,8 +38,27 @@ public class Health : MonoBehaviour
         GameManager.Instance.OnEnemyHealthChanged += SetEnemyHealth;
     }
 
-    public void TakeDamage(float amount)
+    public void Heal(float amount)
     {
+        currentHealth += amount;
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if (healthText != null)
+        {
+            healthText.text = currentHealth % 1 == 0 ? currentHealth.ToString() : currentHealth.ToString("F1");
+            healthBar.fillAmount = ((currentHealth / maxHealth)  * 0.5F) + 0.5f;
+        }
+        OnHealthChanged?.Invoke(healthBar.fillAmount, gameObject);
+    }
+
+    public void TakeDamage(float amount, GameObject source = null)
+    {
+        if (source == null || source == gameObject)
+        {
+            return;
+        }
         currentHealth -= amount;
         if (amount > 0) OnDamageTaken?.Invoke(amount);
         if (currentHealth >= maxHealth)
@@ -43,7 +68,7 @@ public class Health : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = currentHealth % 1 == 0 ? currentHealth.ToString() : currentHealth.ToString("F1");
-            healthBar.fillAmount = ((currentHealth / maxHealth) / 2) + 0.5f;
+            healthBar.fillAmount = ((currentHealth / maxHealth)  * 0.5F) + 0.5f;
         }
         if (currentHealth <= 0)
         {
@@ -54,7 +79,7 @@ public class Health : MonoBehaviour
             }
             StartCoroutine(DeathRoutine());
         }
-        OnHealthChanged?.Invoke(healthBar.fillAmount);
+        OnHealthChanged?.Invoke(healthBar.fillAmount, gameObject);
     }
 
     private IEnumerator DeathRoutine()
@@ -90,8 +115,12 @@ public class Health : MonoBehaviour
         healthText.text = currentHealth.ToString();
     }
 
-    public void SetEnemyHealth(float health)
+    public void SetEnemyHealth(float health, GameObject enemy = null)
     {
+        if (enemy == null || enemy == gameObject)
+        {
+            return;
+        }
         if (enemyHealthBar == null)
         {
             return;

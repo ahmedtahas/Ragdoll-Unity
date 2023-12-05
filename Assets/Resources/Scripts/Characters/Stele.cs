@@ -33,6 +33,10 @@ public class Stele : MonoBehaviour
         body = transform.Find(Constants.BODY);
         barrel = transform.Find("Body/RUA/RLA");
         daggerPrefab = Resources.Load(Constants.DAGGER_PREFAB_PATH) as GameObject;
+    }
+
+    void OnEnable()
+    {
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -53,7 +57,33 @@ public class Stele : MonoBehaviour
         {
             damage.OnHit += HandleHit;
         }
+        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
+
+    void OnDisable()
+    {
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            // Unsubscribe from the OnSignalSent event
+            skillStick.OnAim -= HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.CanUseSkill -= HandleCooldown;
+        }
+        foreach (Damage damage in damagers)
+        {
+            damage.OnHit -= HandleHit;
+        }
+        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
+    }
+
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
+    {
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
+    }
+
     void HandleHit()
     {
         if (hitCount < maxHitCount && !isOnCooldown)
@@ -61,7 +91,6 @@ public class Stele : MonoBehaviour
             hitCount++;
         }
     }
-
     void Update()
     {
         if (aiming) indicator.transform.position = hip.position;
@@ -124,11 +153,11 @@ public class Stele : MonoBehaviour
         {
             if (isHeadshot)
             {
-                GameManager.Instance.DamageEnemy(damage * 3);
+                GameManager.Instance.DamageEnemy(damage * 3, gameObject);
             }
             else
             {
-                GameManager.Instance.DamageEnemy(damage);
+                GameManager.Instance.DamageEnemy(damage, gameObject);
             }
         }
         Teleport(GameManager.Instance.GetAvailablePosition(gameObject, position));

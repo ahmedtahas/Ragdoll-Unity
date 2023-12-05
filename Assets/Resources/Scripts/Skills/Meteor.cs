@@ -63,9 +63,9 @@ public class Meteor : MonoBehaviour
             {
                 if (collision.gameObject.CompareTag("Head"))
                 {
-                    health.TakeDamage(damage);
+                    health.Heal(-damage);
                 }
-                health.TakeDamage(damage);
+                health.Heal(-damage);
                 OnHit?.Invoke(false, false);
             }
             else

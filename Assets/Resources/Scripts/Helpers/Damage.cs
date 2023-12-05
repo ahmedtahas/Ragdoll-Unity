@@ -5,7 +5,12 @@ public class Damage : MonoBehaviour
 {
     public float damage = 10;
     public event Action OnHit;
+    GameObject self;
 
+    void OnEnable()
+    {
+        self = transform.GetComponentInParent<CharacterManager>().gameObject;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -18,11 +23,13 @@ public class Damage : MonoBehaviour
             OnHit?.Invoke();
             if (collision.gameObject.CompareTag("Head"))
             {
-                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);
+                GameManager.Instance.DamageEnemy(damage * 2, self);
+                // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);
             }
             else if (collision.gameObject.CompareTag("Damagable"))
             {
-                collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
+                GameManager.Instance.DamageEnemy(damage, self);
+                // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             }
         
         }

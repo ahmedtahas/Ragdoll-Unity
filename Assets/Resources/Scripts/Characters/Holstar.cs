@@ -15,27 +15,54 @@ public class Holstar : MonoBehaviour
     TimeController timeController;
     float damage;
     float force;
+    Transform body;
 
     void Start()
     {
+        body = transform.Find(Constants.BODY);
         damage = GetComponent<CharacterManager>().characterDamage;
         force = GetComponent<CharacterManager>().characterKnockback;
         timeController = GetComponent<TimeController>();
-        skill = GetComponent<Skill>();
-        if (skill != null)
-        {
-            skill.CanUseSkill += HandleCooldown;
-        }
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
-        if (skillStick != null)
-        {
-            skillStick.SetBehavior(SkillStick.BehaviorType.Click);
-            skillStick.OnClick += HandleSignal;
-        }
         bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
         rf = transform.Find(Constants.RF);
         rfRigidbody = rf.GetComponent<Rigidbody2D>();
         barrelVector = (rf.GetComponent<WeaponCollision>().GetUpperRightCorner() - Vector2.zero);
+    }
+
+
+    void OnEnable()
+    {
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        skill = GetComponent<Skill>();
+        if (skillStick != null)
+        {
+            skillStick.SetBehavior(SkillStick.BehaviorType.Click);
+            skillStick.OnClick += HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.CanUseSkill += HandleCooldown;
+        }
+        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
+    }
+
+    void OnDisable()
+    {
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.OnClick -= HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.CanUseSkill -= HandleCooldown;
+        }
+        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
+    }
+
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
+    {
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
     void HandleCooldown()
@@ -43,7 +70,7 @@ public class Holstar : MonoBehaviour
         isOnCooldown = false;
     }
 
-    void HandleSignal()
+    void HandleSkillSignal()
     {
         if (!isOnCooldown)
         {
@@ -56,13 +83,13 @@ public class Holstar : MonoBehaviour
     {
         if (isHeadshot)
         {
-            GameManager.Instance.DamageEnemy(damage * 3);
+            GameManager.Instance.DamageEnemy(damage * 3, gameObject);
         }
         else
         {
-            GameManager.Instance.DamageEnemy(damage);
+            GameManager.Instance.DamageEnemy(damage, gameObject);
         }
-        GameManager.Instance.PushEnemy((new Vector2(hitPosition.x, hitPosition.y) - new Vector2(transform.position.x, transform.position.y)).normalized, force);
+        GameManager.Instance.PushEnemy((new Vector2(hitPosition.x, hitPosition.y) - new Vector2(rf.transform.position.x, rf.transform.position.y)).normalized, force, gameObject);
     }
 
     void Shoot()

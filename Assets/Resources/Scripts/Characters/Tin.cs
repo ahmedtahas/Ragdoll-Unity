@@ -45,6 +45,8 @@ public class Tin : MonoBehaviour
         GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
 
+
+
     void OnDisable()
     {
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
@@ -94,7 +96,7 @@ public class Tin : MonoBehaviour
             if ((GameManager.Instance.enemy.transform.position - GameManager.Instance.player.transform.position).magnitude <= range * multiplier)
             {
                 GameManager.Instance.PushEnemy((Vector2)(GameManager.Instance.player.transform.position - GameManager.Instance.enemy.transform.position), knockback, gameObject);
-                GameManager.Instance.DamageEnemy(damage * multiplier);
+                GameManager.Instance.DamageEnemy(damage * multiplier, gameObject);
             }
             multiplier = 1.0f;
         }

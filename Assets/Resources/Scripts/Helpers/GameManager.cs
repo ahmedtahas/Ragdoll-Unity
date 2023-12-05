@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour
     public float enemyHealth;
     public float playerKnockback;
     public float enemyKnockback;
-    public event Action<float> OnEnemyHealthChanged;
-    public event Action<float> OnFreezeEnemy;
+    public event Action<float, GameObject> OnEnemyHealthChanged;
+    public event Action<float, GameObject> OnFreezeEnemy;
     public event Action<Vector2, float, GameObject> OnPushEnemy;
-    public event Action<float> OnBlindEnemy;
-    public event Action<bool> OnTrapEnemy;
-    public event Action<float> OnDamageEnemy;
+    public event Action<float, GameObject> OnBlindEnemy;
+    public event Action<bool, GameObject> OnTrapEnemy;
+    public event Action<float, GameObject> OnDamageEnemy;
 
     private void Awake()
     {
@@ -44,19 +44,19 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EnemySet());
     }
 
-    public void DamageEnemy(float damage)
+    public void DamageEnemy(float damage, GameObject caller = null)
     {
-        OnDamageEnemy?.Invoke(damage);
+        OnDamageEnemy?.Invoke(damage, caller);
     }
 
-    public void TrapEnemy(bool trapped)
+    public void TrapEnemy(bool trapped, GameObject caller = null)
     {
-        OnTrapEnemy?.Invoke(trapped);
+        OnTrapEnemy?.Invoke(trapped, caller);
     }
 
-    public void BlindEnemy(float duration)
+    public void BlindEnemy(float duration, GameObject caller = null)
     {
-        OnBlindEnemy?.Invoke(duration);
+        OnBlindEnemy?.Invoke(duration, caller);
     }
 
     public void PushEnemy(Vector2 direction, float force, GameObject caller = null)
@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour
         OnPushEnemy?.Invoke(direction, force, caller);
     }
 
-    public void FreezeEnemy(float duration)
+    public void FreezeEnemy(float duration, GameObject caller = null)
     {
-        OnFreezeEnemy?.Invoke(duration);
+        OnFreezeEnemy?.Invoke(duration, caller);
     }
 
     
@@ -77,9 +77,9 @@ public class GameManager : MonoBehaviour
         enemyTransform.GetComponent<Health>().OnHealthChanged += HandleEnemyHealthChanged;
     }
 
-    private void HandleEnemyHealthChanged(float health)
+    private void HandleEnemyHealthChanged(float health, GameObject caller = null)
     {
-        OnEnemyHealthChanged?.Invoke((health - 0.5f) * 2);
+        OnEnemyHealthChanged?.Invoke((health - 0.5f)  * 2, caller);
     }
 
     public void SetMode(string mode)
@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
         float callerVectorLenght = (callerEndPosition - callerHipPosition).magnitude;
         Vector3 callerVector = (callerEndPosition - callerHipPosition).normalized;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(caller.name + " " + position + "  HEBELEEEE " + callerHipPosition + "  " + callerEndPosition + "  " + callerVector);
         Dictionary<GameObject, (float radius, Vector3 hipPosition)> playerData = new Dictionary<GameObject, (float, Vector3)>();
         for (int i = 0; i < players.Length; i++)
         {
@@ -129,9 +128,7 @@ public class GameManager : MonoBehaviour
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght += range * 1.5f;
-                Debug.Log("1  " + callerVectorLenght);
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
-                Debug.Log(callerEndPosition);
             }
         }
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
@@ -140,38 +137,32 @@ public class GameManager : MonoBehaviour
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght += range;
-                Debug.Log("2  " + callerVectorLenght);
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
-                Debug.Log(callerEndPosition);
             }
         }
-        Debug.Log(callerEndPosition);
         if (callerEndPosition.x > roomPositiveDimensions.x)
         {
-            callerEndPosition.x = roomPositiveDimensions.x - callerRadius / 2;
+            callerEndPosition.x = roomPositiveDimensions.x - (callerRadius  * 0.5F);
         }
         else if (callerEndPosition.x < roomNegativeDimensions.x)
         {
-            callerEndPosition.x = roomNegativeDimensions.x + callerRadius / 2;
+            callerEndPosition.x = roomNegativeDimensions.x + (callerRadius  * 0.5F);
         }
         if (callerEndPosition.y > roomPositiveDimensions.y)
         {
-            callerEndPosition.y = roomPositiveDimensions.y - callerRadius / 2;
+            callerEndPosition.y = roomPositiveDimensions.y - (callerRadius  * 0.5F);
         }
         else if (callerEndPosition.y < roomNegativeDimensions.y)
         {
-            callerEndPosition.y = roomNegativeDimensions.y + callerRadius / 2;
+            callerEndPosition.y = roomNegativeDimensions.y + (callerRadius  * 0.5F);
         }
-        Debug.Log(callerEndPosition);
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
         {
             float range = callerRadius;
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght -= range * 1.5f;
-                Debug.Log("3  " + callerVectorLenght);
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
-                Debug.Log(callerEndPosition);
             }
         }
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
@@ -180,9 +171,7 @@ public class GameManager : MonoBehaviour
             if (Vector3.Distance(callerEndPosition, player.Value.hipPosition) <= range)
             {
                 callerVectorLenght -= range;
-                Debug.Log("4  " + callerVectorLenght);
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
-                Debug.Log(callerEndPosition);
             }
         }
         return callerEndPosition;

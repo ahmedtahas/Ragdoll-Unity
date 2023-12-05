@@ -15,7 +15,7 @@ public class Bot : MonoBehaviour
         body = transform.Find(Constants.BODY);
         health = GetComponent<Health>();
         transform.Find("UI").gameObject.SetActive(false);
-        movement = transform.Find(Constants.BODY).GetComponent<Movement>();
+        movement = GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
         GameManager.Instance.OnFreezeEnemy += HandleFreezeEnemy;
@@ -26,12 +26,12 @@ public class Bot : MonoBehaviour
         // StartCoroutine(Chase());
     }
 
-    void HandleDamageEnemy(float damage)
+    void HandleDamageEnemy(float damage, GameObject source)
     {
-        health.TakeDamage(damage);
+        if (source != gameObject) health.TakeDamage(damage);
     }
 
-    void HandleTrapEnemy(bool trapped)
+    void HandleTrapEnemy(bool trapped, GameObject source)
     {
         // if (trapped)
         // {
@@ -48,12 +48,12 @@ public class Bot : MonoBehaviour
         if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
-    void HandleBlindEnemy(float duration)
+    void HandleBlindEnemy(float duration, GameObject source)
     {
         // StartCoroutine(BlindEnemy(duration));
     }
 
-    void HandleFreezeEnemy(float duration)
+    void HandleFreezeEnemy(float duration, GameObject source)
     {
         // StartCoroutine(FreezeEnemy(duration));
     }

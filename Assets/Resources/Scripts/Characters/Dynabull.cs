@@ -10,14 +10,21 @@ public class Dynabull : MonoBehaviour
     Skill skill;
     Transform rf;
     Transform lf;
+    Transform body;
 
     
 
     void Start()
     {
+        body = transform.Find(Constants.BODY);
         rf = transform.Find(Constants.RF);
         lf = transform.Find(Constants.LF);
         health = GetComponent<Health>();
+        
+    }
+
+    void OnEnable()
+    {
         health.OnDamageTaken += DamageTaken;
         SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         skill = GetComponent<Skill>();
@@ -31,12 +38,33 @@ public class Dynabull : MonoBehaviour
             skill.CanUseSkill += HandleCooldown;
             skill.OnDurationEnd += HandleDurationEnd;
         }
-        
+        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
+    }
+
+    void OnDisable()
+    {
+        health.OnDamageTaken -= DamageTaken;
+        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        if (skillStick != null)
+        {
+            skillStick.OnClick -= HandleSkillSignal;
+        }
+        if (skill != null)
+        {
+            skill.CanUseSkill -= HandleCooldown;
+            skill.OnDurationEnd -= HandleDurationEnd;
+        }
+        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
+    }
+
+    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
+    {
+        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
     void DamageTaken(float amount)
     {
-        if (isOnDuration) health.TakeDamage(-amount / 2);
+        if (isOnDuration) health.Heal(amount  * 0.5F);
     }
 
     void HandleCooldown()
