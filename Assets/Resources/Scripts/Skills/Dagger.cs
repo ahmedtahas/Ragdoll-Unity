@@ -11,6 +11,7 @@ public class Dagger : MonoBehaviour
     private Stele player;
     public int damage = 10;
     public float spinSpeed = 5f;
+    bool hit = false;
 
     public event Action<Vector3, bool, bool> OnHit;
 
@@ -34,10 +35,10 @@ public class Dagger : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill")
-        {
+       {
+            hit = true;
             if (collision.gameObject.CompareTag("Head"))
             {
                 OnHit?.Invoke(transform.position, true, true);
@@ -47,15 +48,12 @@ public class Dagger : MonoBehaviour
                 OnHit?.Invoke(transform.position, true, false);
             }
         }
-        else
-        {
-            OnHit?.Invoke(transform.position, false, false);
-        }
         RemoveDagger();
     }
 
     void RemoveDagger()
     {
+        if (!hit) OnHit?.Invoke(transform.position, false, false);
         cam.RemoveFromView(transform);
         Destroy(gameObject);
     }

@@ -10,9 +10,14 @@ public class CustomNetworkManager : NetworkManager
 
 
 
-    private void Start()
+    private void OnEnabled()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnDisabled()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 
     private void OnClientConnected(ulong clientId)

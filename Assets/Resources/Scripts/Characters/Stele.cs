@@ -31,13 +31,13 @@ public class Stele : MonoBehaviour
         hip = transform.Find(Constants.HIP);
         indicatorPrefab = Resources.Load("Prefabs/Indicator") as GameObject;
         body = transform.Find(Constants.BODY);
-        barrel = transform.Find("Body/RUA/RLA");
+        barrel = transform.Find("Body/RLA");
         daggerPrefab = Resources.Load(Constants.DAGGER_PREFAB_PATH) as GameObject;
     }
 
     void OnEnable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
         {
@@ -62,7 +62,7 @@ public class Stele : MonoBehaviour
 
     void OnDisable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
             // Unsubscribe from the OnSignalSent event

@@ -31,7 +31,7 @@ public class Tin : MonoBehaviour
 
     void OnEnable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
         {
@@ -49,7 +49,7 @@ public class Tin : MonoBehaviour
 
     void OnDisable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
             skillStick.OnChargeUp -= HandleSkillSignal;

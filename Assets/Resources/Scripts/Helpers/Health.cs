@@ -24,18 +24,19 @@ public class Health : MonoBehaviour
         enemyHealthBar = transform.Find("UI/EnemyHealthBG/EnemyHealth").GetComponent<Image>();
         deathLayer = LayerMask.NameToLayer("Dead");
         GameManager.Instance.OnDamageEnemy += TakeDamage;
-        StartCoroutine(SetEnemyHealth());
+        if (GameManager.Instance.gameMode == Constants.SINGLE_PLAYER)
+        {
+            GameManager.Instance.OnEnemyHealthChanged += SetBotHealth;
+        }
+        else
+        {
+            GameManager.Instance.OnEnemyHealthChanged += SetEnemyHealth;
+        }
     }
 
     void OnDisable()
     {
         GameManager.Instance.OnDamageEnemy -= TakeDamage;
-    }
-
-    IEnumerator SetEnemyHealth()
-    {
-        yield return new WaitUntil(() => GameManager.Instance.enemy != null);
-        GameManager.Instance.OnEnemyHealthChanged += SetEnemyHealth;
     }
 
     public void Heal(float amount)
@@ -80,6 +81,7 @@ public class Health : MonoBehaviour
             StartCoroutine(DeathRoutine());
         }
         OnHealthChanged?.Invoke(healthBar.fillAmount, gameObject);
+        print(gameObject.name + " took " + amount + " damage from " + source.name);
     }
 
     private IEnumerator DeathRoutine()
@@ -115,8 +117,19 @@ public class Health : MonoBehaviour
         healthText.text = currentHealth.ToString();
     }
 
+    public void SetBotHealth(float health, GameObject bot = null)
+    {
+        if (bot == null || enemyHealthBar == null)
+        {
+            return;
+        }
+        enemyHealthBar.fillAmount = health;
+    }
+
     public void SetEnemyHealth(float health, GameObject enemy = null)
     {
+        print("Setting enemy health");
+        print(gameObject.name + " " + enemy.name);
         if (enemy == null || enemy == gameObject)
         {
             return;

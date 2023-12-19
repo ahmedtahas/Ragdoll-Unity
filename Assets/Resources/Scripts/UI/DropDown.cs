@@ -58,7 +58,7 @@ public class Dropdown : MonoBehaviour
             GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);
             Destroy(player);
         }
-        if (PlayerPrefs.GetString(Constants.GAME_MODE) == Constants.SINGLE_PLAYER)
+        if (GameManager.Instance.gameMode == Constants.SINGLE_PLAYER)
         {
             GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(100, 0, 0), Quaternion.identity);
             character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);

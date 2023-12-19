@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public string gameMode;
     public string playerCharacter;
     public string enemyCharacter;
     public Transform playerTransform;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public float enemyDamage;
     public float playerHealth;
     public float enemyHealth;
+    public Health playerHealthComponent;
+    public Health enemyHealthComponent;
     public float playerKnockback;
     public float enemyKnockback;
     public event Action<float, GameObject> OnEnemyHealthChanged;
@@ -84,7 +87,8 @@ public class GameManager : MonoBehaviour
 
     public void SetMode(string mode)
     {
-        PlayerPrefs.SetString(Constants.GAME_MODE, mode);
+        gameMode = mode;
+        // PlayerPrefs.SetString(Constants.GAME_MODE, mode);
     }
 
     public Vector2 RotateVector(Vector2 vector, float angle)

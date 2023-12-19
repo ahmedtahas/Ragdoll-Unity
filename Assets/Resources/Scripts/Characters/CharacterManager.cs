@@ -42,18 +42,16 @@ public class CharacterManager : NetworkBehaviour
     float lowKnockback = 15.0f;
 
 
-    public NetworkVariable<int> selection = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> selection = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public override void OnNetworkSpawn()
     {
+        selection.Value = 0;
         selection.OnValueChanged += (previousValue, newValue) =>
         {
-            Debug.Log("Character selection changed to " + newValue + " for " + OwnerClientId);
             if (Constants.CHARACTER_NAMES.TryGetValue(newValue, out string value))
             {
                 Instantiate(value);
-                GameObject.Find("nwui").SetActive(false);
-                transform.Find("UI").gameObject.SetActive(true);
             }
         };
         
@@ -67,6 +65,8 @@ public class CharacterManager : NetworkBehaviour
                 Constants.PUGILSE => 4,
                 Constants.ROOT => 5,
                 Constants.TIN => 6,
+                Constants.DYNABULL => 7,
+                Constants.DUPLICA => 8,
                 _ => 0
             };
         };
@@ -78,9 +78,42 @@ public class CharacterManager : NetworkBehaviour
     {
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform.Find(Constants.HIP).transform);
     }
-    
-    public void Instantiate(string character)
+
+
+    void OnEnable()
     {
+        print("CharacterManager enabled: " + transform.name);
+        if (transform.parent != null) 
+        {
+            print(IsOwner + " DSADASDAS  " + OwnerClientId);
+            transform.Find("UI").gameObject.SetActive(false);
+        }
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+
+    void OnClientConnected(ulong clientId)
+    {
+        if (GameManager.Instance.playerTransform != null)
+        {
+            CharacterManager characterManager = GameManager.Instance.playerTransform.GetComponent<CharacterManager>();
+            characterManager.selection.Value = PlayerPrefs.GetString(Constants.SELECTED_CHARACTER) switch
+            {
+                Constants.CHRONOPEN => 1,
+                Constants.HOLSTAR => 2,
+                Constants.STELE => 3,
+                Constants.PUGILSE => 4,
+                Constants.ROOT => 5,
+                Constants.TIN => 6,
+                Constants.DYNABULL => 7,
+                _ => 0
+            };
+        }
+    }
+    
+    public void Instantiate(string characterName)
+    {
+        string character = characterName;
         if (IsHost)
         {
             transform.Find(Constants.BODY).transform.position = new Vector3(-100, 0, 0);
@@ -111,6 +144,7 @@ public class CharacterManager : NetworkBehaviour
                 GameManager.Instance.enemyDamage = characterDamage;
                 GameManager.Instance.enemyHealth = characterHealth;
                 GameManager.Instance.enemyKnockback = characterKnockback;
+                GameManager.Instance.enemyHealthComponent = GetComponent<Health>();
                 break;
             case Constants.CHRONOPEN:
                 characterScale = mediumSize;
@@ -203,7 +237,35 @@ public class CharacterManager : NetworkBehaviour
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Dynabull>();
                 break;
-            
+            case Constants.DUPLICA:
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = mediumHealth;
+                characterDamage = mediumDamage;
+                characterKnockback = mediumKnockback;
+                usesWeapon = false;
+                isTwoHanded = false;
+                characterCooldown = 20.0f;
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Duplica>();
+                break;
+            case Constants.KATE:
+                character = Constants.DUPLICA;
+                characterScale = mediumSize;
+                characterRadius = mediumRadius;
+                characterSpeed = mediumSpeed;
+                characterHealth = mediumHealth;
+                characterDamage = mediumDamage;
+                characterKnockback = mediumKnockback;
+                usesWeapon = false;
+                isTwoHanded = false;
+                characterCooldown = 0.0f;
+                characterSkillDuration = 0.0f;
+                GetComponent<Movement>().SetSpeed(characterSpeed);
+                GetComponent<Health>().enabled = false;
+                GetComponent<Skill>().enabled = false;
+                break;
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Skins");
@@ -239,13 +301,9 @@ public class CharacterManager : NetworkBehaviour
                 rb.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }
-        if (character != Constants.BOT)
+        if (transform.parent != null)
         {
-            GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
-            GameManager.Instance.playerTransform = transform;
-            GameManager.Instance.playerDamage = characterDamage;
-            GameManager.Instance.playerHealth = characterHealth;
-            GameManager.Instance.playerKnockback = characterKnockback;
+            return;
         }
         GetComponent<Skill>().SetStats(characterCooldown, characterSkillDuration);
         GetComponent<Health>().SetHealth(characterHealth);
@@ -269,8 +327,17 @@ public class CharacterManager : NetworkBehaviour
         {
             lf.GetComponent<WeaponCollision>().UpdateCollisionShape();
         }
+        if (!IsOwner || character == Constants.BOT || characterName == Constants.KATE)
+        {
+            transform.Find("UI").gameObject.SetActive(false);
+            return;
+        }
+        GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
+        GameManager.Instance.playerTransform = transform;
+        GameManager.Instance.playerDamage = characterDamage;
+        GameManager.Instance.playerHealth = characterHealth;
+        GameManager.Instance.playerKnockback = characterKnockback;
+        GameManager.Instance.playerHealthComponent = GetComponent<Health>();
+        return;
     }
-
-    
-
 }

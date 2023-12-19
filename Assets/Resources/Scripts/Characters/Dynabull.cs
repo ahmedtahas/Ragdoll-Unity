@@ -26,7 +26,7 @@ public class Dynabull : MonoBehaviour
     void OnEnable()
     {
         health.OnDamageTaken += DamageTaken;
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
         {
@@ -44,7 +44,7 @@ public class Dynabull : MonoBehaviour
     void OnDisable()
     {
         health.OnDamageTaken -= DamageTaken;
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
             skillStick.OnClick -= HandleSkillSignal;

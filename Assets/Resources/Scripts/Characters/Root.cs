@@ -23,7 +23,7 @@ public class Root : MonoBehaviour
 
     void OnEnable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
         {
@@ -40,7 +40,7 @@ public class Root : MonoBehaviour
 
     void OnDisable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
             // Unsubscribe from the OnSignalSent event

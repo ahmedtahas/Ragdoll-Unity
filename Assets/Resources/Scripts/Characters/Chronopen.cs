@@ -20,7 +20,7 @@ public class Chronopen : MonoBehaviour
 
     void OnEnable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
         {
@@ -37,7 +37,7 @@ public class Chronopen : MonoBehaviour
 
     void OnDisable()
     {
-        SkillStick skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
+        SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
             skillStick.OnClick -= HandleSkillSignal;

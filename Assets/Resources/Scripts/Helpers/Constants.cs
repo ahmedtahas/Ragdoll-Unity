@@ -18,6 +18,8 @@ public class Constants
     public static Vector3 RIGHT_KNOB = new Vector3(-224.0f, -284.0f, 0.0f);
     public const string BOT = "Bot";
     public const string CHRONOPEN = "Chronopen";
+    public const string DUPLICA = "Duplica";
+    public const string KATE = "Kate";
     public const string TIN = "Tin";
     public const string HOLSTAR = "Holstar";
     public const string ROOT = "Root";
@@ -25,9 +27,9 @@ public class Constants
     public const string PUGILSE = "Pugilse";
     public const string DYNABULL = "Dynabull";
     public const string SELECTED_CHARACTER = "SelectedCharacter";
-    public const string HIP = "Body/Stomach/Hip";
-    public const string RF = "Body/RUA/RLA/RF";
-    public const string LF = "Body/LUA/LLA/LF";
+    public const string HIP = "Body/Hip";
+    public const string RF = "Body/RF";
+    public const string LF = "Body/LF";
     public const string BODY = "Body";
     public const string MTC = "MultiTargetCamera";
     public const string HEAD_SKIN = "Head";
@@ -36,7 +38,7 @@ public class Constants
     public static readonly string[] LEG_SKINS = { "RUL", "RLL", "LUL", "LLL" };
     public static readonly string[] HIP_SKINS = { "Hip", "Stomach" };
 
-    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT, TIN, DYNABULL };
+    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT, TIN, DYNABULL, DUPLICA };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_NAMES = new Dictionary<string, string>
     {
         { CHRONOPEN, "Time in a Bottle" },
@@ -45,7 +47,8 @@ public class Constants
         { PUGILSE, "Rhythm of Stars" },
         { ROOT, "Comet of Hate" },
         { TIN, "Singularity" },
-        { DYNABULL, "Bulwark Bloom" }
+        { DYNABULL, "Bulwark Bloom" },
+        { DUPLICA, "Duplikate" }
     };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_DESCRIPTIONS = new Dictionary<string, string>
     {
@@ -55,7 +58,8 @@ public class Constants
         { PUGILSE, "Combo on every hit that deals damage and then gain damage according to the combo count for a duration. The duration extends with combo count.\nCooldown: 15s\nMax Combo: 10\nUsage: Tap" },
         { ROOT, "Summon a Comet that is locked on to the enemy for the duration. The Comet can also damage you if hit.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" },
         { TIN, "Create a singularity that pulls enemies. The singularity can also damage enemies.\nCooldown: 15s\nDuration: 4s\nUsage: Hold" },
-        { DYNABULL, "Grow your shields and lower the damage you take for the duration.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" }
+        { DYNABULL, "Grow your shields and lower the damage you take for the duration.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" },
+        { DUPLICA, "Create a clone of yourself and control it with your skill joystick. The clone can also deal damage to enemies.\nCooldown: 20s\nDuration: 10s\nUsage: Aim" }
     };
     public static readonly Dictionary<string, int> CHARACTER_HEALTH_POINTS = new Dictionary<string, int>
     {
@@ -65,7 +69,8 @@ public class Constants
         { PUGILSE, 160 },
         { ROOT, 160 },
         { TIN, 240 },
-        { DYNABULL, 240 }
+        { DYNABULL, 240 },
+        { DUPLICA, 200 }
     };
     public static readonly Dictionary<string, int> CHARACTER_SPEEDS = new Dictionary<string, int>
     {
@@ -75,7 +80,8 @@ public class Constants
         { PUGILSE, 60 },
         { ROOT, 50 },
         { TIN, 40 },
-        { DYNABULL, 40 }
+        { DYNABULL, 40 },
+        { DUPLICA, 50 }
     };
     public static readonly Dictionary<string, float> CHARACTER_DAMAGES = new Dictionary<string, float>
     {
@@ -85,7 +91,8 @@ public class Constants
         { PUGILSE, 8.0f },
         { ROOT, 12.5f },
         { TIN, 8.0f },
-        { DYNABULL, 8.0f }
+        { DYNABULL, 8.0f },
+        { DUPLICA, 10.0f }
     };
 
     public static readonly Dictionary<int, string> CHARACTER_NAMES = new Dictionary<int, string>
@@ -96,7 +103,8 @@ public class Constants
         { 4, PUGILSE },
         { 5, ROOT },
         { 6, TIN },
-        { 7, DYNABULL }
+        { 7, DYNABULL },
+        { 8, DUPLICA }
     };
 
 }

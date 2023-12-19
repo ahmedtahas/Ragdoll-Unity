@@ -14,7 +14,6 @@ public class Bot : MonoBehaviour
     {
         body = transform.Find(Constants.BODY);
         health = GetComponent<Health>();
-        transform.Find("UI").gameObject.SetActive(false);
         movement = GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
