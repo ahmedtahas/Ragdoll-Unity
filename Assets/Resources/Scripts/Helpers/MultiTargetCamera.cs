@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MultiTargetCamera : MonoBehaviour
 {
@@ -8,29 +9,76 @@ public class MultiTargetCamera : MonoBehaviour
     public float maxZoom = 75f;
     public float zoomLimiter = 140f;
     public float zoomSpeed = 0.1f;
-
     private Camera cam;
     private List<Transform> gameObjectsInView = new List<Transform>();
+    private List<Transform> gameObjectsInBlackout = new List<Transform>();
+    private bool isBlackout = false;
 
     private void Start()
     {
         cam = GetComponent<Camera>();
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(GameReady());
+    }
+
+    IEnumerator GameReady()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null);
+        GameManager.Instance.OnBlindEnemy += Blackout;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnBlindEnemy -= Blackout;
+    }
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            StartCoroutine(BlackoutRoutine());
+        }
         Move();
         Zoom();
     }
 
     public void AddToView(Transform transform)
     {
-        gameObjectsInView.Add(transform);
+        if (gameObjectsInView.Contains(transform)) return;
+        if (isBlackout) gameObjectsInBlackout.Add(transform);
+        else gameObjectsInView.Add(transform);
     }
 
     public void RemoveFromView(Transform transform)
     {
-        gameObjectsInView.Remove(transform);
+        if (gameObjectsInView.Contains(transform)) gameObjectsInView.Remove(transform);
+    }
+
+    public void Blackout(float duration, GameObject caller = null)
+    {
+        StartCoroutine(BlackoutRoutine(duration));
+    }
+
+    public IEnumerator BlackoutRoutine(float duration = 10)
+    {
+        isBlackout = true;
+        gameObjectsInBlackout.AddRange(gameObjectsInView);
+        gameObjectsInView.Clear();
+        gameObjectsInView.Add(GameManager.Instance.player.transform);
+        yield return new WaitForSeconds(duration);
+        isBlackout = false;
+        gameObjectsInView.Clear();
+        foreach (Transform t in gameObjectsInBlackout)
+        {
+            if (t != null)
+            {
+                gameObjectsInView.Add(t);
+            }
+        }
+        gameObjectsInBlackout.Clear();
     }
 
     private void Move()
@@ -40,7 +88,6 @@ public class MultiTargetCamera : MonoBehaviour
 
         transform.position = newPosition;
     }
-
 
     private void Zoom()
     {

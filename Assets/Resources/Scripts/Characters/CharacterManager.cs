@@ -301,6 +301,7 @@ public class CharacterManager : NetworkBehaviour
                 rb.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }
+        print("CharacterManager11: " + character);
         if (transform.parent != null)
         {
             return;
@@ -312,12 +313,14 @@ public class CharacterManager : NetworkBehaviour
         {
             bounceOnImpact.SetKnockback(characterKnockback);
         }
+        print("CharacterManager22: " + character);
         GetComponent<Movement>().SetSpeed(characterSpeed);
         Damage[] damages = GetComponentsInChildren<Damage>();
         foreach (Damage damage in damages)
         {
             damage.SetDamage(characterDamage);
         }
+        print("CharacterManager33: " + character);
         transform.localScale = characterScale;
         if (usesWeapon)
         {
@@ -327,13 +330,17 @@ public class CharacterManager : NetworkBehaviour
         {
             lf.GetComponent<WeaponCollision>().UpdateCollisionShape();
         }
-        if (!IsOwner || character == Constants.BOT || characterName == Constants.KATE)
+        print("CharacterManager44: " + character);
+        if (character == Constants.BOT || characterName == Constants.KATE)
         {
             transform.Find("UI").gameObject.SetActive(false);
             return;
         }
+        print("CharacterManager55: " + character);
         GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
+        print("Player: " + GameManager.Instance.player.name);
         GameManager.Instance.playerTransform = transform;
+        print("CharacterManager66: " + character);
         GameManager.Instance.playerDamage = characterDamage;
         GameManager.Instance.playerHealth = characterHealth;
         GameManager.Instance.playerKnockback = characterKnockback;
