@@ -13,7 +13,7 @@ public class BounceOnImpact : MonoBehaviour
 
     void Start()
     {
-        self = transform.GetComponentInParent<CharacterManager>().gameObject;
+        if (self == null) self = transform.GetComponentInParent<CharacterManager>().gameObject;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -22,10 +22,10 @@ public class BounceOnImpact : MonoBehaviour
         if (collidedRigidbody != null && collidedRigidbody.bodyType == RigidbodyType2D.Dynamic)
         {
             GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
-            if (name == "Head")
-                StartCoroutine(CameraShake(0.03f, 0.1f));
-            GameManager.Instance.PushEnemy(GameManager.Instance.RotateVector(collision.contacts[0].normal, 180), bounceForce, self);
+            if (name == "Head") StartCoroutine(CameraShake(0.03f, 0.1f));
             Bounce(collision.contacts[0].normal);
+            if (collision.gameObject.CompareTag("Skill")) return;
+            GameManager.Instance.PushEnemy(GameManager.Instance.RotateVector(collision.contacts[0].normal, 180), bounceForce, self);
         }
     }
 
@@ -66,6 +66,13 @@ public class BounceOnImpact : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void SetSelf(GameObject self)
+    {
+        print("self set to " + self + " from " + this.self);
+        this.self = self;
+        print("self set to " + this.self);
     }
 
     public void SetKnockback(float knockback)

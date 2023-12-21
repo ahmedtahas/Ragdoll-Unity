@@ -1824,6 +1824,8 @@ GameObject:
   - component: {fileID: 7655671071416975642}
   - component: {fileID: -5585994560774438375}
   - component: {fileID: 13321160786348064}
+  - component: {fileID: 2343063208107740920}
+  - component: {fileID: -5063662544996444305}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -1963,6 +1965,30 @@ MonoBehaviour:
   cooldownText: {fileID: 2515709063199507636}
   cooldown: 0
   duration: 0
+--- !u!114 &2343063208107740920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457379721874462123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa938a3e48f20334a8fbd949a27629a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5063662544996444305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457379721874462123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721f5ffed3927b0498a9e21f7a45bd90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3484725085926668777
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,6 @@ public class Duplica : MonoBehaviour
             skill.CanUseSkill += HandleCooldown;
             skill.OnDurationEnd += HandleDurationEnd;
         }
-        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
 
 
@@ -49,13 +48,9 @@ public class Duplica : MonoBehaviour
         {
             skill.CanUseSkill -= HandleCooldown;
         }
-        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
     }
 
-    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
-    {
-        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
-    }
+    
     void HandleDurationEnd()
     {
         isOnCooldown = true;
@@ -79,10 +74,26 @@ public class Duplica : MonoBehaviour
         if (kate == null)
         {
             kate = Instantiate(katePrefab, body.position, Quaternion.identity);
+            kate.transform.rotation = body.rotation;
             IgnoreCollision(GetComponentsInChildren<Rigidbody2D>(), kate.GetComponentsInChildren<Rigidbody2D>());
             kate.GetComponent<CharacterManager>().Instantiate(Constants.KATE);
+            Rigidbody2D[] rigidbodies = kate.GetComponentsInChildren<Rigidbody2D>();
+            foreach (Rigidbody2D rb in rigidbodies)
+            {
+                rb.tag = "Skill";
+                rb.GetComponent<BounceOnImpact>().SetSelf(gameObject);
+            }
+            Damage[] damages = kate.GetComponentsInChildren<Damage>();
+            foreach (Damage damage in damages)
+            {
+                damage.SetSelf(gameObject);
+            }
             kateMovement = kate.GetComponent<Movement>();
             skill.StartDuration(true);
+        }
+        else if (isReleased)
+        {
+            kateMovement.HandleMove(Vector2.zero);
         }
         else
         {

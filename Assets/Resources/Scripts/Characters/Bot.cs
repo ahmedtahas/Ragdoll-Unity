@@ -17,12 +17,20 @@ public class Bot : MonoBehaviour
         movement = GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
-        GameManager.Instance.OnFreezeEnemy += HandleFreezeEnemy;
+        // StartCoroutine(Chase());
+    }
+
+    void OnEnable()
+    {
         GameManager.Instance.OnBlindEnemy += HandleBlindEnemy;
-        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
         GameManager.Instance.OnTrapEnemy += HandleTrapEnemy;
         GameManager.Instance.OnDamageEnemy += HandleDamageEnemy;
-        // StartCoroutine(Chase());
+    }
+    void OnDisable()
+    {
+        GameManager.Instance.OnBlindEnemy -= HandleBlindEnemy;
+        GameManager.Instance.OnTrapEnemy -= HandleTrapEnemy;
+        GameManager.Instance.OnDamageEnemy -= HandleDamageEnemy;
     }
 
     void HandleDamageEnemy(float damage, GameObject source)

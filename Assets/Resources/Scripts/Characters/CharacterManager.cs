@@ -82,10 +82,8 @@ public class CharacterManager : NetworkBehaviour
 
     void OnEnable()
     {
-        print("CharacterManager enabled: " + transform.name);
         if (transform.parent != null) 
         {
-            print(IsOwner + " DSADASDAS  " + OwnerClientId);
             transform.Find("UI").gameObject.SetActive(false);
         }
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -247,7 +245,7 @@ public class CharacterManager : NetworkBehaviour
                 usesWeapon = false;
                 isTwoHanded = false;
                 characterCooldown = 20.0f;
-                characterSkillDuration = 10.0f;
+                characterSkillDuration = 15.0f;
                 gameObject.AddComponent<Duplica>();
                 break;
             case Constants.KATE:
@@ -265,6 +263,21 @@ public class CharacterManager : NetworkBehaviour
                 GetComponent<Movement>().SetSpeed(characterSpeed);
                 GetComponent<Health>().enabled = false;
                 GetComponent<Skill>().enabled = false;
+                GetComponent<Freezer>().enabled = false;
+                GetComponent<Pusher>().enabled = false;
+                break;
+            case Constants.CYROBYTE:
+                characterScale = smallSize;
+                characterRadius = smallRadius;
+                characterSpeed = highSpeed;
+                characterHealth = lowHealth;
+                characterDamage = highDamage;
+                characterKnockback = lowKnockback;
+                usesWeapon = true;
+                isTwoHanded = true;
+                characterCooldown = 15.0f;
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Cyrobyte>();
                 break;
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();
@@ -301,7 +314,6 @@ public class CharacterManager : NetworkBehaviour
                 rb.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }
-        print("CharacterManager11: " + character);
         if (transform.parent != null)
         {
             return;
@@ -313,14 +325,12 @@ public class CharacterManager : NetworkBehaviour
         {
             bounceOnImpact.SetKnockback(characterKnockback);
         }
-        print("CharacterManager22: " + character);
         GetComponent<Movement>().SetSpeed(characterSpeed);
         Damage[] damages = GetComponentsInChildren<Damage>();
         foreach (Damage damage in damages)
         {
             damage.SetDamage(characterDamage);
         }
-        print("CharacterManager33: " + character);
         transform.localScale = characterScale;
         if (usesWeapon)
         {
@@ -330,21 +340,16 @@ public class CharacterManager : NetworkBehaviour
         {
             lf.GetComponent<WeaponCollision>().UpdateCollisionShape();
         }
-        print("CharacterManager44: " + character);
         if (character == Constants.BOT || characterName == Constants.KATE)
         {
             transform.Find("UI").gameObject.SetActive(false);
             return;
         }
-        print("CharacterManager55: " + character);
         GameManager.Instance.player = transform.Find(Constants.HIP).gameObject;
-        print("Player: " + GameManager.Instance.player.name);
         GameManager.Instance.playerTransform = transform;
-        print("CharacterManager66: " + character);
         GameManager.Instance.playerDamage = characterDamage;
         GameManager.Instance.playerHealth = characterHealth;
         GameManager.Instance.playerKnockback = characterKnockback;
         GameManager.Instance.playerHealthComponent = GetComponent<Health>();
-        return;
     }
 }

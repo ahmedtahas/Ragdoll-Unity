@@ -81,7 +81,6 @@ public class Health : MonoBehaviour
             StartCoroutine(DeathRoutine());
         }
         OnHealthChanged?.Invoke(healthBar.fillAmount, gameObject);
-        print(gameObject.name + " took " + amount + " damage from " + source.name);
     }
 
     private IEnumerator DeathRoutine()

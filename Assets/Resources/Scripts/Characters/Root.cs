@@ -35,7 +35,6 @@ public class Root : MonoBehaviour
         {
             skill.CanUseSkill += HandleCooldown;
         }
-        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
 
     void OnDisable()
@@ -50,13 +49,8 @@ public class Root : MonoBehaviour
         {
             skill.CanUseSkill -= HandleCooldown;
         }
-        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
     }
 
-    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
-    {
-        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
-    }
 
     void HandleCooldown()
     {

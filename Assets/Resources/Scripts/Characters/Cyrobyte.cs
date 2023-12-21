@@ -1,31 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Dynabull : MonoBehaviour
+public class Cyrobyte : MonoBehaviour
 {
-    Health health;
     bool isOnCooldown = false;
-    bool isOnDuration = false;
     Skill skill;
-    Transform rf;
-    Transform lf;
     Transform body;
-
-    
-
-    void Start()
-    {
-        body = transform.Find(Constants.BODY);
-        rf = transform.Find(Constants.RF);
-        lf = transform.Find(Constants.LF);
-        health = GetComponent<Health>();
-        
-    }
+    float speed = 200.0f;
+    ParticleSystem freezeParticles;
+    ParticleSystem freezeParticlesPrefab;
 
     void OnEnable()
     {
-        health.OnDamageTaken += DamageTaken;
+        body = transform.Find(Constants.BODY);
+        freezeParticlesPrefab = Resources.Load<ParticleSystem>("Prefabs/FreezeParticles");
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -36,13 +26,11 @@ public class Dynabull : MonoBehaviour
         if (skill != null)
         {
             skill.CanUseSkill += HandleCooldown;
-            skill.OnDurationEnd += HandleDurationEnd;
         }
     }
 
     void OnDisable()
     {
-        health.OnDamageTaken -= DamageTaken;
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
@@ -51,14 +39,7 @@ public class Dynabull : MonoBehaviour
         if (skill != null)
         {
             skill.CanUseSkill -= HandleCooldown;
-            skill.OnDurationEnd -= HandleDurationEnd;
         }
-    }
-
-
-    void DamageTaken(float amount)
-    {
-        if (isOnDuration) health.Heal(amount  * 0.5F);
     }
 
     void HandleCooldown()
@@ -66,34 +47,23 @@ public class Dynabull : MonoBehaviour
         isOnCooldown = false;
     }
 
-    void HandleDurationEnd()
-    {
-        ShrinkShields();
-    }
-
     void HandleSkillSignal()
     {
         if (!isOnCooldown)
         {
+            isOnCooldown = true;
             skill.StartDuration(true);
-            GrowShields();
+            freezeParticles = Instantiate(freezeParticlesPrefab, body.position, Quaternion.identity);
+            float distance = Vector3.Distance(GameManager.Instance.player.transform.position, GameManager.Instance.enemy.transform.position);
+            float delay = distance / speed;
+            StartCoroutine(FreezeAfterDelay(delay));
         }
     }
 
-    void GrowShields()
+    IEnumerator FreezeAfterDelay(float delay)
     {
-        isOnDuration = true;
-        rf.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        lf.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        yield return new WaitForSeconds(delay);
+        GameManager.Instance.FreezeEnemy(skill.duration, gameObject);
     }
-
-    void ShrinkShields()
-    {
-        isOnDuration = false;
-        rf.localScale = new Vector3(1f, 1f, 1f);
-        lf.localScale = new Vector3(1f, 1f, 1f);
-        isOnCooldown = true;
-    }
-
 
 }

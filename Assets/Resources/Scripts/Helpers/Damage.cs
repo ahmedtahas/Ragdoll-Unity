@@ -9,7 +9,7 @@ public class Damage : MonoBehaviour
 
     void OnEnable()
     {
-        self = transform.GetComponentInParent<CharacterManager>().gameObject;
+        if (self == null) self = transform.GetComponentInParent<CharacterManager>().gameObject;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -33,6 +33,11 @@ public class Damage : MonoBehaviour
             }
         
         }
+    }
+
+    public void SetSelf(GameObject self)
+    {
+        this.self = self;
     }
 
     public void SetDamage(float damage)

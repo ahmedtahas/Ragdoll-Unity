@@ -42,7 +42,6 @@ public class Tin : MonoBehaviour
         {
             skill.CanUseSkill += HandleCooldown;
         }
-        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
 
 
@@ -58,12 +57,6 @@ public class Tin : MonoBehaviour
         {
             skill.CanUseSkill -= HandleCooldown;
         }
-        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
-    }
-
-    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
-    {
-        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
     }
 
     void HandleCooldown()

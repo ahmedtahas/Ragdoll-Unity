@@ -57,7 +57,6 @@ public class Stele : MonoBehaviour
         {
             damage.OnHit += HandleHit;
         }
-        GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
 
     void OnDisable()
@@ -76,13 +75,8 @@ public class Stele : MonoBehaviour
         {
             damage.OnHit -= HandleHit;
         }
-        GameManager.Instance.OnPushEnemy -= HandlePushEnemy;
     }
 
-    void HandlePushEnemy(Vector2 direction, float force, GameObject source)
-    {
-        if (source != gameObject) body.GetComponent<BounceOnImpact>().Pushed(direction, force);
-    }
 
     void HandleHit()
     {
