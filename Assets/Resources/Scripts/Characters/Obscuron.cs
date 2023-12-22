@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cyrobyte : MonoBehaviour
+public class Obscuron : MonoBehaviour
 {
     bool isOnCooldown = false;
     Skill skill;
-    Transform body;
-    ParticleSystem freezeParticles;
-    ParticleSystem freezeParticlesPrefab;
 
     void OnEnable()
     {
-        body = transform.Find(Constants.BODY);
-        freezeParticlesPrefab = Resources.Load<ParticleSystem>("Prefabs/FreezeParticles");
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -51,9 +46,7 @@ public class Cyrobyte : MonoBehaviour
         {
             isOnCooldown = true;
             skill.StartDuration(true);
-            freezeParticles = Instantiate(freezeParticlesPrefab, body.position, Quaternion.identity);
-            GameManager.Instance.FreezeEnemy(body.position, skill.duration, gameObject);
+            GameManager.Instance.BlindEnemy(skill.duration, gameObject);
         }
     }
-
 }

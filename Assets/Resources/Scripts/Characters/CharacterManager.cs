@@ -279,6 +279,19 @@ public class CharacterManager : NetworkBehaviour
                 characterSkillDuration = 10.0f;
                 gameObject.AddComponent<Cyrobyte>();
                 break;
+            case Constants.OBSCURON:
+                characterScale = smallSize;
+                characterRadius = smallRadius;
+                characterSpeed = highSpeed;
+                characterHealth = lowHealth;
+                characterDamage = highDamage;
+                characterKnockback = lowKnockback;
+                usesWeapon = true;
+                isTwoHanded = true;
+                characterCooldown = 15.0f;
+                characterSkillDuration = 10.0f;
+                gameObject.AddComponent<Obscuron>();
+                break;
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Skins");
