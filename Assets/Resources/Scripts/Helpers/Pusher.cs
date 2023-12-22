@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Pusher : MonoBehaviour
 {
-    Rigidbody2D body;
+    Transform body;
     void OnEnable()
     {
-        body = transform.Find(Constants.BODY).GetComponent<Rigidbody2D>();
+        body = transform.Find(Constants.BODY);
         GameManager.Instance.OnPushEnemy += HandlePushEnemy;
     }
     void OnDisable()

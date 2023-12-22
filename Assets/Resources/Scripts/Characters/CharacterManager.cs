@@ -263,7 +263,7 @@ public class CharacterManager : NetworkBehaviour
                 GetComponent<Movement>().SetSpeed(characterSpeed);
                 GetComponent<Health>().enabled = false;
                 GetComponent<Skill>().enabled = false;
-                GetComponent<Freezer>().enabled = false;
+                // GetComponent<Freezer>().enabled = false;
                 GetComponent<Pusher>().enabled = false;
                 break;
             case Constants.CYROBYTE:

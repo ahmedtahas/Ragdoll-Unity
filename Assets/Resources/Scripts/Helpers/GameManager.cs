@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public float playerKnockback;
     public float enemyKnockback;
     public event Action<float, GameObject> OnEnemyHealthChanged;
-    public event Action<float, GameObject> OnFreezeEnemy;
+    public event Action<Vector3, float, GameObject> OnFreezeEnemy;
     public event Action<Vector2, float, GameObject> OnPushEnemy;
     public event Action<float, GameObject> OnBlindEnemy;
     public event Action<bool, GameObject> OnTrapEnemy;
@@ -67,9 +67,9 @@ public class GameManager : MonoBehaviour
         OnPushEnemy?.Invoke(direction, force, caller);
     }
 
-    public void FreezeEnemy(float duration, GameObject caller = null)
+    public void FreezeEnemy(Vector3 position, float duration, GameObject caller = null)
     {
-        OnFreezeEnemy?.Invoke(duration, caller);
+        OnFreezeEnemy?.Invoke(position, duration, caller);
     }
 
     

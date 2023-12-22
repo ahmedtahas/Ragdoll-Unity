@@ -6,21 +6,37 @@ using System;
 public class Freezer : MonoBehaviour
 {
     Rigidbody2D[] rigidbodies;
+    Transform body;
+    float speed;
+    ParticleSystem freezeParticlesPrefab;
+
+
+    void Start()
+    {   
+        freezeParticlesPrefab = Resources.Load<ParticleSystem>("Prefabs/FreezeParticles");
+        ParticleSystem.MainModule freezeParticlesPrefabMain = freezeParticlesPrefab.main;
+        speed = freezeParticlesPrefabMain.startSpeed.constant;
+        body = transform.Find(Constants.BODY);
+        rigidbodies = GetComponentsInChildren<Rigidbody2D>();
+    }
+
     void OnEnable()
     {
-        rigidbodies = GetComponentsInChildren<Rigidbody2D>();
         GameManager.Instance.OnFreezeEnemy += HandleFreezeEnemy;
     }
     void OnDisable()
     {
         GameManager.Instance.OnFreezeEnemy -= HandleFreezeEnemy;
     }
-    void HandleFreezeEnemy(float duration, GameObject source)
+    void HandleFreezeEnemy(Vector3 position, float duration, GameObject source)
     {
-        if (source != gameObject) StartCoroutine(FreezeSelf(duration));
+        if (source != gameObject) StartCoroutine(FreezeSelf(position, duration));
     }
-    IEnumerator FreezeSelf(float duration)
+    IEnumerator FreezeSelf(Vector3 position, float duration)
     {
+        float distance = Vector3.Distance(position, body.position);
+        float delay = distance / speed;
+        yield return new WaitForSeconds(delay);
         GetComponent<Movement>().enabled = false;
         foreach (Rigidbody2D rigidbody in rigidbodies)
         {

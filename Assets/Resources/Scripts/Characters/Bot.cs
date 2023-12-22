@@ -20,6 +20,14 @@ public class Bot : MonoBehaviour
         // StartCoroutine(Chase());
     }
 
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.K))
+    //     {
+    //         GameManager.Instance.FreezeEnemy(body.position, 5.0f, gameObject);
+    //     }
+    // }
+
     void OnEnable()
     {
         GameManager.Instance.OnBlindEnemy += HandleBlindEnemy;

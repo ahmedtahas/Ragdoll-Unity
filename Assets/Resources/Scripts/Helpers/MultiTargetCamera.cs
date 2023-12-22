@@ -37,10 +37,6 @@ public class MultiTargetCamera : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(BlackoutRoutine());
-        }
         Move();
         Zoom();
     }

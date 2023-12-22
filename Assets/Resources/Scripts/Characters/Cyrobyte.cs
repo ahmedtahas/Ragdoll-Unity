@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Cyrobyte : MonoBehaviour
 {
     bool isOnCooldown = false;
     Skill skill;
     Transform body;
-    float speed = 200.0f;
+    float speed;
     ParticleSystem freezeParticles;
     ParticleSystem freezeParticlesPrefab;
 
@@ -16,6 +15,8 @@ public class Cyrobyte : MonoBehaviour
     {
         body = transform.Find(Constants.BODY);
         freezeParticlesPrefab = Resources.Load<ParticleSystem>("Prefabs/FreezeParticles");
+        ParticleSystem.MainModule freezeParticlesPrefabMain = freezeParticlesPrefab.main;
+        speed = freezeParticlesPrefabMain.startSpeed.constant;
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();
         if (skillStick != null)
@@ -54,16 +55,8 @@ public class Cyrobyte : MonoBehaviour
             isOnCooldown = true;
             skill.StartDuration(true);
             freezeParticles = Instantiate(freezeParticlesPrefab, body.position, Quaternion.identity);
-            float distance = Vector3.Distance(GameManager.Instance.player.transform.position, GameManager.Instance.enemy.transform.position);
-            float delay = distance / speed;
-            StartCoroutine(FreezeAfterDelay(delay));
+            GameManager.Instance.FreezeEnemy(body.position, skill.duration, gameObject);
         }
-    }
-
-    IEnumerator FreezeAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GameManager.Instance.FreezeEnemy(skill.duration, gameObject);
     }
 
 }
