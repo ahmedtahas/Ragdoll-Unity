@@ -4,7 +4,7 @@ using System;
 public class Damage : MonoBehaviour
 {
     public float damage = 10;
-    public event Action OnHit;
+    public event Action<bool> OnHit;
     GameObject self;
 
     void OnEnable()
@@ -20,14 +20,15 @@ public class Damage : MonoBehaviour
             {
                 return;
             }
-            OnHit?.Invoke();
             if (collision.gameObject.CompareTag("Head"))
             {
+                OnHit?.Invoke(true);
                 GameManager.Instance.DamageEnemy(damage * 2, self);
                 // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);
             }
             else if (collision.gameObject.CompareTag("Damagable"))
             {
+                OnHit?.Invoke(false);
                 GameManager.Instance.DamageEnemy(damage, self);
                 // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             }

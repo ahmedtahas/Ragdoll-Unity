@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pugilse : MonoBehaviour
 {
-    Rigidbody2D rfRigidbody;
     bool isOnCooldown = false;
     TimeController timeController;
     int combo = 0;
@@ -13,11 +12,9 @@ public class Pugilse : MonoBehaviour
     float cooldown;
     float damage;
     Skill skill;
-    Transform body;
 
     void Start()
     {
-        body = transform.Find(Constants.BODY);
         damage = GetComponent<CharacterManager>().characterDamage;
         timeController = GetComponent<TimeController>();
         maxCombo = (int)skill.duration;
@@ -79,7 +76,7 @@ public class Pugilse : MonoBehaviour
         }
     }
 
-    void HandleHit()
+    void HandleHit(bool isHeadshot)
     {
         if (combo < maxCombo)
         {
@@ -104,7 +101,7 @@ public class Pugilse : MonoBehaviour
         timeController.SlowDownTime();
         foreach (Damage damage in damagers)
         {
-            damage.SetDamage(damage.damage * (combo + 1)  * 0.5F);
+            damage.SetDamage(this.damage * (combo + 1)  * 0.5F);
         }
     }
 

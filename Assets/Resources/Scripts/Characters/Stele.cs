@@ -78,7 +78,7 @@ public class Stele : MonoBehaviour
     }
 
 
-    void HandleHit()
+    void HandleHit(bool isHeadshot)
     {
         if (hitCount < maxHitCount && !isOnCooldown)
         {
