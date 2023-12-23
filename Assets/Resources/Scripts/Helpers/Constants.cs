@@ -29,6 +29,7 @@ public class Constants
     public const string CYROBYTE = "Cyrobyte";
     public const string OBSCURON = "Obscuron";
     public const string INFRADE = "Infrade";
+    public const string ROARAK = "Roarak";
     public const string SELECTED_CHARACTER = "SelectedCharacter";
     public const string HIP = "Body/Hip";
     public const string RF = "Body/RF";
@@ -41,7 +42,7 @@ public class Constants
     public static readonly string[] LEG_SKINS = { "RUL", "RLL", "LUL", "LLL" };
     public static readonly string[] HIP_SKINS = { "Hip", "Stomach" };
 
-    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT, TIN, DYNABULL, DUPLICA, CYROBYTE, OBSCURON, INFRADE };
+    public static readonly List<string> CHARACTERS = new List<string> { CHRONOPEN, HOLSTAR, STELE, PUGILSE, ROOT, TIN, DYNABULL, DUPLICA, CYROBYTE, OBSCURON, INFRADE, ROARAK };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_NAMES = new Dictionary<string, string>
     {
         { CHRONOPEN, "Time in a Bottle" },
@@ -54,7 +55,8 @@ public class Constants
         { DUPLICA, "Duplikate" },
         { CYROBYTE, "Freeze 'n' Ease" },
         { OBSCURON, "Nightfall Nebula" },
-        { INFRADE, "Heatwave Havoc" }
+        { INFRADE, "Heatwave Havoc" },
+        { ROARAK, "Bulk-Up Showdown" }
     };
     public static readonly Dictionary<string, string> CHARACTER_SKILL_DESCRIPTIONS = new Dictionary<string, string>
     {
@@ -68,7 +70,8 @@ public class Constants
         { DUPLICA, "Create a clone of yourself and control it with your skill joystick. The clone can also deal damage to enemies.\nCooldown: 20s\nDuration: 15s\nUsage: Aim" },
         { CYROBYTE, "Emit a freezing wave, that freezes the enemy in place for a duration.\nCooldown: 15s\nDuration: 10s\nUsage: Tap" },
         { OBSCURON, "Cast a shroud of cosmic darkness over your enemies, obscuring their vision for a duration.\nCooldown: 10s\nDuration: 10s\nUsage: Tap" },
-        { INFRADE, "Engulf your sword in flames, doubling your damage output for a duration.\nCooldown: 20s\nDuration: 10s\nUsage: Tap" }
+        { INFRADE, "Engulf your sword in flames, doubling your damage output for a duration.\nCooldown: 20s\nDuration: 15s\nUsage: Tap" },
+        { ROARAK, "Teleport to the small ring with the enemy, grow in size, deal more damage and take reduced damage for the duration.\nCooldown: 25s\nDuration: 25s\nUsage: Tap" },
     };
     public static readonly Dictionary<string, int> CHARACTER_HEALTH_POINTS = new Dictionary<string, int>
     {
@@ -82,7 +85,8 @@ public class Constants
         { DUPLICA, 200 },
         { CYROBYTE, 160 },
         { OBSCURON, 160 },
-        { INFRADE, 200 }
+        { INFRADE, 200 },
+        { ROARAK, 240 }
     };
     public static readonly Dictionary<string, int> CHARACTER_SPEEDS = new Dictionary<string, int>
     {
@@ -96,7 +100,8 @@ public class Constants
         { DUPLICA, 50 },
         { CYROBYTE, 60 },
         { OBSCURON, 60 },
-        { INFRADE, 50 }
+        { INFRADE, 50 },
+        { ROARAK, 40 }
     };
     public static readonly Dictionary<string, float> CHARACTER_DAMAGES = new Dictionary<string, float>
     {
@@ -110,7 +115,8 @@ public class Constants
         { DUPLICA, 10.0f },
         { CYROBYTE, 12.5f },
         { OBSCURON, 12.5f },
-        { INFRADE, 10.0f }
+        { INFRADE, 10.0f },
+        { ROARAK, 8.0f }
     };
 
     public static readonly Dictionary<int, string> CHARACTER_NAMES = new Dictionary<int, string>
@@ -125,7 +131,8 @@ public class Constants
         { 8, DUPLICA },
         { 9, CYROBYTE },
         { 10, OBSCURON },
-        { 11, INFRADE }
+        { 11, INFRADE },
+        { 12, ROARAK }
     };
 
 }

@@ -67,6 +67,10 @@ public class CharacterManager : NetworkBehaviour
                 Constants.TIN => 6,
                 Constants.DYNABULL => 7,
                 Constants.DUPLICA => 8,
+                Constants.CYROBYTE => 9,
+                Constants.OBSCURON => 10,
+                Constants.INFRADE => 11,
+                Constants.ROARAK => 12,
                 _ => 0
             };
         };
@@ -104,6 +108,11 @@ public class CharacterManager : NetworkBehaviour
                 Constants.ROOT => 5,
                 Constants.TIN => 6,
                 Constants.DYNABULL => 7,
+                Constants.DUPLICA => 8,
+                Constants.CYROBYTE => 9,
+                Constants.OBSCURON => 10,
+                Constants.INFRADE => 11,
+                Constants.ROARAK => 12,
                 _ => 0
             };
         }
@@ -114,11 +123,11 @@ public class CharacterManager : NetworkBehaviour
         string character = characterName;
         if (IsHost)
         {
-            transform.Find(Constants.BODY).transform.position = new Vector3(-100, 0, 0);
+            transform.Find(Constants.BODY).transform.position = new Vector3(-80, 0, 0);
         }
         else if (NetworkManager.Singleton.IsConnectedClient)
         {
-            transform.Find(Constants.BODY).transform.position = new Vector3(+100, 0, 0);
+            transform.Find(Constants.BODY).transform.position = new Vector3(+80, 0, 0);
         }
         gameObject.name = character;
         rf = transform.Find(Constants.RF).gameObject;
@@ -302,8 +311,21 @@ public class CharacterManager : NetworkBehaviour
                 usesWeapon = true;
                 isTwoHanded = false;
                 characterCooldown = 20.0f;
-                characterSkillDuration = 10.0f;
+                characterSkillDuration = 15.0f;
                 gameObject.AddComponent<Infrade>();
+                break;
+            case Constants.ROARAK:
+                characterScale = bigSize;
+                characterRadius = bigRadius;
+                characterSpeed = lowSpeed;
+                characterHealth = highHealth;
+                characterDamage = lowDamage;
+                characterKnockback = highKnockback;
+                usesWeapon = true;
+                isTwoHanded = false;
+                characterCooldown = 25.0f;
+                characterSkillDuration = 25.0f;
+                gameObject.AddComponent<Roarak>();
                 break;
         }
         rigidbodies = GetComponentsInChildren<Rigidbody2D>();

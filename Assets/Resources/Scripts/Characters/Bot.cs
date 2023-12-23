@@ -20,42 +20,32 @@ public class Bot : MonoBehaviour
         // StartCoroutine(Chase());
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.K))
-    //     {
-    //         GameManager.Instance.FreezeEnemy(body.position, 5.0f, gameObject);
-    //     }
-    // }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameManager.Instance.TrapEnemy(true);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.TrapEnemy(false);
+        }
+    }
 
     void OnEnable()
     {
         GameManager.Instance.OnBlindEnemy += HandleBlindEnemy;
-        GameManager.Instance.OnTrapEnemy += HandleTrapEnemy;
         GameManager.Instance.OnDamageEnemy += HandleDamageEnemy;
     }
     void OnDisable()
     {
         GameManager.Instance.OnBlindEnemy -= HandleBlindEnemy;
-        GameManager.Instance.OnTrapEnemy -= HandleTrapEnemy;
         GameManager.Instance.OnDamageEnemy -= HandleDamageEnemy;
     }
 
     void HandleDamageEnemy(float damage, GameObject source)
     {
         if (source != gameObject) health.TakeDamage(damage);
-    }
-
-    void HandleTrapEnemy(bool trapped, GameObject source)
-    {
-        // if (trapped)
-        // {
-        //     StartCoroutine(TrapEnemy());
-        // }
-        // else
-        // {
-        //     StopCoroutine(TrapEnemy());
-        // }
     }
 
     void HandlePushEnemy(Vector2 direction, float force, GameObject source)
@@ -66,11 +56,6 @@ public class Bot : MonoBehaviour
     void HandleBlindEnemy(float duration, GameObject source)
     {
         // StartCoroutine(BlindEnemy(duration));
-    }
-
-    void HandleFreezeEnemy(float duration, GameObject source)
-    {
-        // StartCoroutine(FreezeEnemy(duration));
     }
 
     IEnumerator Chase()

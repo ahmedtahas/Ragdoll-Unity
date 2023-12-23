@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     
-    public Vector2 roomPositiveDimensions = new Vector2(130.0f, 60.0f);
-    public Vector2 roomNegativeDimensions = new Vector2(-130.0f, -60.0f);
-
+    public Vector2 roomPositiveDimensions = new Vector2(160.0f, 80.0f);
+    public Vector2 roomNegativeDimensions = new Vector2(-160.0f, -80.0f);
+    public bool trapped = false;
     public GameObject player;
     public GameObject enemy;
     public string gameMode;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public event Action<Vector3, float, GameObject> OnFreezeEnemy;
     public event Action<Vector2, float, GameObject> OnPushEnemy;
     public event Action<float, GameObject> OnBlindEnemy;
-    public event Action<bool, GameObject> OnTrapEnemy;
+    public event Action<bool> OnTrapEnemy;
     public event Action<float, GameObject> OnDamageEnemy;
 
     private void Awake()
@@ -52,9 +52,10 @@ public class GameManager : MonoBehaviour
         OnDamageEnemy?.Invoke(damage, caller);
     }
 
-    public void TrapEnemy(bool trapped, GameObject caller = null)
+    public void TrapEnemy(bool trapped)
     {
-        OnTrapEnemy?.Invoke(trapped, caller);
+        this.trapped = trapped;
+        OnTrapEnemy?.Invoke(trapped);
     }
 
     public void BlindEnemy(float duration, GameObject caller = null)
@@ -88,7 +89,6 @@ public class GameManager : MonoBehaviour
     public void SetMode(string mode)
     {
         gameMode = mode;
-        // PlayerPrefs.SetString(Constants.GAME_MODE, mode);
     }
 
     public Vector2 RotateVector(Vector2 vector, float angle)
@@ -100,6 +100,49 @@ public class GameManager : MonoBehaviour
             vector.x * cosTheta - vector.y * sinTheta,
             vector.x * sinTheta + vector.y * cosTheta
         );
+    }
+
+    public Vector3 GetInternalPosition(Vector3 callerEndPosition, float callerRadius)
+    {
+        if (!trapped)
+        {
+            if (callerEndPosition.x > roomPositiveDimensions.x)
+            {
+                callerEndPosition.x = roomPositiveDimensions.x - (callerRadius  * 0.5F);
+            }
+            else if (callerEndPosition.x < roomNegativeDimensions.x)
+            {
+                callerEndPosition.x = roomNegativeDimensions.x + (callerRadius  * 0.5F);
+            }
+            if (callerEndPosition.y > roomPositiveDimensions.y)
+            {
+                callerEndPosition.y = roomPositiveDimensions.y - (callerRadius  * 0.5F);
+            }
+            else if (callerEndPosition.y < roomNegativeDimensions.y)
+            {
+                callerEndPosition.y = roomNegativeDimensions.y + (callerRadius  * 0.5F);
+            }
+        }
+        else
+        {
+            if (callerEndPosition.x > roomPositiveDimensions.x * 0.5f)
+            {
+                callerEndPosition.x = roomPositiveDimensions.x * 0.5f - (callerRadius  * 0.5F);
+            }
+            else if (callerEndPosition.x < roomNegativeDimensions.x * 0.5f)
+            {
+                callerEndPosition.x = roomNegativeDimensions.x * 0.5f + (callerRadius  * 0.5F);
+            }
+            if (callerEndPosition.y > roomPositiveDimensions.y * 0.5f)
+            {
+                callerEndPosition.y = roomPositiveDimensions.y * 0.5f - (callerRadius  * 0.5F);
+            }
+            else if (callerEndPosition.y < roomNegativeDimensions.y * 0.5f)
+            {
+                callerEndPosition.y = roomNegativeDimensions.y * 0.5f + (callerRadius  * 0.5F);
+            }
+        }
+        return callerEndPosition;
     }
     
 
@@ -144,22 +187,7 @@ public class GameManager : MonoBehaviour
                 callerEndPosition = callerHipPosition + callerVector * callerVectorLenght;
             }
         }
-        if (callerEndPosition.x > roomPositiveDimensions.x)
-        {
-            callerEndPosition.x = roomPositiveDimensions.x - (callerRadius  * 0.5F);
-        }
-        else if (callerEndPosition.x < roomNegativeDimensions.x)
-        {
-            callerEndPosition.x = roomNegativeDimensions.x + (callerRadius  * 0.5F);
-        }
-        if (callerEndPosition.y > roomPositiveDimensions.y)
-        {
-            callerEndPosition.y = roomPositiveDimensions.y - (callerRadius  * 0.5F);
-        }
-        else if (callerEndPosition.y < roomNegativeDimensions.y)
-        {
-            callerEndPosition.y = roomNegativeDimensions.y + (callerRadius  * 0.5F);
-        }
+        callerEndPosition = GetInternalPosition(callerEndPosition, callerRadius);
         foreach(KeyValuePair<GameObject, (float radius, Vector3 hipPosition)> player in playerData)
         {
             float range = callerRadius;

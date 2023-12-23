@@ -28,7 +28,6 @@ public class Root : MonoBehaviour
         if (skillStick != null)
         {
             skillStick.SetBehavior(SkillStick.BehaviorType.Click);
-            // Subscribe to the OnSignalSent event
             skillStick.OnClick += HandleSkillSignal;
         }
         if (skill != null)
@@ -42,7 +41,6 @@ public class Root : MonoBehaviour
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         if (skillStick != null)
         {
-            // Unsubscribe from the OnSignalSent event
             skillStick.OnClick -= HandleSkillSignal;
         }
         if (skill != null)
@@ -91,7 +89,8 @@ public class Root : MonoBehaviour
 
     public void CreateMeteor()
     {
-        meteorInstance = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
+        Vector3 position = GameManager.Instance.trapped ? new Vector3(transform.position.x * 0.5f, transform.position.y * 0.5f, 0) : transform.position;
+        meteorInstance = Instantiate(meteorPrefab, position, Quaternion.identity);
         meteorInstance.GetComponent<Meteor>().OnHit += HandleMeteorHit;
         meteorInstance.GetComponent<Meteor>().FollowEnemy(gameObject, GameManager.Instance.enemy, skill.duration, damage);
     }

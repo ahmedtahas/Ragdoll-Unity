@@ -5,10 +5,10 @@ using System;
 
 public class MultiTargetCamera : MonoBehaviour
 {
-    public float minZoom = 5f;
-    public float maxZoom = 75f;
-    public float zoomLimiter = 140f;
-    public float zoomSpeed = 0.1f;
+    private float minZoom = 7f;
+    private float maxZoom = 95f;
+    private float zoomLimiter = 180f;
+    private float zoomSpeed = 0.1f;
     private Camera cam;
     private List<Transform> gameObjectsInView = new List<Transform>();
     private List<Transform> gameObjectsInBlackout = new List<Transform>();

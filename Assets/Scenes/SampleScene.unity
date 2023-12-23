@@ -7989,7 +7989,7 @@ GameObject:
   - component: {fileID: 910051843}
   - component: {fileID: 910051842}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8055,12 +8055,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910051841}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 400, y: 200, z: 1}
+  m_LocalScale: {x: 400, y: 240, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 953770601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &920795328
 GameObject:
@@ -8341,6 +8341,42 @@ MonoBehaviour:
   musicSlider: {fileID: 1717990491}
   sfxSlider: {fileID: 297444055}
   joystickToggle: {fileID: 1999909328}
+--- !u!1 &953770600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953770601}
+  m_Layer: 0
+  m_Name: BigRing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &953770601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953770600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 910051843}
+  - {fileID: 1266751710}
+  - {fileID: 1594735251}
+  - {fileID: 1426018781}
+  - {fileID: 1125479726}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &960016159
 GameObject:
   m_ObjectHideFlags: 0
@@ -9553,7 +9589,7 @@ GameObject:
   - component: {fileID: 1125479724}
   - component: {fileID: 1125479723}
   m_Layer: 7
-  m_Name: Square (2)
+  m_Name: Left
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9691,12 +9727,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125479722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -150, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -180, y: 0, z: 0}
   m_LocalScale: {x: 240, y: 40, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 953770601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1135759719
 GameObject:
@@ -11081,7 +11117,7 @@ GameObject:
   - component: {fileID: 1266751708}
   - component: {fileID: 1266751711}
   m_Layer: 7
-  m_Name: Square
+  m_Name: Bottom
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11174,12 +11210,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266751707}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -80, z: 0}
-  m_LocalScale: {x: 400, y: 40, z: 1.053}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -100, z: 0}
+  m_LocalScale: {x: 400, y: 40, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 953770601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1266751711
 BoxCollider2D:
@@ -17661,6 +17697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPositiveDimensions: {x: 130, y: 60}
   roomNegativeDimensions: {x: -130, y: -60}
+  trapped: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
   gameMode: 
@@ -17991,7 +18028,7 @@ GameObject:
   - component: {fileID: 1426018779}
   - component: {fileID: 1426018778}
   m_Layer: 7
-  m_Name: Square (1)
+  m_Name: Right
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18129,12 +18166,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426018777}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 150, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 180, y: 0, z: 0}
   m_LocalScale: {x: 240, y: 40, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 953770601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1435722838
 GameObject:
@@ -19820,7 +19857,7 @@ GameObject:
   - component: {fileID: 1594735249}
   - component: {fileID: 1594735248}
   m_Layer: 7
-  m_Name: Square (3)
+  m_Name: Top
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19958,12 +19995,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594735247}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 80, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 400, y: 40, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 953770601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1636795891
 GameObject:
@@ -24874,12 +24911,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5367527838767098351, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
+      propertyPath: maxZoom
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367527838767098351, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
       propertyPath: minZoom
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6651298547592435250, guid: bcbb0f19faf852448bee080cb6ec1756, type: 3}
       propertyPath: orthographic size
-      value: 80
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24891,11 +24932,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 619394802}
-  - {fileID: 910051843}
-  - {fileID: 1266751710}
-  - {fileID: 1594735251}
-  - {fileID: 1426018781}
-  - {fileID: 1125479726}
+  - {fileID: 953770601}
   - {fileID: 2065184874}
   - {fileID: 7918995763843151504}
   - {fileID: 1705339304}

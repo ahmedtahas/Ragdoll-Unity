@@ -60,13 +60,13 @@ public class Dropdown : MonoBehaviour
         }
         if (GameManager.Instance.gameMode == Constants.SINGLE_PLAYER)
         {
-            GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(100, 0, 0), Quaternion.identity);
+            GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position - new Vector3(80, 0, 0), Quaternion.identity);
             character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);
             character.name = selectedOptionText.text;
-            character.transform.Find(Constants.BODY).transform.position = new Vector3(-100, 0, 0);
+            character.transform.Find(Constants.BODY).transform.position = new Vector3(-80, 0, 0);
             GameObject.Find("nwui").SetActive(false);
             character.transform.Find("UI").gameObject.SetActive(true);
-            character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position + new Vector3(100, 0, 0), Quaternion.identity);
+            character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position + new Vector3(80, 0, 0), Quaternion.identity);
             character.GetComponent<CharacterManager>().Instantiate(Constants.BOT);
             character.name = Constants.BOT;
         }
