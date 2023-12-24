@@ -26,7 +26,7 @@ public class Trapper : MonoBehaviour
     {
         if (trapped)
         {
-            body.position = new Vector3(body.position.x * 0.3f, body.position.y * 0.3f, 0);
+            body.position = new Vector3(body.position.x * 0.5f, body.position.y * 0.5f, 0);
             body.position = GameManager.Instance.GetInternalPosition(body.position, characterManager.characterRadius);
             body.position = GameManager.Instance.GetAvailablePosition(gameObject, body.position);
             smallRing = Instantiate(smallRingPrefab, Vector3.zero, Quaternion.identity);

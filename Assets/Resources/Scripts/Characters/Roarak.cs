@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Roarak : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class Roarak : MonoBehaviour
     void HandleDurationEnd()
     {
         isOnDuration = false;
-        Shrink();
+        StartCoroutine(Shrink());
         GameManager.Instance.TrapEnemy(false);
     }
 
@@ -85,27 +86,55 @@ public class Roarak : MonoBehaviour
             isOnDuration = true;
             isOnCooldown = true;
             skill.StartDuration(true);
-            Grow();
+            StartCoroutine(Grow());
         }
     }
 
-    void Grow()
+    IEnumerator Grow()
     {
-        transform.localScale *= multiplier;
-        characterManager.characterRadius *= multiplier;
+        float elapsedTime = 0f;
+        Vector3 initialScale = transform.localScale;
+        float initialRadius = characterManager.characterRadius;
+
         foreach (Damage damage in damagers)
         {
             damage.SetDamage(this.damage * multiplier);
         }
+        while (elapsedTime < 2f)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / 2f; 
+
+            transform.localScale = Vector3.Lerp(initialScale, initialScale * multiplier, t);
+            characterManager.characterRadius = Mathf.Lerp(initialRadius, initialRadius * multiplier, t);
+
+
+            yield return null;
+        }
+        transform.localScale = initialScale * multiplier;
+        characterManager.characterRadius = initialRadius * multiplier;
     }
 
-    void Shrink()
+    IEnumerator Shrink()
     {
-        transform.localScale = scale;
-        characterManager.characterRadius = radius;
+        float elapsedTime = 0f;
+
         foreach (Damage damage in damagers)
         {
             damage.SetDamage(this.damage);
         }
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / 1f; 
+
+            transform.localScale = Vector3.Lerp(transform.localScale, scale, t);
+            characterManager.characterRadius = Mathf.Lerp(characterManager.characterRadius, radius, t);
+
+
+            yield return null;
+        }
+        transform.localScale = scale;
+        characterManager.characterRadius = radius;
     }
 }

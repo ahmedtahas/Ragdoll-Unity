@@ -55,6 +55,7 @@ public class MultiTargetCamera : MonoBehaviour
 
     public void Blackout(float duration, GameObject caller = null)
     {
+        if (GameManager.Instance.gameMode == Constants.SINGLE_PLAYER) return;
         StartCoroutine(BlackoutRoutine(duration));
     }
 

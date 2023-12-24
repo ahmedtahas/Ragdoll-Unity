@@ -19,12 +19,12 @@ public class Dynabull : MonoBehaviour
         body = transform.Find(Constants.BODY);
         rf = transform.Find(Constants.RF);
         lf = transform.Find(Constants.LF);
-        health = GetComponent<Health>();
         
     }
 
     void OnEnable()
     {
+        health = GetComponent<Health>();
         health.OnDamageTaken += DamageTaken;
         SkillStick skillStick = transform.GetComponentInChildren<SkillStick>();
         skill = GetComponent<Skill>();

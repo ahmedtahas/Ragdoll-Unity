@@ -18,11 +18,13 @@ public class Dropdown : MonoBehaviour
     public TextMeshProUGUI skillNameText;
     public TextMeshProUGUI skillDescriptionText;
     public GameObject spawner;
+    public GameObject pauseButton;
 
     private bool isDropdownOpen = false;
 
     void Start()
     {
+        pauseButton = GameObject.Find("PauseButton");
         dropdownButton.onClick.AddListener(ToggleDropdown);
         ToggleDropdown();
     }
@@ -64,7 +66,9 @@ public class Dropdown : MonoBehaviour
             character.GetComponent<CharacterManager>().Instantiate(selectedOptionText.text);
             character.name = selectedOptionText.text;
             character.transform.Find(Constants.BODY).transform.position = new Vector3(-80, 0, 0);
-            GameObject.Find("nwui").SetActive(false);
+            GameObject nwui = GameObject.Find("nwui");
+            if (nwui != null) nwui.SetActive(false);
+            if (pauseButton != null) pauseButton.SetActive(true);
             character.transform.Find("UI").gameObject.SetActive(true);
             character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawner.transform.position + new Vector3(80, 0, 0), Quaternion.identity);
             character.GetComponent<CharacterManager>().Instantiate(Constants.BOT);

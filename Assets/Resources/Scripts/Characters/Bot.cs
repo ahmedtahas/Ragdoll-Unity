@@ -10,6 +10,7 @@ public class Bot : MonoBehaviour
     GameObject hip;
     Health health;
     Transform body;
+    bool blinded = false;
     void Start()
     {
         body = transform.Find(Constants.BODY);
@@ -17,20 +18,20 @@ public class Bot : MonoBehaviour
         movement = GetComponent<Movement>();
         hip = transform.Find(Constants.HIP).gameObject;
         GameManager.Instance.enemy = hip;
-        // StartCoroutine(Chase());
+        StartCoroutine(Chase());
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GameManager.Instance.TrapEnemy(true);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            GameManager.Instance.TrapEnemy(false);
-        }
-    }
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.K))
+    //     {
+    //         GameManager.Instance.TrapEnemy(true);
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.L))
+    //     {
+    //         GameManager.Instance.TrapEnemy(false);
+    //     }
+    // }
 
     void OnEnable()
     {
@@ -55,7 +56,14 @@ public class Bot : MonoBehaviour
 
     void HandleBlindEnemy(float duration, GameObject source)
     {
-        // StartCoroutine(BlindEnemy(duration));
+        StartCoroutine(Blind(duration));
+    }
+
+    IEnumerator Blind(float duration)
+    {
+        blinded = true;
+        yield return new WaitForSeconds(duration);
+        blinded = false;
     }
 
     IEnumerator Chase()
@@ -64,18 +72,23 @@ public class Bot : MonoBehaviour
         player = GameManager.Instance.player;
         while (true)
         {
+            if (blinded)
+            {
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
             if (health.currentHealth <= 0)
             {
                 break;
             }
             if ((player.transform.position - hip.transform.position).magnitude > 30.0f)
             {
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(0.5f);
                 movement.HandleMove((player.transform.position - hip.transform.position).normalized);
             }
             else
             {
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(0.5f);
                 movement.HandleMove((hip.transform.position - player.transform.position).normalized);
             }
         }

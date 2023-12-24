@@ -66,7 +66,7 @@ public class Tin : MonoBehaviour
 
     void HandleSkillSignal(bool released, float chargeTime)
     {
-        if (!released)
+        if (!isOnCooldown && !released)
         {
             transform.GetComponent<Movement>().enabled = false;
             skill.StartDuration(false);
@@ -74,10 +74,10 @@ public class Tin : MonoBehaviour
         }
         if (!isOnCooldown && released)
         {
-            transform.GetComponent<Movement>().enabled = true;
             isOnCooldown = true;
-            DestroyShockwave();
             skill.StartCooldown();
+            transform.GetComponent<Movement>().enabled = true;
+            DestroyShockwave();
             if (chargeTime >= maximumCharge)
             {
                 multiplier += maximumCharge;
