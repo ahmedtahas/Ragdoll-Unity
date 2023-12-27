@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class MultiTargetCamera : MonoBehaviour
 {
-    private float minZoom = 7f;
+    private float minZoom = 10f;
     private float maxZoom = 95f;
     private float zoomLimiter = 180f;
     private float zoomSpeed = 0.1f;
@@ -37,12 +38,22 @@ public class MultiTargetCamera : MonoBehaviour
 
     private void Update()
     {
+        if (gameObjectsInView.Any(item => item == null))
+        {
+            gameObjectsInView.RemoveAll(item => item == null);
+        }
+
+        if (gameObjectsInBlackout.Any(item => item == null))
+        {
+            gameObjectsInBlackout.RemoveAll(item => item == null);
+        }
         Move();
         Zoom();
     }
 
     public void AddToView(Transform transform)
     {
+        if (transform == null) return;
         if (gameObjectsInView.Contains(transform)) return;
         if (isBlackout) gameObjectsInBlackout.Add(transform);
         else gameObjectsInView.Add(transform);
@@ -50,6 +61,7 @@ public class MultiTargetCamera : MonoBehaviour
 
     public void RemoveFromView(Transform transform)
     {
+        if (transform == null) return;
         if (gameObjectsInView.Contains(transform)) gameObjectsInView.Remove(transform);
     }
 
@@ -82,7 +94,6 @@ public class MultiTargetCamera : MonoBehaviour
     {
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPosition = new Vector3(centerPoint.x, centerPoint.y, -1);
-
         transform.position = newPosition;
     }
 
@@ -97,7 +108,6 @@ public class MultiTargetCamera : MonoBehaviour
     {
         if (gameObjectsInView.Count == 0)
             return Vector3.zero;
-
         Bounds bounds = new Bounds(gameObjectsInView[0].position, Vector3.zero);
         for (int i = 0; i < gameObjectsInView.Count; i++)
         {

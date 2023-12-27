@@ -9348,6 +9348,7 @@ MonoBehaviour:
   skillNameText: {fileID: 791265451}
   skillDescriptionText: {fileID: 1053919578}
   spawner: {fileID: 2065184873}
+  pauseButton: {fileID: 0}
 --- !u!1 &1053919576
 GameObject:
   m_ObjectHideFlags: 0
@@ -18489,7 +18490,6 @@ MonoBehaviour:
   roomNegativeDimensions: {x: -130, y: -60}
   trapped: 0
   player: {fileID: 0}
-  enemy: {fileID: 0}
   gameMode: 
   playerCharacter: 
   enemyCharacter: 
@@ -18620,7 +18620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.46433073, b: 0.7264151, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18661,7 +18661,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -64}
+  m_AnchoredPosition: {x: -64, y: -64}
   m_SizeDelta: {x: 256, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413086432

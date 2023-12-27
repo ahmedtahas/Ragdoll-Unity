@@ -76,12 +76,6 @@ public class CharacterManager : NetworkBehaviour
         };
     }
 
-    
-
-    private void Start()
-    {
-        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform.Find(Constants.HIP).transform);
-    }
 
 
     void OnEnable()
@@ -120,6 +114,7 @@ public class CharacterManager : NetworkBehaviour
     
     public void Instantiate(string characterName)
     {
+        GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform.Find(Constants.HIP).transform);
         string character = characterName;
         if (IsHost)
         {

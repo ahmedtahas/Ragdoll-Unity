@@ -70,9 +70,7 @@ public class BounceOnImpact : MonoBehaviour
 
     public void SetSelf(GameObject self)
     {
-        print("self set to " + self + " from " + this.self);
         this.self = self;
-        print("self set to " + this.self);
     }
 
     public void SetKnockback(float knockback)

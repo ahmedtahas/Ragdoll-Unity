@@ -16,13 +16,26 @@ public class Health : MonoBehaviour
 
     public event Action<float, GameObject> OnHealthChanged;
     public event Action<float> OnDamageTaken;
+    public event Action<bool> OnEnemyDeath;
 
     void OnEnable()
     {
-        healthBar = transform.Find("UI/Bars/Health/HBG/HFG").GetComponent<Image>();
-        healthText = transform.Find("UI/Bars/HT").GetComponent<TextMeshProUGUI>();
-        enemyHealthBar = transform.Find("UI/EnemyHealthBG/EnemyHealth").GetComponent<Image>();
-        deathLayer = LayerMask.NameToLayer("Dead");
+        if (healthBar == null)
+        {
+            healthBar = transform.Find("UI/Bars/Health/HBG/HFG").GetComponent<Image>();
+        }
+        if (healthText == null)
+        {
+            healthText = transform.Find("UI/Bars/HT").GetComponent<TextMeshProUGUI>();
+        }
+        if (enemyHealthBar == null)
+        {
+            enemyHealthBar = transform.Find("UI/EnemyHealthBG/EnemyHealth").GetComponent<Image>();
+        }
+        if (deathLayer == 0)
+        {
+            deathLayer = LayerMask.NameToLayer("Dead");
+        }
         GameManager.Instance.OnDamageEnemy += TakeDamage;
         if (GameManager.Instance.gameMode == Constants.SINGLE_PLAYER)
         {
@@ -61,7 +74,7 @@ public class Health : MonoBehaviour
             return;
         }
         currentHealth -= amount;
-        if (amount > 0) OnDamageTaken?.Invoke(amount);
+        OnDamageTaken?.Invoke(amount);
         if (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;
@@ -96,15 +109,30 @@ public class Health : MonoBehaviour
         {
             child.gameObject.layer = deathLayer;
             child.GetComponent<BounceOnImpact>().enabled = false;
+            Damage damageComponent = child.GetComponent<Damage>();
+            if (damageComponent != null)
+            {
+                damageComponent.enabled = false;
+            }
         }
 
         yield return new WaitForSeconds(3);
 
         Die();
+
+        yield return new WaitForSeconds(5);
+
+        Destroy(gameObject);
     }
 
     private void Die()
     {
+        GetComponent<Health>().enabled = false;
+        GetComponent<CharacterManager>().enabled = false;
+        GetComponent<TimeController>().enabled = false;
+        GetComponent<Pusher>().enabled = false;
+        GetComponent<Freezer>().enabled = false;
+        GetComponent<Trapper>().enabled = false;
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform.Find(Constants.HIP).transform);
     }
 
@@ -123,12 +151,15 @@ public class Health : MonoBehaviour
             return;
         }
         enemyHealthBar.fillAmount = health;
+        if (health <= 0 && gameObject.name != Constants.BOT)
+        {
+            GameManager.Instance.RespawnBot();
+            OnEnemyDeath?.Invoke(false);
+        }
     }
 
     public void SetEnemyHealth(float health, GameObject enemy = null)
     {
-        print("Setting enemy health");
-        print(gameObject.name + " " + enemy.name);
         if (enemy == null || enemy == gameObject)
         {
             return;
@@ -138,5 +169,9 @@ public class Health : MonoBehaviour
             return;
         }
         enemyHealthBar.fillAmount = health;
+        if (health <= 0)
+        {
+            OnEnemyDeath?.Invoke(true);
+        }
     }
 }
