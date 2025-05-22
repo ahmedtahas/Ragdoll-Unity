@@ -27,12 +27,18 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
+        GameManager.Instance.GetComponent<TimeController>().ResumeSlowDown();
     }
 
     public void EndGame()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] skills = GameObject.FindGameObjectsWithTag("Skill");
+        GameObject spawnManager = GameObject.Find("SpawnManager");
+        if (spawnManager != null)
+        {
+            Destroy(spawnManager);
+        }
         foreach (GameObject player in players)
         {
             GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(player.transform.Find(Constants.HIP).transform);

@@ -17,7 +17,7 @@ public class Tin : MonoBehaviour
     Coroutine growShockwaveCoroutine;
     Transform body;
 
-    
+
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class Tin : MonoBehaviour
         maximumCharge = GetComponent<CharacterManager>().characterSkillDuration;
         knockback = GetComponent<CharacterManager>().characterKnockback;
         damage = GetComponent<CharacterManager>().characterDamage;
-        
+        damage = 2000.0f;
     }
 
     void OnEnable()

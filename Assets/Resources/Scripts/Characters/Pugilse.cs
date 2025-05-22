@@ -16,12 +16,13 @@ public class Pugilse : MonoBehaviour
     void Start()
     {
         damage = GetComponent<CharacterManager>().characterDamage;
-        timeController = GetComponent<TimeController>();
+        timeController = GameManager.Instance.GetComponent<TimeController>();
+        // timeController = GetComponent<TimeController>();
         maxCombo = (int)skill.duration;
         cooldown = skill.cooldown;
         skill.SetCooldownBar(0.0f, "0");
     }
-    
+
 
     void OnEnable()
     {
@@ -101,7 +102,7 @@ public class Pugilse : MonoBehaviour
         timeController.SlowDownTime();
         foreach (Damage damage in damagers)
         {
-            damage.SetDamage(this.damage * (combo + 1)  * 0.5F);
+            damage.SetDamage(this.damage * (combo + 1) * 0.5F);
         }
     }
 

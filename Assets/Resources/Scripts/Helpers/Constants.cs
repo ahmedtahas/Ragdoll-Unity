@@ -135,4 +135,11 @@ public class Constants
         { 12, ROARAK }
     };
 
+    public static readonly Dictionary<string, float> CHARACTER_PART_SIZES = new Dictionary<string, float>
+    {
+        { "BIG", 144.0f },
+        { "SMALL", 96.0f },
+        { "MEDIUM", 120.0f }
+    };
+
 }

@@ -11,6 +11,7 @@ public class Damage : MonoBehaviour
     {
         if (self == null) self = transform.GetComponentInParent<CharacterManager>().gameObject;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -20,19 +21,67 @@ public class Damage : MonoBehaviour
             {
                 return;
             }
+
+            GameObject targetObject = collision.gameObject;
+
+            // Find the Health component of the target
+            Health targetHealth = collision.transform.GetComponentInParent<Health>();
+
             if (collision.gameObject.CompareTag("Head"))
             {
                 OnHit?.Invoke(true);
+
+                // Store the hit part in the health component
+                if (targetHealth != null)
+                {
+                    targetHealth.lastDamagedPart = collision.gameObject;
+                }
+
                 GameManager.Instance.DamageEnemy(damage * 2, self);
-                // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage * 2);
+
+                // Flash the specific body part (head)
+                ApplyDamageFlash(targetObject, 1.0f);
             }
             else if (collision.gameObject.CompareTag("Damagable"))
             {
                 OnHit?.Invoke(false);
+
+                // Store the hit part in the health component
+                if (targetHealth != null)
+                {
+                    targetHealth.lastDamagedPart = collision.gameObject;
+                }
+
                 GameManager.Instance.DamageEnemy(damage, self);
-                // collision.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
+
+                // Flash the specific body part
+                ApplyDamageFlash(targetObject, 0.7f);
             }
-        
+        }
+    }
+
+    // Apply a temporary red flash effect to the specific body part
+    private void ApplyDamageFlash(GameObject bodyPart, float intensity)
+    {
+        // Find the body object
+        Transform bodyTransform = bodyPart.transform;
+        while (bodyTransform != null && bodyTransform.name != "Body")
+        {
+            bodyTransform = bodyTransform.parent;
+        }
+
+        // If we found the body
+        if (bodyTransform != null)
+        {
+            // Get or add the DamageFlash component
+            DamageFlash flashComponent = bodyTransform.GetComponent<DamageFlash>();
+            if (flashComponent == null)
+            {
+                flashComponent = bodyTransform.gameObject.AddComponent<DamageFlash>();
+            }
+
+            // Flash the specific body part
+            flashComponent.FlashBodyPart(bodyPart, intensity);
         }
     }
 
@@ -44,5 +93,10 @@ public class Damage : MonoBehaviour
     public void SetDamage(float damage)
     {
         this.damage = damage;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

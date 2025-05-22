@@ -19,10 +19,14 @@ public class Dropdown : MonoBehaviour
     public TextMeshProUGUI skillDescriptionText;
     public GameObject pauseButton;
 
+    public GameObject spawnManagerPrefab;
+    public GameObject spawnManager;
+
     private bool isDropdownOpen = false;
 
     void Start()
     {
+        spawnManagerPrefab = Resources.Load("Prefabs/SpawnManager") as GameObject;
         pauseButton = GameObject.Find("PauseButton");
         dropdownButton.onClick.AddListener(ToggleDropdown);
         ToggleDropdown();
@@ -64,10 +68,11 @@ public class Dropdown : MonoBehaviour
             GameObject nwui = GameObject.Find("nwui");
             if (nwui != null) nwui.SetActive(false);
             if (pauseButton != null) pauseButton.SetActive(true);
-            GameManager.Instance.SpawnPlayer(selectedOptionText.text, true);
-            GameManager.Instance.SpawnPlayer(Constants.BOT, false);
-            GameManager.Instance.InstantiatePlayers();
+            spawnManager = Instantiate(spawnManagerPrefab);
+            spawnManager.name = "SpawnManager";
+            spawnManager.GetComponent<SpawnManager>().SpawnPlayer(selectedOptionText.text, true);
+            spawnManager.GetComponent<SpawnManager>().SpawnPlayer(Constants.BOT, false);
+            spawnManager.GetComponent<SpawnManager>().InstantiatePlayers();
         }
-
     }
 }

@@ -9347,8 +9347,9 @@ MonoBehaviour:
   levelText: {fileID: 980758547}
   skillNameText: {fileID: 791265451}
   skillDescriptionText: {fileID: 1053919578}
-  spawner: {fileID: 2065184873}
   pauseButton: {fileID: 0}
+  spawnManagerPrefab: {fileID: 0}
+  spawnManager: {fileID: 0}
 --- !u!1 &1053919576
 GameObject:
   m_ObjectHideFlags: 0
@@ -13324,7 +13325,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.0001
+      scalar: 0.001
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -18467,6 +18468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1401926544}
   - component: {fileID: 1401926543}
+  - component: {fileID: 1401926545}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -18518,6 +18520,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401926545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401926542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710d251c5cbb9d04d8c239846a2599e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413086427
 GameObject:
   m_ObjectHideFlags: 0

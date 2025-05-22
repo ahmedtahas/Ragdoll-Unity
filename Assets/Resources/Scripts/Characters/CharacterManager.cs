@@ -54,7 +54,7 @@ public class CharacterManager : NetworkBehaviour
                 Instantiate(value);
             }
         };
-        
+
         if (IsOwner)
         {
             selection.Value = PlayerPrefs.GetString(Constants.SELECTED_CHARACTER) switch
@@ -73,14 +73,15 @@ public class CharacterManager : NetworkBehaviour
                 Constants.ROARAK => 12,
                 _ => 0
             };
-        };
+        }
+        ;
     }
 
 
 
     void OnEnable()
     {
-        if (transform.parent != null) 
+        if (transform.parent != null)
         {
             transform.Find("UI").gameObject.SetActive(false);
         }
@@ -111,7 +112,7 @@ public class CharacterManager : NetworkBehaviour
             };
         }
     }
-    
+
     public void Instantiate(string characterName)
     {
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().AddToView(transform.Find(Constants.HIP).transform);
@@ -305,7 +306,7 @@ public class CharacterManager : NetworkBehaviour
                 characterKnockback = mediumKnockback;
                 usesWeapon = true;
                 isTwoHanded = false;
-                characterCooldown = 20.0f;
+                characterCooldown = 3.0f;
                 characterSkillDuration = 15.0f;
                 gameObject.AddComponent<Infrade>();
                 break;

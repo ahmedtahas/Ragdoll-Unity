@@ -9,12 +9,8 @@ public class GameManager : MonoBehaviour
 
     
     public Vector2 roomPositiveDimensions = new Vector2(160.0f, 80.0f);
-    public Vector3 leftSpawnPoint = new Vector3(-80, 0, 0);
-    public Vector3 rightSpawnPoint = new Vector3(80, 0, 0);
     public Vector2 roomNegativeDimensions = new Vector2(-160.0f, -80.0f);
     public bool trapped = false;
-    int botCount = 1;
-    private bool respawning = false;
     public GameObject player;
     private GameObject _enemy;
     public GameObject enemy
@@ -45,6 +41,8 @@ public class GameManager : MonoBehaviour
     public event Action<float, GameObject> OnBlindEnemy;
     public event Action<bool> OnTrapEnemy;
     public event Action<float, GameObject> OnDamageEnemy;
+    GameObject spawnManager;
+    GameObject spawnManagerPrefab;
 
     private void Awake()
     {
@@ -84,7 +82,6 @@ public class GameManager : MonoBehaviour
     {
         OnFreezeEnemy?.Invoke(position, duration, caller);
     }
-
     
     IEnumerator EnemySet()
     {
@@ -218,49 +215,5 @@ public class GameManager : MonoBehaviour
             }
         }
         return callerEndPosition;
-    }
-
-    public void RespawnBot(bool isPlayer = false)
-    {
-        if (respawning) return;
-        respawning = true;
-        botCount++;
-        StartCoroutine(BotRespawnRoutine());
-    }
-
-    private IEnumerator BotRespawnRoutine()
-    {
-        yield return new WaitForSeconds(3);
-        if (player.transform.position.x > 0)
-        {
-            SpawnPlayer(Constants.BOT, true);
-        }
-        else
-        {
-            SpawnPlayer(Constants.BOT, false);
-        }
-        respawning = false;
-    }
-
-    public void InstantiatePlayers()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            player.GetComponent<CharacterManager>().Instantiate(player.name);
-        }
-    }
-
-
-    public void SpawnPlayer(string characterName, bool isHost)
-    {
-        Vector3 spawnPoint = isHost ? leftSpawnPoint : rightSpawnPoint;
-        GameObject character = Instantiate(Resources.Load(Constants.CHARACTER_PREFAB_PATH) as GameObject, spawnPoint, Quaternion.identity);
-        character.name = characterName;
-        if (characterName == Constants.BOT)
-        {
-            player.transform.parent.transform.parent.GetComponent<Health>().SetBotHealth(1, character);
-            character.GetComponent<CharacterManager>().Instantiate(characterName);
-        }
     }
 }

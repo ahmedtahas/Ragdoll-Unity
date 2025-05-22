@@ -8,11 +8,15 @@ public class Health : MonoBehaviour
 {
     Image healthBar;
     TextMeshProUGUI healthText;
+    SkillStick skillStick;
     Image enemyHealthBar;
+    TimeController timeController;
     public float maxHealth;
     public float currentHealth;
     private LayerMask deathLayer;
     public Transform[] childTransforms;
+
+    [HideInInspector] public GameObject lastDamagedPart; // Store the last part that took damage
 
     public event Action<float, GameObject> OnHealthChanged;
     public event Action<float> OnDamageTaken;
@@ -20,6 +24,8 @@ public class Health : MonoBehaviour
 
     void OnEnable()
     {
+
+        skillStick = transform.Find("UI/SkillStick").GetComponent<SkillStick>();
         if (healthBar == null)
         {
             healthBar = transform.Find("UI/Bars/Health/HBG/HFG").GetComponent<Image>();
@@ -62,7 +68,7 @@ public class Health : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = currentHealth % 1 == 0 ? currentHealth.ToString() : currentHealth.ToString("F1");
-            healthBar.fillAmount = ((currentHealth / maxHealth)  * 0.5F) + 0.5f;
+            healthBar.fillAmount = ((currentHealth / maxHealth) * 0.5F) + 0.5f;
         }
         OnHealthChanged?.Invoke(healthBar.fillAmount, gameObject);
     }
@@ -73,6 +79,22 @@ public class Health : MonoBehaviour
         {
             return;
         }
+
+        // Store the collision object as the last damaged part
+        if (source.GetComponent<Damage>() != null)
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(source.transform.position, 0.5f);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.transform.IsChildOf(transform) &&
+                    (collider.CompareTag("Damagable") || collider.CompareTag("Head")))
+                {
+                    lastDamagedPart = collider.gameObject;
+                    break;
+                }
+            }
+        }
+
         currentHealth -= amount;
         OnDamageTaken?.Invoke(amount);
         if (currentHealth >= maxHealth)
@@ -82,7 +104,7 @@ public class Health : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = currentHealth % 1 == 0 ? currentHealth.ToString() : currentHealth.ToString("F1");
-            healthBar.fillAmount = ((currentHealth / maxHealth)  * 0.5F) + 0.5f;
+            healthBar.fillAmount = ((currentHealth / maxHealth) * 0.5F) + 0.5f;
         }
         if (currentHealth <= 0)
         {
@@ -98,38 +120,84 @@ public class Health : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
-        // Disable all joints in child objects
-        foreach (var joint in GetComponentsInChildren<Joint2D>())
-        {
-            joint.enabled = false;
-        }
 
-        // Change collision layer of all child objects
+        timeController = GameManager.Instance.GetComponent<TimeController>();
+        // timeController = GetComponent<TimeController>();
+        Debug.Log("Death routine started");
+        timeController.SlowDownTime(0.1f, 3f);
+
         foreach (Transform child in childTransforms)
         {
+
             child.gameObject.layer = deathLayer;
-            child.GetComponent<BounceOnImpact>().enabled = false;
-            Damage damageComponent = child.GetComponent<Damage>();
-            if (damageComponent != null)
+        }
+        if (lastDamagedPart != null)
+        {
+            // Disable joints in the damaged part
+            foreach (var joint in lastDamagedPart.GetComponentsInChildren<Joint2D>())
             {
-                damageComponent.enabled = false;
+                joint.enabled = false;
+            }
+
+            // Change layer of damaged part
+            lastDamagedPart.layer = deathLayer;
+
+            // Disable bounce and damage components
+            BounceOnImpact bounce = lastDamagedPart.GetComponent<BounceOnImpact>();
+            if (bounce != null) bounce.enabled = false;
+
+            Damage damageComponent = lastDamagedPart.GetComponent<Damage>();
+            if (damageComponent != null) damageComponent.enabled = false;
+
+            // Make the damaged part flash one last time in a darker red
+            DamageFlash bodyFlash = transform.Find("Body").GetComponent<DamageFlash>();
+            if (bodyFlash != null)
+            {
+                bodyFlash.FlashBodyPart(lastDamagedPart, 1.5f); // More intense flash
             }
         }
 
-        yield return new WaitForSeconds(3);
+        // Wait for 1 second before disabling the rest of the joints
+        yield return new WaitForSeconds(0.2f);
+
+        // Now disable all remaining joints and change layers
+        foreach (Transform child in childTransforms)
+        {
+            // Skip the already disabled part
+            if (lastDamagedPart != null && child.gameObject == lastDamagedPart)
+                continue;
+
+            // Disable joints
+            foreach (var joint in child.GetComponentsInChildren<Joint2D>())
+            {
+                joint.enabled = false;
+            }
+
+            // Change layer
+
+            // Disable components
+            BounceOnImpact bounce = child.GetComponent<BounceOnImpact>();
+            if (bounce != null) bounce.enabled = false;
+
+            Damage damageComponent = child.GetComponent<Damage>();
+            if (damageComponent != null) damageComponent.enabled = false;
+        }
+
+        // Wait a bit more before disabling character functionality
+        yield return new WaitForSeconds(2f);
 
         Die();
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
 
         Destroy(gameObject);
     }
 
     private void Die()
     {
+        Debug.Log("Die method called");
         GetComponent<Health>().enabled = false;
         GetComponent<CharacterManager>().enabled = false;
-        GetComponent<TimeController>().enabled = false;
         GetComponent<Pusher>().enabled = false;
         GetComponent<Freezer>().enabled = false;
         GetComponent<Trapper>().enabled = false;
@@ -151,10 +219,17 @@ public class Health : MonoBehaviour
             return;
         }
         enemyHealthBar.fillAmount = health;
+
         if (health <= 0 && gameObject.name != Constants.BOT)
         {
-            GameManager.Instance.RespawnBot();
+            skillStick.enabled = false;
+            SpawnManager spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+            spawnManager.RespawnBot();
             OnEnemyDeath?.Invoke(false);
+        }
+        if (health == 1 && gameObject.name != Constants.BOT)
+        {
+            skillStick.enabled = true;
         }
     }
 
@@ -173,5 +248,14 @@ public class Health : MonoBehaviour
         {
             OnEnemyDeath?.Invoke(true);
         }
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

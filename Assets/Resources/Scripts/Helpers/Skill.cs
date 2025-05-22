@@ -51,7 +51,7 @@ public class Skill : NetworkBehaviour
 
     public void SetCooldownBar(float fillAmount, string text)
     {
-        cooldownBar.fillAmount = (fillAmount  * 0.5F) + 0.5f;
+        cooldownBar.fillAmount = (fillAmount * 0.5F) + 0.5f;
         cooldownText.text = text;
         remainingDuration = fillAmount * duration;
     }
@@ -73,13 +73,14 @@ public class Skill : NetworkBehaviour
     }
     IEnumerator DurationRoutine(bool cooldown)
     {
+        Debug.Log("Duration started for " + duration);
         if (duringCooldown)
             yield break;
         duringCooldown = true;
         while (remainingDuration > 0)
         {
             remainingDuration -= Time.deltaTime;
-            cooldownBar.fillAmount = ((remainingDuration / duration)  * 0.5F) + 0.5f;
+            cooldownBar.fillAmount = ((remainingDuration / duration) * 0.5F) + 0.5f;
             cooldownText.text = remainingDuration.ToString("F1") + "s";
             yield return null;
         }
@@ -91,10 +92,11 @@ public class Skill : NetworkBehaviour
 
     IEnumerator CooldownRoutine()
     {
+        Debug.Log("Cooldown started for " + cooldown);
         while (remainingCooldown > 0)
         {
             remainingCooldown -= Time.deltaTime;
-            cooldownBar.fillAmount = ((1 - (remainingCooldown / cooldown))  * 0.5F) + 0.5f;
+            cooldownBar.fillAmount = ((1 - (remainingCooldown / cooldown)) * 0.5F) + 0.5f;
             cooldownText.text = remainingCooldown.ToString("F1") + "s";
             yield return null;
         }

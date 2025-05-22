@@ -21,7 +21,7 @@ public class BounceOnImpact : MonoBehaviour
         Rigidbody2D collidedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
         if (collidedRigidbody != null && collidedRigidbody.bodyType == RigidbodyType2D.Dynamic)
         {
-            GetComponentInParent<TimeController>().SlowDownTime(0.02f, 0.5f);
+            GameManager.Instance.GetComponent<TimeController>().SlowDownTime(0.2f, 0.5f);
             if (name == "Head") StartCoroutine(CameraShake(0.03f, 0.1f));
             Bounce(collision.contacts[0].normal);
             if (collision.gameObject.CompareTag("Skill")) return;

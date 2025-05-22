@@ -37,8 +37,19 @@ public class Dagger : MonoBehaviour
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill")
-       {
+        {
             hit = true;
+
+            // Apply damage flash with higher intensity for dagger (more severe weapon)
+            ApplyDamageFlash(collision.gameObject, collision.gameObject.CompareTag("Head") ? 1.2f : 0.9f);
+
+            // Store hit part in Health component for staged death
+            Health targetHealth = collision.transform.GetComponentInParent<Health>();
+            if (targetHealth != null)
+            {
+                targetHealth.lastDamagedPart = collision.gameObject;
+            }
+
             if (collision.gameObject.CompareTag("Head"))
             {
                 OnHit?.Invoke(transform.position, true, true);
@@ -56,5 +67,31 @@ public class Dagger : MonoBehaviour
         if (!hit) OnHit?.Invoke(transform.position, false, false);
         cam.RemoveFromView(transform);
         Destroy(gameObject);
+    }
+
+    // Apply a damage flash to the hit body part
+    private void ApplyDamageFlash(GameObject bodyPart, float intensity)
+    {
+        // Find the body object
+        Transform bodyTransform = bodyPart.transform;
+        while (bodyTransform != null && bodyTransform.name != "Body")
+        {
+            bodyTransform = bodyTransform.parent;
+            if (bodyTransform == null) break;
+        }
+
+        // If we found the body
+        if (bodyTransform != null)
+        {
+            // Get or add the DamageFlash component
+            DamageFlash flashComponent = bodyTransform.GetComponent<DamageFlash>();
+            if (flashComponent == null)
+            {
+                flashComponent = bodyTransform.gameObject.AddComponent<DamageFlash>();
+            }
+
+            // Flash the specific body part
+            flashComponent.FlashBodyPart(bodyPart, intensity);
+        }
     }
 }

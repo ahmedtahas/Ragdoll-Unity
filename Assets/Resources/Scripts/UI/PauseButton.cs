@@ -14,6 +14,7 @@ public class PauseButton : MonoBehaviour
     }
     public void PauseGame()
     {
+        GameManager.Instance.GetComponent<TimeController>().PauseSlowDown();
         Time.timeScale = 0;
     }
 }

@@ -58,8 +58,18 @@ public class Meteor : MonoBehaviour
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic && collision.gameObject.tag != "Skill" && collision.gameObject.tag != "Shield")
         {
-            Health health = collision.gameObject.GetComponentInParent<Health>();
-            if (health == this.health)
+            Health targetHealth = collision.gameObject.GetComponentInParent<Health>();
+
+            // Apply a very intense damage flash for meteor (most powerful weapon)
+            ApplyDamageFlash(collision.gameObject, collision.gameObject.CompareTag("Head") ? 1.5f : 1.2f);
+
+            // Store hit part in Health component for staged death
+            if (targetHealth != null)
+            {
+                targetHealth.lastDamagedPart = collision.gameObject;
+            }
+
+            if (health == targetHealth)
             {
                 if (collision.gameObject.CompareTag("Head"))
                 {
@@ -82,5 +92,31 @@ public class Meteor : MonoBehaviour
         }
         GameObject.Find(Constants.MTC).GetComponent<MultiTargetCamera>().RemoveFromView(transform);
         Destroy(gameObject);
+    }
+
+    // Apply a damage flash to the hit body part
+    private void ApplyDamageFlash(GameObject bodyPart, float intensity)
+    {
+        // Find the body object
+        Transform bodyTransform = bodyPart.transform;
+        while (bodyTransform != null && bodyTransform.name != "Body")
+        {
+            bodyTransform = bodyTransform.parent;
+            if (bodyTransform == null) break;
+        }
+
+        // If we found the body
+        if (bodyTransform != null)
+        {
+            // Get or add the DamageFlash component
+            DamageFlash flashComponent = bodyTransform.GetComponent<DamageFlash>();
+            if (flashComponent == null)
+            {
+                flashComponent = bodyTransform.gameObject.AddComponent<DamageFlash>();
+            }
+
+            // Flash the specific body part with orange-red for meteor (fire effect)
+            flashComponent.FlashBodyPart(bodyPart, intensity, new Color(1f, 0.4f, 0.1f, 1f));
+        }
     }
 }
